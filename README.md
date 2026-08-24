@@ -2,13 +2,12 @@
 
 An audited roster-and-birthplace geography project covering every unique player on an MLB organization full roster as of **August 24, 2026**. The snapshot includes MLB, Triple-A, Double-A, High-A, Single-A, and Rookie levels.
 
-The project also includes a separately defined historical pipeline view: U.S. high schools credited with players who made an MLB debut from **January 1, 2000 through August 24, 2026**.
+> [!CAUTION]
+> **High-school map correction in progress (August 24, 2026).** The first release counted 6,225 players whose MLB debuts occurred in 2000–2026. That excluded affiliated minor-league participants and did not answer the intended MLB/MiLB talent-pipeline question. The high-school route is withdrawn from the documented release while it is rebuilt and validated against the reconciled universe of 54,980 MLB and affiliated MiLB season participants. Do not cite the earlier school rankings. See [CORRECTION.md](CORRECTION.md).
 
 ![The Geography of MLB Talent social preview](public/og.png)
 
 **Interactive map:** [mlb-talent-map-2026.pages.dev](https://mlb-talent-map-2026.pages.dev)
-
-**High-school pipeline:** [mlb-talent-map-2026.pages.dev/mlb-high-school-map](https://mlb-talent-map-2026.pages.dev/mlb-high-school-map)
 
 ## What the product does
 
@@ -24,16 +23,6 @@ The project also includes a separately defined historical pipeline view: U.S. hi
 ## Route
 
 - `/mlb-talent-map` — current MLB/MiLB roster birthplace map.
-- `/mlb-high-school-map` — post-2000 MLB debut pipeline by U.S. high school.
-
-## High-school pipeline scope
-
-- Reviews 6,225 players with an MLB debut in the declared period.
-- Preserves 2,656 U.S. high-school identities from MLB education records.
-- Maps and ranks all 76 schools with at least five qualifying players.
-- Exposes the player names, positions, and MLB debut dates underlying every mapped school count.
-- Keeps school, state, debut-era, and position filters in the shareable URL.
-- Audits each leader-program coordinate to a campus and checks that the point falls inside the reported state.
 
 ## Reproduce and verify
 
@@ -43,13 +32,13 @@ npm run data:build
 npm run check
 ```
 
-`data:build` refreshes the official MLB roster snapshot and the post-2000 MLB debut/education records for the fixed publication date, reruns the federal-place match, and validates the Natural Earth country join. `check` validates both public data contracts, builds both deployment targets, runs unit tests, and exercises both rendered products in desktop and mobile Chromium.
+`data:build` refreshes the official MLB roster snapshot for the fixed publication date, reruns the federal-place match, and validates the Natural Earth country join. `check` validates the public data contract, builds the deployment targets, runs unit tests, and exercises the rendered product in desktop and mobile Chromium.
 
 ## Evidence boundary
 
 Roster membership and birth-country aggregation use MLB's person-ID snapshot directly. County geography is a conservative representative assignment because MLB exposes birth city/state/country, not exact birth county. A mapped country means the player is counted somewhere within MLB's reported birth country; a mapped county means the federal place reference resolves uniquely to that county and does not prove exact birth coordinates.
 
-The current-roster browser payload omits player names and raw birth-city text. The high-school pipeline intentionally includes player names and debut dates because those records are the public evidence behind each school count; it does not publish private personal data.
+The current-roster browser payload omits player names and raw birth-city text.
 
 See [METHODOLOGY.md](METHODOLOGY.md), [DATA_QUALITY.md](DATA_QUALITY.md), and [ATTRIBUTION.md](ATTRIBUTION.md).
 
