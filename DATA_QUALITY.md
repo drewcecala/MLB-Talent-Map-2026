@@ -86,16 +86,19 @@ Machine-readable evidence is in `reports/data-quality.json` and `reports/world-g
 
 ## High-school pipeline validation
 
-The post-2000 pipeline is validated independently from the current-roster map:
+The 2000–2026 MLB/affiliated-MiLB pipeline is validated independently from the current-roster map:
 
 | Check | Result |
 |---|---:|
-| MLB debut records reviewed | 6,225 |
-| Players with a U.S. high school | 3,979 |
-| U.S. school identities retained | 2,656 |
-| Programs meeting the five-player map threshold | 76 |
-| Leader-program players | 463 |
-| Players without an MLB high-school record | 1,753 |
-| High-school records outside the 50 states/DC scope | 493 |
+| Unique official MLB/MiLB participants | 54,980 |
+| Appeared in MLB during the period | 7,380 |
+| Appeared only in included affiliated minor-league levels | 47,600 |
+| Players with any reported high school | 18,642 |
+| Players with a U.S. high school | 16,800 |
+| U.S. school identities retained | 7,048 |
+| Programs meeting the 20-player map threshold | 25 |
+| Distinct players credited to mapped leaders | 621 |
+| Players without an MLB high-school record | 36,338 |
+| High-school credits outside the 50 states/DC scope | 1,842 |
 
-Automated release checks verify the debut-date window, distinct MLB person IDs within each school, school count ordering, exact five-player map-threshold coverage, source evidence for all campus points, state containment for every coordinate, documented identity-resolution structure, and an embedded SHA-256 checksum. Machine-readable evidence is in `reports/high-school-data-quality.json`.
+Automated release checks verify all 54,980 unique person IDs against the public universe audit, exact participation-season arrays, source sport IDs, universe-to-map checksum linkage, player-level joins, school count ordering, exact 20-player map-threshold coverage, source evidence for all campus points, state containment for every coordinate, and documented identity resolutions. The 2020 source reconciliation explicitly expects 1,289 MLB participants and zero participants from each canceled minor-league season endpoint. Machine-readable evidence is in `reports/high-school-data-quality.json` and `data/mlb-affiliated-universe-audit.json`.

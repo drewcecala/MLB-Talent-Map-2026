@@ -85,16 +85,18 @@ The public map payload includes MLB person IDs, organization/level/status/positi
 
 ## High-school pipeline methodology
 
-The high-school map answers a different question: which U.S. high schools are credited with the most players who made an MLB debut from **2000-01-01 through 2026-08-24**?
+The high-school map answers a different question: which U.S. high schools are credited with the most players who appeared in MLB or affiliated Minor League Baseball from **2000 through 2026-08-24**?
 
-1. Request MLB's season-player universe for every season from 2000 through 2026 and deduplicate by MLB person ID.
-2. Hydrate those person records with MLB education data.
-3. Keep only players whose `mlbDebutDate` falls inside the declared window.
+1. Request MLB's official season-player endpoint for every season from 2000 through 2026 at MLB (`sportId=1`), Triple-A (`11`), Double-A (`12`), High-A (`13`), Single-A (`14`), Short-Season A (`15`), and Rookie (`16`).
+2. Deduplicate the union by MLB person ID while retaining every exact participation season and every returned level. The reconciled universe contains 54,980 players: 7,380 with an MLB appearance in the period and 47,600 who appeared only at an included affiliated minor-league level.
+3. Hydrate all 54,980 person records with MLB education data and require complete person hydration before the build can continue.
 4. Credit each player once to every listed high school in the 50 states or District of Columbia.
 5. Keep distinct school identities by normalized name, state, and reported city. Consolidate only documented aliases or neighboring locality labels for the same campus; do not broadly merge ambiguous name-only records.
 6. Rank by distinct MLB person IDs credited to each school.
-7. Location-audit every program with at least five qualifying players. The published leader map contains all 76 programs meeting that threshold.
+7. Location-audit every program with at least 20 qualifying players. The published leader map contains all 25 programs meeting that threshold.
 
 Campus locations use OpenStreetMap Nominatim where an exact school feature is available. Remaining leaders use an official school or municipal address with the U.S. Census Geocoder, or an official municipal coordinate. Every published point is automatically checked against the 2020 state polygon for its reported state.
 
-The historical school dataset contains player names, positions, and MLB debut dates so readers can inspect the exact public records behind each aggregate. Totals across schools are not additive because a player listed at multiple schools credits each school. MLB education data is not complete for every player; 1,753 of the 6,225 reviewed debut records have no high-school entry.
+The historical school dataset contains player names, exact participation seasons, highest included level, positions, and MLB debut dates where available. The repository also publishes the full 54,980-player universe and a linked SHA-256 checksum so the scope can be audited independently from the mapped school subset. Totals across schools are not additive because a player listed at multiple schools credits each school.
+
+MLB education data is incomplete: 18,642 participants have at least one high-school record, 16,800 have a U.S. high school in scope, and 36,338 have no reported high school. The official affiliated minor-league season was canceled in 2020; those six minor-league endpoints correctly return zero participants for 2020, while the MLB endpoint remains included.

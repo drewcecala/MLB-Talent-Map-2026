@@ -3,8 +3,12 @@ export type Era = "all" | "2000s" | "2010s" | "2020s";
 export type HighSchoolPlayer = {
   id: number;
   name: string;
-  debutDate: string;
-  debutYear: number;
+  firstSeason: number;
+  lastSeason: number;
+  seasons: number[];
+  reachedMlb: boolean;
+  highestLevel: string;
+  mlbDebutDate: string | null;
   position: string;
   positionGroup: string;
 };
@@ -24,8 +28,8 @@ export type HighSchool = {
   reportedCities: string[];
   players: HighSchoolPlayer[];
   playerCount: number;
-  firstDebutYear: number;
-  latestDebutYear: number;
+  firstSeason: number;
+  latestSeason: number;
 };
 
 export type RankedHighSchool = HighSchool & {
@@ -58,11 +62,29 @@ export const ERA_LABELS: Record<Era, string> = {
 
 export const integer = new Intl.NumberFormat("en-US");
 
+export function formatSeasons(seasons: number[]) {
+  if (!seasons.length) return "—";
+  const ranges: string[] = [];
+  let start = seasons[0];
+  let previous = seasons[0];
+  for (const season of seasons.slice(1)) {
+    if (season === previous + 1) {
+      previous = season;
+      continue;
+    }
+    ranges.push(start === previous ? String(start) : `${start}–${previous}`);
+    start = season;
+    previous = season;
+  }
+  ranges.push(start === previous ? String(start) : `${start}–${previous}`);
+  return ranges.join(", ");
+}
+
 export function playerMatchesEra(player: HighSchoolPlayer, era: Era) {
   if (era === "all") return true;
-  if (era === "2000s") return player.debutYear >= 2000 && player.debutYear <= 2009;
-  if (era === "2010s") return player.debutYear >= 2010 && player.debutYear <= 2019;
-  return player.debutYear >= 2020 && player.debutYear <= 2026;
+  if (era === "2000s") return player.seasons.some((season) => season >= 2000 && season <= 2009);
+  if (era === "2010s") return player.seasons.some((season) => season >= 2010 && season <= 2019);
+  return player.seasons.some((season) => season >= 2020 && season <= 2026);
 }
 
 export function rankHighSchools(

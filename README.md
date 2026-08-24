@@ -2,12 +2,14 @@
 
 An audited roster-and-birthplace geography project covering every unique player on an MLB organization full roster as of **August 24, 2026**. The snapshot includes MLB, Triple-A, Double-A, High-A, Single-A, and Rookie levels.
 
-> [!CAUTION]
-> **High-school map correction in progress (August 24, 2026).** The first release counted 6,225 players whose MLB debuts occurred in 2000–2026. That excluded affiliated minor-league participants and did not answer the intended MLB/MiLB talent-pipeline question. The high-school route is withdrawn from the documented release while it is rebuilt and validated against the reconciled universe of 54,980 MLB and affiliated MiLB season participants. Do not cite the earlier school rankings. See [CORRECTION.md](CORRECTION.md).
+> [!IMPORTANT]
+> **Corrected high-school release (August 24, 2026).** The historical map uses 54,980 unique official MLB and affiliated MiLB season participants from 2000–2026—not the withdrawn 6,225-debut subset. The complete participant universe and its linked checksum are public. See [CORRECTION.md](CORRECTION.md).
 
 ![The Geography of MLB Talent social preview](public/og.png)
 
 **Interactive map:** [mlb-talent-map-2026.pages.dev](https://mlb-talent-map-2026.pages.dev)
+
+**High-school pipeline:** [mlb-talent-map-2026.pages.dev/mlb-high-school-map](https://mlb-talent-map-2026.pages.dev/mlb-high-school-map)
 
 ## What the product does
 
@@ -19,10 +21,20 @@ An audited roster-and-birthplace geography project covering every unique player 
 - Supports filters for roster level, MLB organization, position group, roster status, birth country, and active-only status.
 - Supports total players, players per 100,000 residents, MLB-level players, and pitchers.
 - Withholds per-capita rankings until a county has at least 10 mapped players in the selected view.
+- Reconciles 54,980 distinct MLB/affiliated-MiLB season participants since 2000 and maps every U.S. high school credited with at least 20 of them.
 
 ## Route
 
 - `/mlb-talent-map` — current MLB/MiLB roster birthplace map.
+- `/mlb-high-school-map` — historical MLB/affiliated-MiLB pipeline by U.S. high school.
+
+## High-school pipeline scope
+
+- Reviews 54,980 distinct players from official MLB season-player endpoints for MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels in 2000–2026.
+- Separates 7,380 participants who appeared in MLB during the period from 47,600 minor-only participants.
+- Preserves exact participation seasons for every player and 7,048 U.S. high-school identities from MLB education records.
+- Maps all 25 schools with at least 20 qualifying participants and exposes the names, seasons, positions, and highest included level underlying every count.
+- Audits every displayed campus coordinate against a source and its reported state boundary.
 
 ## Reproduce and verify
 
@@ -32,13 +44,13 @@ npm run data:build
 npm run check
 ```
 
-`data:build` refreshes the official MLB roster snapshot for the fixed publication date, reruns the federal-place match, and validates the Natural Earth country join. `check` validates the public data contract, builds the deployment targets, runs unit tests, and exercises the rendered product in desktop and mobile Chromium.
+`data:build` refreshes the official MLB roster snapshot and 2000–2026 MLB/MiLB season-player universe for the fixed publication date, reruns the federal-place match, and validates the Natural Earth country join. `check` validates both data contracts, builds both deployment targets, runs unit tests, and exercises both rendered products in desktop and mobile Chromium.
 
 ## Evidence boundary
 
 Roster membership and birth-country aggregation use MLB's person-ID snapshot directly. County geography is a conservative representative assignment because MLB exposes birth city/state/country, not exact birth county. A mapped country means the player is counted somewhere within MLB's reported birth country; a mapped county means the federal place reference resolves uniquely to that county and does not prove exact birth coordinates.
 
-The current-roster browser payload omits player names and raw birth-city text.
+The current-roster browser payload omits player names and raw birth-city text. The historical high-school research publishes participant names and official person IDs because they are the auditable evidence behind each school count; no private personal data is included.
 
 See [METHODOLOGY.md](METHODOLOGY.md), [DATA_QUALITY.md](DATA_QUALITY.md), and [ATTRIBUTION.md](ATTRIBUTION.md).
 

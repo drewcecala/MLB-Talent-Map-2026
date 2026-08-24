@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MlbHighSchoolMap } from "./MlbHighSchoolMap";
 
 export const metadata: Metadata = {
-  title: "High schools producing MLB talent since 2000",
+  title: "High schools producing MLB and MiLB talent since 2000",
   description:
-    "Map and rank U.S. high schools by distinct players who made an MLB debut from 2000 through August 24, 2026, with player-level source records.",
+    "Map and rank U.S. high schools across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026.",
   alternates: { canonical: "/mlb-high-school-map" },
 };
 

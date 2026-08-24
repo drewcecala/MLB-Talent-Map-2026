@@ -1,36 +1,45 @@
 {
   "snapshotDate": "2026-08-24",
-  "scope": "Players with an MLB debut from 2000-01-01 through 2026-08-24, credited once to every U.S. high school in the MLB Stats API education record.",
-  "leaderThreshold": 5,
+  "scope": "Unique players returned by official MLB season-player endpoints at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, or Rookie level for seasons 2000 through 2026, credited once to every U.S. high school in the MLB Stats API education record.",
+  "leaderThreshold": 20,
   "counts": {
-    "mlbPlayersReviewed": 6225,
-    "playersWithUsHighSchool": 3979,
-    "schoolIdentities": 2656,
-    "locationAuditedPrograms": 76,
-    "locationAuditedPlayers": 463,
-    "missingHighSchoolRecords": 1753,
-    "outsideUsHighSchoolRecords": 493
+    "affiliatedPlayers": 54980,
+    "mlbParticipants": 7380,
+    "minorOnlyParticipants": 47600,
+    "playersWithUsHighSchool": 16800,
+    "schoolIdentities": 7048,
+    "locationAuditedPrograms": 25,
+    "locationAuditedPlayers": 621,
+    "missingHighSchoolRecords": 36338,
+    "outsideUsHighSchoolCredits": 1842
   },
   "locationEvidence": {
-    "openStreetMapNominatim": 64,
-    "officialAddressWithCensusGeocoder": 11,
-    "officialMunicipalCoordinate": 1
+    "openStreetMapNominatim": 21,
+    "officialAddressWithCensusGeocoder": 3,
+    "officialDistrictAddressWithPublishedCoordinate": 1
   },
   "checks": {
-    "mlbPersonIdsDeduplicatedWithinSchool": true,
-    "debutDatesInsideDeclaredWindow": true,
+    "officialSeasonUniverseReconciled": true,
+    "allParticipantIdsUnique": true,
+    "exactParticipationSeasonsRetained": true,
+    "universeAndMapChecksumsLinked": true,
+    "analyticalChecksumsStableAcrossRebuildTimestamps": true,
+    "personIdsDeduplicatedWithinSchool": true,
+    "participantSeasonsInsideDeclaredWindow": true,
     "schoolRowsCountSorted": true,
-    "fivePlusThresholdFullyLocated": true,
+    "twentyPlusThresholdFullyLocated": true,
     "campusCoordinatesInsideReportedState": true,
     "ambiguousNameOnlyRecordsNotBroadlyMerged": true,
     "documentedAliasesOnly": true,
     "allLocationRecordsHaveSourceEvidence": true,
-    "embeddedDatasetChecksumMatches": true
+    "embeddedDatasetChecksumMatches": true,
+    "leaderClientBundleMatchesFullSchoolUniverse": true
   },
   "limitations": [
     "MLB education records are incomplete for some players.",
     "Reported school names and cities can use abbreviations, historical names, or neighboring locality labels.",
     "Players with multiple listed high schools credit each school, so school totals are not additive.",
-    "The public map location-audits programs with five or more qualifying players; lower-count school identities remain in the source dataset but are not shown as campus points."
+    "Affiliated minor-league seasons were canceled in 2020; the official minor-league endpoints contain zero participants for that year while MLB remains included.",
+    "The public map location-audits every program with 20 or more qualifying players; lower-count school identities remain in the source dataset but are not shown as campus points."
   ]
 }

@@ -6,10 +6,10 @@ import { MlbTalentMap } from "../app/mlb-talent-map/MlbTalentMap";
 
 const highSchoolRoute = window.location.pathname.startsWith("/mlb-high-school-map");
 const title = highSchoolRoute
-  ? "High Schools Producing MLB Talent Since 2000 | MLB Talent Map 2026"
+  ? "High Schools Producing MLB & MiLB Talent Since 2000 | MLB Talent Map 2026"
   : "Interactive roster map | The Geography of MLB Talent";
 const description = highSchoolRoute
-  ? "Map and rank U.S. high schools by distinct players who made an MLB debut from 2000 through August 24, 2026, with player-level source records."
+  ? "Map and rank U.S. high schools across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026."
   : "Explore U.S. birthplace geography and international origins for every player on an MLB organization roster as of August 24, 2026.";
 const socialImage = highSchoolRoute
   ? "https://mlb-talent-map-2026.pages.dev/og-high-schools.png"

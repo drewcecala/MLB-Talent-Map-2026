@@ -25,26 +25,26 @@ async function ready(page: Page) {
 test("default view reports the audited post-2000 school universe", async ({ page }) => {
   await ready(page);
   const coverage = page.getByRole("region", { name: "High school research coverage" });
-  await expect(coverage).toContainText("MLB debuts reviewed6,225");
-  await expect(coverage).toContainText("With U.S. high school3,979");
-  await expect(coverage).toContainText("Leader programs mapped76");
-  await expect(coverage).toContainText("Most from one school12");
-  await expect(page.getByRole("heading", { name: "Bishop Gorman leads this view" })).toBeVisible();
-  await expect(page.getByRole("region", { name: "Selected high school detail" })).toContainText("Joey Gallo");
+  await expect(coverage).toContainText("MLB/MiLB participants54,980");
+  await expect(coverage).toContainText("Reached MLB7,380");
+  await expect(coverage).toContainText("With U.S. high school16,800");
+  await expect(coverage).toContainText("Leader programs mapped25");
+  await expect(page.getByRole("heading", { name: "IMG Academy leads this view" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Selected high school detail" })).toContainText("James Wood");
 });
 
-test("debut-era filters update rankings and the shareable URL", async ({ page }) => {
+test("participation-era filters update rankings and the shareable URL", async ({ page }) => {
   await ready(page);
-  await page.getByLabel("MLB debut period").selectOption("2020s");
+  await page.getByLabel("Participation period").selectOption("2020s");
   await expect(page).toHaveURL(/era=2020s/);
-  await expect(page.getByRole("heading", { name: "Calvary Christian Academy leads this view" })).toBeVisible();
-  await expect(page.getByText("2020–2026 MLB debuts")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "IMG Academy leads this view" })).toBeVisible();
+  await expect(page.getByText("2020–2026 official participants")).toBeVisible();
 });
 
 test("state and position filters combine without estimating records", async ({ page }) => {
   await ready(page);
   await page.getByLabel("School state").selectOption("CA");
-  await page.getByLabel("MLB position group").selectOption("Pitcher");
+  await page.getByLabel("Primary position group").selectOption("Pitcher");
   await expect(page).toHaveURL(/state=CA/);
   await expect(page).toHaveURL(/position=Pitcher/);
   await expect(page.getByRole("heading", { name: /leads this view/ })).toBeVisible();
@@ -65,7 +65,7 @@ test("invalid URL state is safely normalized", async ({ page }) => {
   await page.goto("/mlb-high-school-map?era=1990s&state=ZZ&position=Quarterback&school=missing");
   await expect(page.locator("[data-high-school-map-ready='true']")).toBeVisible();
   await expect(page).toHaveURL(/\/mlb-high-school-map$/);
-  await expect(page.getByLabel("MLB debut period")).toHaveValue("all");
+  await expect(page.getByLabel("Participation period")).toHaveValue("all");
 });
 
 test("the high-school map has no serious accessibility violations or horizontal overflow", async ({ page }) => {

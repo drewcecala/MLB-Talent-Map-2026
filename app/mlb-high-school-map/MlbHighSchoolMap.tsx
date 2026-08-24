@@ -7,6 +7,7 @@ import {
   DEFAULT_HIGH_SCHOOL_FILTERS,
   ERA_LABELS,
   countUniquePlayers,
+  formatSeasons,
   highSchoolFiltersToQuery,
   integer,
   optionValues,
@@ -31,7 +32,10 @@ type HighSchoolData = {
     sources: string[];
     caveats: string[];
     counts: {
-      mlbPlayers: number;
+      affiliatedPlayers: number;
+      mlbParticipants: number;
+      minorOnlyPlayers: number;
+      hydratedPlayers: number;
       playersWithAnyHighSchool: number;
       playersWithUsHighSchool: number;
       playersMissingHighSchool: number;
@@ -58,7 +62,7 @@ function useHighSchoolBundle() {
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch("/data/mlb-high-school-map.json").then((response) => {
+      fetch("/data/mlb-high-school-leaders.json").then((response) => {
         if (!response.ok) throw new Error("The high-school research snapshot is unavailable.");
         return response.json() as Promise<HighSchoolData>;
       }),
@@ -78,16 +82,11 @@ function useHighSchoolBundle() {
 }
 
 const LABEL_OFFSETS: Record<string, [number, number]> = {
-  "nv-bishop-gorman-las-vegas": [18, -18],
-  "ca-rancho-bernardo-san-diego": [-22, 74],
-  "ca-william-s-hart": [-27, -18],
-  "ca-elk-grove": [-18, -23],
-  "fl-plant": [35, -42],
-  "ca-poway": [34, 88],
-  "fl-sarasota": [-31, 52],
-  "fl-jesuit-tampa": [28, 73],
-  "ca-mater-dei-santa-ana": [-47, 51],
-  "ga-walton": [18, -15],
+  "fl-img-academy-bradenton": [-42, -42],
+  "fl-american-heritage-plantation": [42, -32],
+  "ca-rancho-bernardo-san-diego": [-24, 72],
+  "az-chaparral-scottsdale": [-30, -30],
+  "nv-bishop-gorman-las-vegas": [20, -19],
 };
 
 function dotRadius(count: number) {
@@ -124,7 +123,7 @@ function HighSchoolDotMap({
       className="hs-map"
       viewBox="0 0 980 600"
       role="group"
-      aria-label="U.S. map locating leading high schools by post-2000 MLB debuts"
+      aria-label="U.S. map locating leading high schools by MLB and affiliated Minor League Baseball participants since 2000"
       aria-describedby={descriptionId}
     >
       <rect className="hs-map-background" width="980" height="600" rx="18" />
@@ -208,8 +207,11 @@ function SchoolDetail({ school }: { school: RankedHighSchool }) {
         {school.filteredPlayers.map((player) => (
           <div className="hs-player-row" role="listitem" key={player.id}>
             <strong>{player.name}</strong>
-            <span>{player.positionGroup} · {player.position}</span>
-            <time dateTime={player.debutDate}>MLB debut {player.debutDate}</time>
+            <span>{player.positionGroup} · {player.position} · highest in window {player.highestLevel}</span>
+            <span>
+              Seasons {formatSeasons(player.seasons)}
+              {player.mlbDebutDate ? <> · MLB debut <time dateTime={player.mlbDebutDate}>{player.mlbDebutDate}</time></> : ""}
+            </span>
           </div>
         ))}
       </div>
@@ -227,8 +229,8 @@ function LoadingState({ error }: { error?: string | null }) {
   return (
     <main className="loading-shell hs-loading" aria-busy={!error}>
       <div className="loading-card" role={error ? "alert" : "status"}>
-        <span className="brand-chip">DEBUT PIPELINE</span>
-        <h1>High Schools Producing MLB Talent</h1>
+        <span className="brand-chip">AFFILIATED PIPELINE</span>
+        <h1>High Schools Producing MLB &amp; MiLB Talent</h1>
         <p>{error ?? "Loading the audited school, player, and campus-location records…"}</p>
       </div>
     </main>
@@ -298,12 +300,12 @@ export function MlbHighSchoolMap() {
       <header className="site-header hs-header">
         <div className="header-copy">
           <div className="eyebrow-line">
-            <span>MLB DEBUTS · 2000–2026</span>
-            <span className="brand-chip">DEBUT PIPELINE</span>
+            <span>MLB + AFFILIATED MiLB · 2000–2026</span>
+            <span className="brand-chip">AFFILIATED PIPELINE</span>
           </div>
-          <h1>High Schools Producing MLB Talent</h1>
+          <h1>High Schools Producing MLB &amp; MiLB Talent</h1>
           <p>
-            Every U.S. high school with at least five distinct players who made an MLB debut from January 1, 2000 through {data.meta.snapshotDate}. Dot size shows player count; each school opens to its underlying MLB player records.
+            Every U.S. high school credited with at least 20 distinct MLB or affiliated MiLB season participants from 2000 through {data.meta.snapshotDate}. Dot size shows player count; each school opens to its underlying official player records.
           </p>
         </div>
         <div className="header-actions">
@@ -314,10 +316,10 @@ export function MlbHighSchoolMap() {
       </header>
 
       <section className="coverage-strip hs-coverage" aria-label="High school research coverage">
-        <div><span>MLB debuts reviewed</span><strong>{integer.format(data.meta.counts.mlbPlayers)}</strong></div>
+        <div><span>MLB/MiLB participants</span><strong>{integer.format(data.meta.counts.affiliatedPlayers)}</strong></div>
+        <div><span>Reached MLB</span><strong>{integer.format(data.meta.counts.mlbParticipants)}</strong></div>
         <div><span>With U.S. high school</span><strong>{integer.format(data.meta.counts.playersWithUsHighSchool)}</strong></div>
         <div><span>Leader programs mapped</span><strong>{integer.format(data.meta.counts.locatedHighSchools)}</strong></div>
-        <div><span>Most from one school</span><strong>{integer.format(data.schools[0].playerCount)}</strong></div>
       </section>
 
       <div className="hs-workspace-grid">
@@ -330,7 +332,7 @@ export function MlbHighSchoolMap() {
             <p className="interaction-note">Tap a dot or use the school selector · circle area encodes players</p>
           </div>
           <div className="view-status">
-            <strong>{ERA_LABELS[filters.era]} MLB debuts</strong>
+            <strong>{ERA_LABELS[filters.era]} official participants</strong>
             <span>{integer.format(ranked.length)} programs shown</span>
             <span>{integer.format(uniquePlayers)} distinct players</span>
           </div>
@@ -363,10 +365,10 @@ export function MlbHighSchoolMap() {
           />
           <div className="hs-size-legend" aria-label="Player count legend">
             <strong>Players credited</strong>
-            {[1, 5, 10].map((value) => (
+            {[5, 20, 47].map((value) => (
               <span key={value}><i style={{ width: dotRadius(value) * 2, height: dotRadius(value) * 2 }} />{value}</span>
             ))}
-            <small>Only programs with 5+ players in the full 2000–2026 period were location-audited.</small>
+            <small>All 25 programs with 20+ players in the full 2000–2026 period were location-audited.</small>
           </div>
           {active ? <SchoolDetail school={active} /> : (
             <p className="hs-empty">No school has a player matching this filter combination.</p>
@@ -380,7 +382,7 @@ export function MlbHighSchoolMap() {
           </div>
           <div className="filter-grid">
             <label className="filter-field" htmlFor="hs-era">
-              <span>MLB debut period</span>
+              <span>Participation period</span>
               <select id="hs-era" value={filters.era} onChange={(event) => update("era", event.target.value as Era)}>
                 {(Object.keys(ERA_LABELS) as Era[]).map((era) => <option value={era} key={era}>{ERA_LABELS[era]}</option>)}
               </select>
@@ -393,7 +395,7 @@ export function MlbHighSchoolMap() {
               </select>
             </label>
             <label className="filter-field" htmlFor="hs-position">
-              <span>MLB position group</span>
+              <span>Primary position group</span>
               <select id="hs-position" value={filters.positionGroup} onChange={(event) => update("positionGroup", event.target.value)}>
                 <option value="all">All position groups</option>
                 {positionValues.map((position) => <option value={position} key={position}>{position}</option>)}
@@ -409,6 +411,7 @@ export function MlbHighSchoolMap() {
             <strong>Counting rule</strong>
             <p>{data.meta.definition}</p>
             <p>A player listed at multiple high schools credits each one, so school totals are not additive.</p>
+            <p>{integer.format(data.meta.counts.playersMissingHighSchool)} participants have no reported high school and are excluded from school rankings, not treated as zero.</p>
           </div>
         </aside>
 
@@ -433,7 +436,7 @@ export function MlbHighSchoolMap() {
           </ol>
           <div className="rank-context hs-rank-context">
             <strong>Default leader</strong>
-            <p>Bishop Gorman in Las Vegas leads the full period with 12 distinct MLB debuts. Ties are ordered by full-period count, then school name.</p>
+            <p>IMG Academy in Bradenton leads the full period with 47 distinct MLB/MiLB participants. Ties are ordered by full-period count, then school name.</p>
           </div>
         </aside>
       </div>
@@ -446,7 +449,7 @@ export function MlbHighSchoolMap() {
         <p className="table-scroll-note">Swipe horizontally to see every directory column.</p>
         <div className="audit-table-wrap" role="region" aria-label="Ranked high school directory" tabIndex={0}>
           <table>
-            <thead><tr><th scope="col">Rank</th><th scope="col">High school</th><th scope="col">Location</th><th scope="col">Players</th><th scope="col">Debut span</th><th scope="col">Player records</th></tr></thead>
+            <thead><tr><th scope="col">Rank</th><th scope="col">High school</th><th scope="col">Location</th><th scope="col">Players</th><th scope="col">Participation span</th><th scope="col">Player records</th></tr></thead>
             <tbody>
               {ranked.map((school, index) => (
                 <tr key={school.id}>
@@ -454,8 +457,8 @@ export function MlbHighSchoolMap() {
                   <th scope="row"><button className="hs-table-button" type="button" onClick={() => { selectSchool(school); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{school.name}</button></th>
                   <td>{schoolLocation(school)}</td>
                   <td><strong>{school.filteredCount}</strong></td>
-                  <td>{school.filteredPlayers.at(0)?.debutYear}–{school.filteredPlayers.at(-1)?.debutYear}</td>
-                  <td>{school.filteredPlayers.map((player) => `${player.name} (${player.debutYear})`).join(" · ")}</td>
+                  <td>{Math.min(...school.filteredPlayers.map((player) => player.firstSeason))}–{Math.max(...school.filteredPlayers.map((player) => player.lastSeason))}</td>
+                  <td>{school.filteredPlayers.map((player) => `${player.name} (${formatSeasons(player.seasons)}; ${player.highestLevel})`).join(" · ")}</td>
                 </tr>
               ))}
             </tbody>
@@ -466,13 +469,14 @@ export function MlbHighSchoolMap() {
       <section className="methodology-band hs-methodology">
         <div><p className="panel-kicker">Methodology</p><h2>Player records first; campus points second.</h2></div>
         <p>
-          MLB&apos;s official player and education endpoints supply debut dates and reported high schools. Players are deduplicated by MLB person ID within each school. School identities are separated by reported city, with only narrowly audited aliases consolidated. The 76 programs with at least five players were geocoded to campus locations and checked against state boundaries.
+          MLB&apos;s official season-player endpoints identify participants at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels. Education records supply reported high schools. Players are deduplicated by MLB person ID within each school. Only narrowly audited school aliases are consolidated. All 25 programs with at least 20 participants were geocoded to campus locations and checked against state boundaries.
+          Education coverage is incomplete: {integer.format(data.meta.counts.playersMissingHighSchool)} participants have no reported high school and therefore cannot be credited to a school.
         </p>
         <dl>
-          <div><dt>MLB debut window</dt><dd>2000–2026</dd></div>
+          <div><dt>Official participants</dt><dd>{integer.format(data.meta.counts.affiliatedPlayers)}</dd></div>
+          <div><dt>MLB participants</dt><dd>{integer.format(data.meta.counts.mlbParticipants)}</dd></div>
+          <div><dt>Minor-only participants</dt><dd>{integer.format(data.meta.counts.minorOnlyPlayers)}</dd></div>
           <div><dt>U.S. school identities</dt><dd>{integer.format(data.meta.counts.usHighSchoolIdentities)}</dd></div>
-          <div><dt>Programs location-audited</dt><dd>{integer.format(data.meta.counts.locatedHighSchools)}</dd></div>
-          <div><dt>Missing school records</dt><dd>{integer.format(data.meta.counts.playersMissingHighSchool)}</dd></div>
         </dl>
       </section>
 
@@ -481,7 +485,7 @@ export function MlbHighSchoolMap() {
           <strong>Sources</strong>
           <p>
             {data.meta.sources.map((source, index) => (
-              <Fragment key={source}>{index ? " · " : ""}<a href={source} target="_blank" rel="noreferrer">MLB Stats API{index ? " education" : " player seasons"}</a></Fragment>
+              <Fragment key={source}>{index ? " · " : ""}<a href={source} target="_blank" rel="noreferrer">MLB Stats API {index < 7 ? ["MLB", "Triple-A", "Double-A", "High-A", "Single-A", "Short-Season A", "Rookie"][index] : "education"}</a></Fragment>
             ))}
             {" · "}<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>
             {" · "}<a href="https://geocoding.geo.census.gov/geocoder/" target="_blank" rel="noreferrer">U.S. Census Geocoder</a>
@@ -490,7 +494,7 @@ export function MlbHighSchoolMap() {
         <div className="footer-note">
           <span>Research snapshot: {data.meta.snapshotDate}</span>
           <span>Independent research · not affiliated with or endorsed by MLB</span>
-          <span className="quiet-brand">DEBUT PIPELINE</span>
+          <span className="quiet-brand">AFFILIATED PIPELINE</span>
         </div>
       </footer>
     </main>

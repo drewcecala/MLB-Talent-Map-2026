@@ -5,6 +5,21 @@ const SNAPSHOT_DATE = process.argv[2] ?? new Date().toISOString().slice(0, 10);
 const START_YEAR = 2000;
 const END_YEAR = Number(SNAPSHOT_DATE.slice(0, 4));
 const MLB_API = "https://statsapi.mlb.com/api/v1";
+const SPORT_IDS = [1, 11, 12, 13, 14, 15, 16];
+const SPORT_RANK = new Map(SPORT_IDS.map((sportId, index) => [sportId, index]));
+const SPORT_LABELS = new Map([
+  [1, "MLB"],
+  [11, "Triple-A"],
+  [12, "Double-A"],
+  [13, "High-A"],
+  [14, "Single-A"],
+  [15, "Short-Season A"],
+  [16, "Rookie"],
+]);
+const UNIVERSE_FIELDS = [
+  "id", "name", "firstSeason", "lastSeason", "seasons", "sportIds",
+  "appearedInMlb", "hasAnyHighSchool", "hasUsHighSchool",
+];
 const US_STATES = new Set([
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN",
   "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV",
@@ -15,6 +30,8 @@ const US_STATES = new Set([
 const DATA_DIR = new URL("../data/processed/", import.meta.url);
 const RAW_DIR = new URL("../data/raw/", import.meta.url);
 const PUBLIC_FILE = new URL("../public/data/mlb-high-school-map.json", import.meta.url);
+const LEADER_FILE = new URL("../public/data/mlb-high-school-leaders.json", import.meta.url);
+const UNIVERSE_FILE = new URL("../data/mlb-affiliated-universe-audit.json", import.meta.url);
 const LOCATION_FILE = new URL("../data/high-school-locations.json", import.meta.url);
 const RESOLUTION_FILE = new URL("../data/high-school-resolutions.json", import.meta.url);
 
@@ -93,12 +110,31 @@ await mkdir(DATA_DIR, { recursive: true });
 await mkdir(RAW_DIR, { recursive: true });
 
 const years = Array.from({ length: END_YEAR - START_YEAR + 1 }, (_, index) => START_YEAR + index);
-const seasonPayloads = await mapLimit(years, 6, async (year) => {
-  const query = new URLSearchParams({ season: String(year) });
-  return fetchJson(`${MLB_API}/sports/1/players?${query}`);
+const seasonPayloads = await mapLimit(years.flatMap((year) =>
+  SPORT_IDS.map((sportId) => ({ year, sportId }))), 12, async ({ year, sportId }) => {
+  const query = new URLSearchParams({ season: String(year), fields: "people,id" });
+  const payload = await fetchJson(`${MLB_API}/sports/${sportId}/players?${query}`);
+  return { year, sportId, people: payload.people ?? [] };
 });
 
-const playerIds = [...new Set(seasonPayloads.flatMap((payload) => payload.people.map((person) => person.id)))];
+const participationById = new Map();
+for (const payload of seasonPayloads) {
+  for (const person of payload.people) {
+    const participation = participationById.get(person.id) ?? {
+      firstSeason: payload.year,
+      lastSeason: payload.year,
+      seasons: new Set(),
+      sportIds: new Set(),
+    };
+    participation.firstSeason = Math.min(participation.firstSeason, payload.year);
+    participation.lastSeason = Math.max(participation.lastSeason, payload.year);
+    participation.seasons.add(payload.year);
+    participation.sportIds.add(payload.sportId);
+    participationById.set(person.id, participation);
+  }
+}
+
+const playerIds = [...participationById.keys()].sort((a, b) => a - b);
 const chunks = [];
 for (let index = 0; index < playerIds.length; index += 250) chunks.push(playerIds.slice(index, index + 250));
 
@@ -108,6 +144,9 @@ const peoplePayloads = await mapLimit(chunks, 4, async (ids) => {
 });
 const peopleById = new Map();
 for (const person of peoplePayloads.flatMap((payload) => payload.people)) peopleById.set(person.id, person);
+if (peopleById.size !== participationById.size) {
+  throw new Error(`Player hydration incomplete: ${peopleById.size}/${participationById.size}`);
+}
 
 const locations = await readLocations();
 const resolutions = JSON.parse(await readFile(RESOLUTION_FILE, "utf8"));
@@ -117,10 +156,26 @@ const outsideScope = [];
 const credits = [];
 
 for (const person of peopleById.values()) {
-  if (!person.mlbDebutDate || person.mlbDebutDate < `${START_YEAR}-01-01` || person.mlbDebutDate > SNAPSHOT_DATE) continue;
+  const participation = participationById.get(person.id);
+  if (!participation) continue;
+  const reachedMlb = participation.sportIds.has(1);
+  const highestSportId = [...participation.sportIds].sort((a, b) =>
+    SPORT_RANK.get(a) - SPORT_RANK.get(b))[0];
+  const player = {
+    id: person.id,
+    name: person.fullName,
+    firstSeason: participation.firstSeason,
+    lastSeason: participation.lastSeason,
+    seasons: [...participation.seasons].sort((a, b) => a - b),
+    reachedMlb,
+    highestLevel: SPORT_LABELS.get(highestSportId) ?? "Unknown",
+    mlbDebutDate: person.mlbDebutDate ?? null,
+    position: person.primaryPosition?.abbreviation ?? "—",
+    positionGroup: positionGroup(person),
+  };
   const highschools = person.education?.highschools ?? [];
   if (!highschools.length) {
-    missingEducation.push({ id: person.id, name: person.fullName, debutDate: person.mlbDebutDate });
+    missingEducation.push(player);
     continue;
   }
 
@@ -131,7 +186,8 @@ for (const person of peopleById.values()) {
       outsideScope.push({
         playerId: person.id,
         playerName: person.fullName,
-        debutDate: person.mlbDebutDate,
+        firstSeason: participation.firstSeason,
+        lastSeason: participation.lastSeason,
         school: school.name ?? "Unknown",
         city: school.city ?? null,
         state: state || null,
@@ -146,14 +202,7 @@ for (const person of peopleById.values()) {
       name,
       city: school.city ?? null,
       state,
-      player: {
-      id: person.id,
-      name: person.fullName,
-      debutDate: person.mlbDebutDate,
-      debutYear: Number(person.mlbDebutDate.slice(0, 4)),
-      position: person.primaryPosition?.abbreviation ?? "—",
-      positionGroup: positionGroup(person),
-      },
+      player,
     });
   }
 }
@@ -206,39 +255,80 @@ const schoolRows = [...schools.values()].map((school) => ({
   ...school,
   reportedNames: school.reportedNames.sort(),
   reportedCities: school.reportedCities.sort(),
-  players: school.players.sort((a, b) => a.debutDate.localeCompare(b.debutDate) || a.name.localeCompare(b.name)),
+  players: school.players.sort((a, b) => a.firstSeason - b.firstSeason || a.name.localeCompare(b.name)),
   playerCount: school.players.length,
-  firstDebutYear: Math.min(...school.players.map((player) => player.debutYear)),
-  latestDebutYear: Math.max(...school.players.map((player) => player.debutYear)),
+  firstSeason: Math.min(...school.players.map((player) => player.firstSeason)),
+  latestSeason: Math.max(...school.players.map((player) => player.lastSeason)),
 })).sort((a, b) => b.playerCount - a.playerCount || a.name.localeCompare(b.name));
 
-const debutPlayers = [...peopleById.values()].filter((person) =>
-  person.mlbDebutDate >= `${START_YEAR}-01-01` && person.mlbDebutDate <= SNAPSHOT_DATE,
-);
 const withUsHighSchool = new Set(schoolRows.flatMap((school) => school.players.map((player) => player.id)));
-const withAnyEducation = debutPlayers.filter((person) => (person.education?.highschools?.length ?? 0) > 0);
+const withAnyEducation = [...peopleById.values()].filter((person) => (person.education?.highschools?.length ?? 0) > 0);
+const withAnyEducationIds = new Set(withAnyEducation.map((person) => person.id));
+const mlbParticipants = [...participationById.values()].filter((row) => row.sportIds.has(1)).length;
 const mappedSchools = schoolRows.filter((school) => school.latitude !== null && school.longitude !== null);
 const mappedPlayers = new Set(mappedSchools.flatMap((school) => school.players.map((player) => player.id)));
+const universeParticipants = playerIds.map((id) => {
+  const person = peopleById.get(id);
+  const participation = participationById.get(id);
+  return [
+    id,
+    person.fullName,
+    participation.firstSeason,
+    participation.lastSeason,
+    [...participation.seasons].sort((a, b) => a - b),
+    [...participation.sportIds].sort((a, b) => SPORT_RANK.get(a) - SPORT_RANK.get(b)),
+    participation.sportIds.has(1),
+    withAnyEducationIds.has(id),
+    withUsHighSchool.has(id),
+  ];
+});
+const universeUnsigned = {
+  meta: {
+    snapshotDate: SNAPSHOT_DATE,
+    seasonRange: { start: START_YEAR, end: END_YEAR },
+    sportIds: SPORT_IDS,
+    participantFields: UNIVERSE_FIELDS,
+    participantCount: universeParticipants.length,
+    definition: "Unique people returned by MLB's official season-player endpoints for MLB and affiliated Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels, deduplicated by MLB person ID.",
+    seasonSportCounts: seasonPayloads.map((payload) => ({
+      season: payload.year,
+      sportId: payload.sportId,
+      players: new Set(payload.people.map((person) => person.id)).size,
+    })),
+  },
+  participants: universeParticipants,
+};
+const universeStableJson = `${JSON.stringify(universeUnsigned, null, 2)}\n`;
+const universeSha256 = createHash("sha256").update(universeStableJson).digest("hex");
+const universeAudit = structuredClone(universeUnsigned);
+universeAudit.meta.sha256 = universeSha256;
 
 const output = {
   meta: {
-    title: "MLB high school talent map since 2000",
+    title: "MLB and affiliated MiLB high school talent map since 2000",
     snapshotDate: SNAPSHOT_DATE,
     startDate: `${START_YEAR}-01-01`,
     generatedAt: new Date().toISOString(),
-    definition: "Distinct players whose MLB debut date is on or after 2000-01-01 and on or before the snapshot date. Each player is credited once to every U.S. high school listed in the MLB Stats API education record.",
+    sportIds: SPORT_IDS,
+    seasonRange: { start: START_YEAR, end: END_YEAR },
+    universeSha256,
+    definition: "Distinct players listed by MLB's official season-player endpoints at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, or Rookie level from 2000 through the snapshot season. Each player is credited once to every U.S. high school listed in the MLB Stats API education record.",
     sources: [
-      `${MLB_API}/sports/1/players?season=${END_YEAR}`,
+      ...SPORT_IDS.map((sportId) => `${MLB_API}/sports/${sportId}/players?season=${END_YEAR}`),
       `${MLB_API}/people?personIds=592450&hydrate=education`,
     ],
     caveats: [
-      "MLB education records are not complete for every player.",
+      "MLB education records are not complete for every MLB or affiliated MiLB player.",
       "A player who attended multiple listed high schools is credited to each school; totals across schools are not additive.",
       "School names and cities are reported by MLB and may contain historical names, abbreviations, or missing city fields. Ambiguous name-only records remain unresolved; only documented leader aliases and campus identities are consolidated.",
       "Only U.S. high schools in the 50 states and District of Columbia are included.",
+      "Affiliated minor-league seasons were canceled in 2020, so the 2020 minor-league endpoints contain no participants; MLB participants remain included for that season.",
     ],
     counts: {
-      mlbPlayers: debutPlayers.length,
+      affiliatedPlayers: participationById.size,
+      mlbParticipants,
+      minorOnlyPlayers: participationById.size - mlbParticipants,
+      hydratedPlayers: peopleById.size,
       playersWithAnyHighSchool: withAnyEducation.length,
       playersWithUsHighSchool: withUsHighSchool.size,
       playersMissingHighSchool: missingEducation.length,
@@ -252,11 +342,28 @@ const output = {
   schools: schoolRows,
 };
 
-const stableJson = `${JSON.stringify(output, null, 2)}\n`;
+const checksumOutput = structuredClone(output);
+delete checksumOutput.meta.generatedAt;
+const stableJson = `${JSON.stringify(checksumOutput, null, 2)}\n`;
 const sha256 = createHash("sha256").update(stableJson).digest("hex");
 output.meta.sha256 = sha256;
 
-await writeFile(PUBLIC_FILE, `${JSON.stringify(output, null, 2)}\n`);
+const leaderOutput = {
+  meta: {
+    ...output.meta,
+    schoolUniverseSha256: sha256,
+  },
+  schools: mappedSchools,
+};
+delete leaderOutput.meta.sha256;
+const checksumLeaders = structuredClone(leaderOutput);
+delete checksumLeaders.meta.generatedAt;
+const leaderStableJson = `${JSON.stringify(checksumLeaders, null, 2)}\n`;
+leaderOutput.meta.sha256 = createHash("sha256").update(leaderStableJson).digest("hex");
+
+await writeFile(PUBLIC_FILE, `${JSON.stringify(output, null, 1)}\n`);
+await writeFile(LEADER_FILE, `${JSON.stringify(leaderOutput, null, 2)}\n`);
+await writeFile(UNIVERSE_FILE, `${JSON.stringify(universeAudit)}\n`);
 await writeFile(new URL(`mlb-high-school-quality-${SNAPSHOT_DATE}.json`, DATA_DIR), `${JSON.stringify({
   ...output.meta.counts,
   sha256,
@@ -274,5 +381,5 @@ console.log(JSON.stringify({ ...output.meta.counts, sha256, topSchools: schoolRo
   city: school.city,
   state: school.state,
   playerCount: school.playerCount,
-  players: school.players.map((player) => `${player.name} (${player.debutYear})`),
+  players: school.players.map((player) => `${player.name} (${player.firstSeason}–${player.lastSeason}; ${player.highestLevel})`),
 })) }, null, 2));

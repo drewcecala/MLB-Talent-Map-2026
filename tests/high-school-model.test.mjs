@@ -3,10 +3,25 @@ import test from "node:test";
 import {
   DEFAULT_HIGH_SCHOOL_FILTERS,
   countUniquePlayers,
+  formatSeasons,
   highSchoolFiltersToQuery,
   parseHighSchoolFilters,
+  playerMatchesEra,
   rankHighSchools,
 } from "../app/mlb-high-school-map/model.ts";
+
+const player = (id, name, seasons, position, positionGroup, reachedMlb = false) => ({
+  id,
+  name,
+  firstSeason: seasons[0],
+  lastSeason: seasons.at(-1),
+  seasons,
+  reachedMlb,
+  highestLevel: reachedMlb ? "MLB" : "Triple-A",
+  mlbDebutDate: reachedMlb ? `${seasons[0]}-04-01` : null,
+  position,
+  positionGroup,
+});
 
 const schools = [
   {
@@ -23,12 +38,12 @@ const schools = [
     reportedNames: ["Alpha"],
     reportedCities: ["Las Vegas"],
     playerCount: 3,
-    firstDebutYear: 2003,
-    latestDebutYear: 2022,
+    firstSeason: 2003,
+    latestSeason: 2022,
     players: [
-      { id: 1, name: "One", debutDate: "2003-04-01", debutYear: 2003, position: "P", positionGroup: "Pitcher" },
-      { id: 2, name: "Two", debutDate: "2015-04-01", debutYear: 2015, position: "SS", positionGroup: "Infielder" },
-      { id: 3, name: "Three", debutDate: "2022-04-01", debutYear: 2022, position: "P", positionGroup: "Pitcher" },
+      player(1, "One", [2003, 2004], "P", "Pitcher"),
+      player(2, "Two", [2015, 2020], "SS", "Infielder", true),
+      player(3, "Three", [2022], "P", "Pitcher"),
     ],
   },
   {
@@ -45,22 +60,33 @@ const schools = [
     reportedNames: ["Beta"],
     reportedCities: ["San Diego"],
     playerCount: 2,
-    firstDebutYear: 2015,
-    latestDebutYear: 2024,
+    firstSeason: 2015,
+    latestSeason: 2024,
     players: [
-      { id: 2, name: "Two", debutDate: "2015-04-01", debutYear: 2015, position: "SS", positionGroup: "Infielder" },
-      { id: 4, name: "Four", debutDate: "2024-04-01", debutYear: 2024, position: "C", positionGroup: "Catcher" },
+      player(2, "Two", [2015, 2020], "SS", "Infielder", true),
+      player(4, "Four", [2024], "C", "Catcher"),
     ],
   },
 ];
 
-test("school rankings filter by debut era and preserve distinct-player counts", () => {
+test("school rankings filter by exact participation seasons and preserve distinct-player counts", () => {
   const ranked = rankHighSchools(schools, { ...DEFAULT_HIGH_SCHOOL_FILTERS, era: "2010s" });
   assert.deepEqual(ranked.map((school) => [school.id, school.filteredCount]), [
     ["nv-alpha-las-vegas", 1],
     ["ca-beta-san-diego", 1],
   ]);
   assert.equal(countUniquePlayers(ranked), 1);
+});
+
+test("era matching does not infer participation during a gap", () => {
+  const gapPlayer = player(5, "Gap", [2005, 2022], "P", "Pitcher");
+  assert.equal(playerMatchesEra(gapPlayer, "2000s"), true);
+  assert.equal(playerMatchesEra(gapPlayer, "2010s"), false);
+  assert.equal(playerMatchesEra(gapPlayer, "2020s"), true);
+});
+
+test("season evidence preserves and compresses only consecutive years", () => {
+  assert.equal(formatSeasons([2005, 2006, 2008, 2022, 2023]), "2005–2006, 2008, 2022–2023");
 });
 
 test("state, position, and text filters are applied together", () => {

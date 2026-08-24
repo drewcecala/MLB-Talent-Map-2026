@@ -36,6 +36,7 @@
     { "state": "CA", "names": ["Thousand Oaks"], "cities": [""], "canonical": { "id": "ca-thousand-oaks", "name": "Thousand Oaks", "city": "Thousand Oaks", "state": "CA" } },
     { "state": "TN", "names": ["Tullahoma"], "cities": [""], "canonical": { "id": "tn-tullahoma", "name": "Tullahoma", "city": "Tullahoma", "state": "TN" } },
     { "state": "CA", "names": ["Upland"], "cities": [""], "canonical": { "id": "ca-upland", "name": "Upland", "city": "Upland", "state": "CA" } },
-    { "state": "CA", "names": ["Valencia"], "cities": [""], "canonical": { "id": "ca-valencia", "name": "Valencia", "city": "Valencia", "state": "CA" } }
+    { "state": "CA", "names": ["Valencia"], "cities": [""], "canonical": { "id": "ca-valencia", "name": "Valencia", "city": "Valencia", "state": "CA" } },
+    { "state": "CA", "names": ["Los Alamitos"], "cities": [""], "canonical": { "id": "ca-los-alamitos", "name": "Los Alamitos", "city": "Los Alamitos", "state": "CA" } }
   ]
 }
