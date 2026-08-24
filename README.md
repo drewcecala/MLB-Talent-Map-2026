@@ -50,13 +50,34 @@ An audited roster-and-birthplace geography project covering every unique player 
 
 ## Reproduce and verify
 
+The published data products are committed, so a clean clone validates, builds and
+tests without any downloads:
+
 ```bash
 npm ci
-npm run data:build
 npm run check
 ```
 
-`data:build` refreshes the official MLB roster snapshot, the 1876–2026 career-start audit, and the college signing-school reconciliation for the fixed publication date; it also reruns the federal-place match and validates the Natural Earth country join. `check` validates all three data products, builds both deployment targets, runs unit tests, and exercises every rendered route in desktop and mobile Chromium.
+`check` validates all three data products, builds both deployment targets, runs
+unit tests, and exercises every rendered route in desktop and mobile Chromium.
+
+### Rebuilding the data products
+
+`npm run data:build` regenerates the data from source. It refreshes the official
+MLB roster snapshot, the 1876–2026 career-start audit, and the college
+signing-school reconciliation for the fixed publication date; it also reruns the
+federal-place match and validates the Natural Earth country join.
+
+It needs source files that are **not** redistributed in this repository — they are
+public-domain or third-party downloads, cited in [ATTRIBUTION.md](ATTRIBUTION.md).
+Place them in `data/raw/` before running:
+
+| File | Source |
+|---|---|
+| `PopulatedPlaces_National_Text.zip`, `AllNames_National_Text.zip` | [USGS GNIS](https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data) |
+| `2025_Gaz_place_national.zip` | [Census Gazetteer](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html) |
+| `natural-earth-50m/ne_50m_admin_0_countries.*` | [Natural Earth 1:50m](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/) |
+| `mlb-rosters-<date>.json` and other player-level snapshots | Fetched from the MLB Stats API; withheld because they carry player-level source fields |
 
 ## Evidence boundary
 
