@@ -85,35 +85,34 @@ The public map payload includes MLB person IDs, organization/level/status/positi
 
 ## High-school pipeline methodology
 
-The high-school map answers a different question: which U.S. high schools are credited with the most players who appeared in MLB or affiliated Minor League Baseball from **2000 through 2026-08-24**?
+The high-school map asks which U.S. high schools are credited with the most players whose official MLB or affiliated Minor League career record begins in **2000 or later**, through 2026-08-24.
 
-1. Request MLB's official season-player endpoint for every season from 2000 through 2026 at MLB (`sportId=1`), Triple-A (`11`), Double-A (`12`), High-A (`13`), Single-A (`14`), Short-Season A (`15`), and Rookie (`16`).
-2. Deduplicate the union by MLB person ID while retaining every exact participation season and every returned level. The reconciled universe contains 54,980 players: 7,380 with an MLB appearance in the period and 47,600 who appeared only at an included affiliated minor-league level.
-3. Hydrate all 54,980 person records with MLB education data and require complete person hydration before the build can continue.
+1. Request MLB's official season-player endpoint for every season from 1876 through 2026 at MLB (`sportId=1`), Triple-A (`11`), Double-A (`12`), High-A (`13`), Single-A (`14`), Short-Season A (`15`), and Rookie (`16`).
+2. Build the 2000–2026 union, then exclude every person ID returned by any included endpoint before 2000. This removes 5,209 carryovers from the 54,980 players visible during the publication period and leaves 49,771 eligible career starters: 5,372 who reached MLB and 44,399 who appeared only at an included affiliated minor-league level.
+3. Hydrate all 49,771 eligible person records with MLB education data and require complete person hydration before the build can continue.
 4. Credit each player once to every listed high school in the 50 states or District of Columbia.
 5. Keep distinct school identities by normalized name, state, and reported city. Consolidate only documented aliases or neighboring locality labels for the same campus; do not broadly merge ambiguous name-only records.
 6. Rank by distinct MLB person IDs credited to each school.
-7. Location-audit every program with at least 20 qualifying players. The published leader map contains all 25 programs meeting that threshold.
+7. Location-audit every program with at least 20 qualifying players. The published leader map contains all 15 programs meeting that threshold after the career-start correction.
 
 Campus locations use OpenStreetMap Nominatim where an exact school feature is available. Remaining leaders use an official school or municipal address with the U.S. Census Geocoder, or an official municipal coordinate. Every published point is automatically checked against the 2020 state polygon for its reported state.
 
-The historical school dataset contains player names, exact participation seasons, highest included level, positions, and MLB debut dates where available. The repository also publishes the full 54,980-player universe and a linked SHA-256 checksum so the scope can be audited independently from the mapped school subset. Totals across schools are not additive because a player listed at multiple schools credits each school.
+The historical school dataset contains player names, exact participation seasons, highest included level, positions, and MLB debut dates where available. The repository also publishes the full 49,771-player universe, the 5,209 excluded IDs, and a linked SHA-256 checksum so the scope can be audited independently from the mapped school subset. Totals across schools are not additive because a player listed at multiple schools credits each school.
 
-MLB education data is incomplete: 18,642 participants have at least one high-school record, 16,800 have a U.S. high school in scope, and 36,338 have no reported high school. The official affiliated minor-league season was canceled in 2020; those six minor-league endpoints correctly return zero participants for 2020, while the MLB endpoint remains included.
+MLB education data is incomplete: 16,317 eligible players have at least one high-school record, 14,862 have a U.S. high school in scope, and 33,454 have no reported high school. The official affiliated minor-league season was canceled in 2020; those six minor-league endpoints correctly return zero participants for 2020, while the MLB endpoint remains included.
 
 ## College pipeline methodology
 
-The college map uses the same 54,980-person official MLB/affiliated-MiLB participation universe and asks which verified colleges are credited with the most of those players.
+The college audit uses the same 49,771-player career-start universe and asks which single school each player attended immediately before signing a professional contract.
 
-1. Read every nonempty college reported by MLB's hydrated education record. This primary source identifies 23,895 players.
-2. Query the official MLB Draft endpoint for every draft year from 1965 through 2026 and intersect draft picks with the 54,980 MLB person IDs. Accept a draft school when MLB explicitly classifies it as a four-year or junior college. Older draft records lack consistent school-class fields, so they are accepted only when the reported school exactly matches an audited college alias, an MLB education college identity, or a SABR Lahman school identity. Explicit high-school, secondary-school, and preparatory-school records are excluded.
-3. Join the SABR Lahman 2025 `CollegePlaying` table to MLB person IDs through exact `key_bbref` → `key_mlbam` links in the Chadwick Register. This source can supplement MLB participants but not minor-only players who are absent from Lahman's major-league player universe.
-4. Consolidate audited institutional aliases such as `LSU`/`Louisiana State`, `USC`/`Southern California`, and `Miami`/`Miami (FL)`. Do not merge ambiguous institutions without a documented rule.
-5. Deduplicate by MLB person ID within each canonical college. A transfer credits every verified college once, so totals across colleges are not additive.
-6. Rank by distinct qualifying player IDs. Map every program at the 155-player cutoff; four programs tie at 155, producing a 26-program leader set rather than an arbitrary 25.
+1. Read MLB's hydrated education record. MLB reports one college for 21,513 eligible players but does not provide attendance dates there.
+2. Query MLB Draft records from 1965 through 2026 and MLB professional-signing transactions. Match the draft that produced professional entry through the signing year or MLB's person-level draft year. Earlier unsigned selections are ignored.
+3. A matched signing draft classified as a four-year or junior college supplies the final college. A matched signing draft explicitly identifying a high school, secondary school, or academy supplies documented non-college entry only when no college evidence conflicts.
+4. Join dated SABR Lahman `CollegePlaying` rows through exact Chadwick Register identifiers. When no signing-draft school is available, the single latest dated college season before professional entry can supply the final college.
+5. Retain MLB's single reported college as candidate/corroborating evidence, but do not credit an undated MLB education record by itself. Consolidate only audited institutional aliases.
+6. Credit no more than one college per player. Earlier transfer schools, unsigned draft selections, and ambiguous multi-school evidence receive no credit.
+7. Treat blank education, international origin, foreign birth, and young signing age as unresolved—not as evidence of no college.
 
-The source hierarchy recovers 804 player records that were blank in MLB education from MLB Draft evidence and 21 more from SABR/Lahman. The final evidence state is 24,720 players with at least one verified college and 30,260 without verified college evidence. The latter are labeled **unresolved**, not “did not attend college,” because source absence is not proof of non-attendance.
+The audit currently resolves 17,210 final colleges and 3,640 documented non-college signings. The other 28,921 players remain unresolved, for 20,850 of 49,771 resolved signing-school statuses (41.9%). Publication requires at least 44,794 resolved players (90%). Because the threshold is not met, the public college leader bundle is empty and the route displays the evidence status instead of rankings.
 
-The reconciled data contains 28,832 player-college credits across 2,452 institution identities. The 26 mapped leaders cover 4,626 distinct players. Campus points are OpenStreetMap university-feature centroids recorded with direct feature links, and every displayed coordinate is automatically tested against the 2020 polygon for its reported state.
-
-The repository's full audit preserves record-level evidence URLs and source labels. The smaller public browser bundle retains the source labels needed to audit displayed player rows while omitting repeated evidence objects for performance. Both files have reproducible SHA-256 checksums and link back to the same player-universe checksum.
+The full audit preserves record-level evidence URLs, source labels, the selection basis, and signing dates where available. All outputs have reproducible SHA-256 checksums and link back to the same player-universe checksum.

@@ -300,12 +300,12 @@ export function MlbHighSchoolMap() {
       <header className="site-header hs-header">
         <div className="header-copy">
           <div className="eyebrow-line">
-            <span>MLB + AFFILIATED MiLB · 2000–2026</span>
+            <span>MLB + AFFILIATED MiLB · CAREERS STARTING 2000–2026</span>
             <span className="brand-chip">AFFILIATED PIPELINE</span>
           </div>
           <h1>High Schools Producing MLB &amp; MiLB Talent</h1>
           <p>
-            Every U.S. high school credited with at least 20 distinct MLB or affiliated MiLB season participants from 2000 through {data.meta.snapshotDate}. Dot size shows player count; each school opens to its underlying official player records.
+            Every U.S. high school credited with at least 20 distinct players whose official MLB or affiliated MiLB career record begins in 2000 or later, through {data.meta.snapshotDate}. Dot size shows player count; each school opens to its underlying official player records.
           </p>
         </div>
         <div className="header-actions">
@@ -368,7 +368,7 @@ export function MlbHighSchoolMap() {
             {[5, 20, 47].map((value) => (
               <span key={value}><i style={{ width: dotRadius(value) * 2, height: dotRadius(value) * 2 }} />{value}</span>
             ))}
-            <small>All 25 programs with 20+ players in the full 2000–2026 period were location-audited.</small>
+            <small>All {integer.format(data.meta.counts.locatedHighSchools)} programs with 20+ eligible career starters were location-audited.</small>
           </div>
           {active ? <SchoolDetail school={active} /> : (
             <p className="hs-empty">No school has a player matching this filter combination.</p>
@@ -469,7 +469,7 @@ export function MlbHighSchoolMap() {
       <section className="methodology-band hs-methodology">
         <div><p className="panel-kicker">Methodology</p><h2>Player records first; campus points second.</h2></div>
         <p>
-          MLB&apos;s official season-player endpoints identify participants at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels. Education records supply reported high schools. Players are deduplicated by MLB person ID within each school. Only narrowly audited school aliases are consolidated. All 25 programs with at least 20 participants were geocoded to campus locations and checked against state boundaries.
+          MLB&apos;s official season-player endpoints identify participants at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels. Every player returned before 2000 is excluded, so the population contains career starters rather than anyone who merely appeared after the cutoff. Education records supply reported high schools. Players are deduplicated by MLB person ID within each school. Only narrowly audited school aliases are consolidated. All {integer.format(data.meta.counts.locatedHighSchools)} programs with at least 20 eligible players were geocoded to campus locations and checked against state boundaries.
           Education coverage is incomplete: {integer.format(data.meta.counts.playersMissingHighSchool)} participants have no reported high school and therefore cannot be credited to a school.
         </p>
         <dl>

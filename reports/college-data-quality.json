@@ -1,29 +1,35 @@
 {
   "counts": {
-    "affiliatedPlayers": 54980,
-    "mlbParticipants": 7380,
-    "minorOnlyPlayers": 47600,
-    "playersWithMlbEducationCollege": 23895,
-    "playersAddedByMlbDraft": 804,
-    "playersAddedBySabrLahman": 21,
-    "playersWithVerifiedCollege": 24720,
-    "playersWithoutVerifiedCollege": 30260,
-    "verifiedCollegePlayerCredits": 28832,
-    "collegeIdentities": 2452,
+    "affiliatedPlayers": 49771,
+    "mlbParticipants": 5372,
+    "minorOnlyPlayers": 44399,
+    "playersWithMlbEducationCollege": 21513,
+    "playersAddedByMlbDraft": 495,
+    "playersAddedBySabrLahman": 0,
+    "playersWithVerifiedCollege": 17210,
+    "playersWithoutVerifiedCollege": 32561,
+    "playersWithDocumentedNoCollege": 3640,
+    "playersWithUnresolvedEducation": 28921,
+    "resolvedSigningSchoolPlayers": 20850,
+    "requiredResolvedPlayers": 44794,
+    "resolutionCoverageRate": 0.4189186474051154,
+    "minimumPublicationCoverage": 0.9,
+    "verifiedCollegePlayerCredits": 17210,
+    "collegeIdentities": 1542,
     "locatedColleges": 26,
-    "locatedPlayers": 4626
+    "locatedPlayers": 3382
   },
   "sourceFiles": {
     "universe": {
-      "sha256": "c099900bc49d79164397987bee659fab0083fd598401f2b537d2743f5ea20d2c",
-      "records": 54980
+      "sha256": "82a92209b1d83a66e6c389eb1d69237e67bb400555cbdf12a25a621b30b31ad8",
+      "records": 49771
     },
     "mlbEducation": {
-      "sha256": "ae851c4d21523887cd523a5391066c6d38eb2dc9391b5b3c0f0dccb301e94d78",
-      "records": 54980
+      "sha256": "8758a91ca2f878466d9dafc2a1e6794e450879ea2b08ac7e081243207fb0d16d",
+      "records": 49771
     },
     "mlbDraft": {
-      "sha256": "1cb2c68dca207be5feb9bbacb36812733d69d3751fba33446ce249cac51b4802",
+      "sha256": "d8883512361929923879feddb253752bbd1771477e232414ea68b43e386555bc",
       "years": 62
     },
     "sabrCollegePlaying": {
@@ -37,21 +43,39 @@
     "chadwickRegister": {
       "sha256": "dd0bf052f38159938f2ffe9f19bd138c862770ffb44e0114096c819eb958d59d",
       "records": 518743
+    },
+    "mlbSigningTransactions": {
+      "sha256": "e75540f83226a60f781215f2bf306fda081e882058151342d78d31606acf1239",
+      "records": 15929
     }
   },
   "sourceCreditCounts": {
-    "mlbEducation": 23895,
-    "mlbDraft": 20603,
-    "sabrLahman": 2788
+    "mlbEducation": 21513,
+    "mlbDraft": 17980,
+    "sabrLahman": 1300
   },
-  "draftRejectedRecords": 10838,
+  "selectionBasisCounts": {
+    "signedDraftCollege": 17152,
+    "signedDraftNonCollege": 3640,
+    "datedLahmanCollege": 58,
+    "mlbEducationUncorroborated": 4410,
+    "unresolved": 28921
+  },
+  "publicationGate": {
+    "ready": false,
+    "minimumCoverage": 0.9,
+    "actualCoverage": 0.4189186474051154,
+    "requiredResolvedPlayers": 44794,
+    "resolvedPlayers": 20850
+  },
+  "draftRejectedRecords": 8775,
   "lahmanUnmatchedPlayerIds": 121,
   "topColleges": [
     {
       "id": "college-arizona-state",
       "name": "Arizona State University",
-      "playerCount": 231,
-      "reachedMlbCount": 53,
+      "playerCount": 165,
+      "reachedMlbCount": 40,
       "reportedNames": [
         "Arizona State",
         "Arizona State University"
@@ -61,8 +85,8 @@
     {
       "id": "college-miami-fl",
       "name": "University of Miami",
-      "playerCount": 210,
-      "reachedMlbCount": 52,
+      "playerCount": 152,
+      "reachedMlbCount": 30,
       "reportedNames": [
         "Miami",
         "Miami (FL)",
@@ -73,8 +97,8 @@
     {
       "id": "college-ucla",
       "name": "UCLA",
-      "playerCount": 203,
-      "reachedMlbCount": 56,
+      "playerCount": 147,
+      "reachedMlbCount": 34,
       "reportedNames": [
         "UCLA",
         "University of California - Los Angeles"
@@ -84,8 +108,8 @@
     {
       "id": "college-texas",
       "name": "University of Texas at Austin",
-      "playerCount": 203,
-      "reachedMlbCount": 51,
+      "playerCount": 145,
+      "reachedMlbCount": 33,
       "reportedNames": [
         "Texas",
         "University of Texas at Austin"
@@ -95,8 +119,8 @@
     {
       "id": "college-louisiana-state",
       "name": "Louisiana State University",
-      "playerCount": 201,
-      "reachedMlbCount": 72,
+      "playerCount": 143,
+      "reachedMlbCount": 51,
       "reportedNames": [
         "LSU",
         "Louisiana State",
@@ -105,122 +129,10 @@
       "located": true
     },
     {
-      "id": "college-arkansas",
-      "name": "University of Arkansas",
-      "playerCount": 199,
-      "reachedMlbCount": 36,
-      "reportedNames": [
-        "Arkansas",
-        "University of Arkansas"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-oklahoma",
-      "name": "University of Oklahoma",
-      "playerCount": 193,
-      "reachedMlbCount": 45,
-      "reportedNames": [
-        "Oklahoma",
-        "University of Oklahoma"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-cal-state-fullerton",
-      "name": "Cal State Fullerton",
-      "playerCount": 187,
-      "reachedMlbCount": 55,
-      "reportedNames": [
-        "Cal State Fullerton",
-        "California State University Fullerton"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-stanford",
-      "name": "Stanford University",
-      "playerCount": 186,
-      "reachedMlbCount": 61,
-      "reportedNames": [
-        "Stanford",
-        "Stanford University"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-oklahoma-state",
-      "name": "Oklahoma State University",
-      "playerCount": 185,
-      "reachedMlbCount": 41,
-      "reportedNames": [
-        "Oklahoma State",
-        "Oklahoma State University"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-florida-state",
-      "name": "Florida State University",
-      "playerCount": 184,
-      "reachedMlbCount": 47,
-      "reportedNames": [
-        "Florida State",
-        "Florida State University"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-texas-a-and-m",
-      "name": "Texas A&M University",
-      "playerCount": 183,
-      "reachedMlbCount": 39,
-      "reportedNames": [
-        "Texas A&M",
-        "Texas A&M University"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-north-carolina",
-      "name": "University of North Carolina at Chapel Hill",
-      "playerCount": 172,
-      "reachedMlbCount": 40,
-      "reportedNames": [
-        "North Carolina",
-        "UNC Chapel Hill",
-        "University of North Carolina at Chapel Hill"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-florida",
-      "name": "University of Florida",
-      "playerCount": 170,
-      "reachedMlbCount": 56,
-      "reportedNames": [
-        "Florida",
-        "University of Florida"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-southern-california",
-      "name": "University of Southern California",
-      "playerCount": 170,
-      "reachedMlbCount": 50,
-      "reportedNames": [
-        "Southern California",
-        "USC",
-        "University of Southern California"
-      ],
-      "located": true
-    },
-    {
       "id": "college-vanderbilt",
       "name": "Vanderbilt University",
-      "playerCount": 169,
-      "reachedMlbCount": 42,
+      "playerCount": 143,
+      "reachedMlbCount": 37,
       "reportedNames": [
         "Vanderbilt",
         "Vanderbilt University"
@@ -228,65 +140,76 @@
       "located": true
     },
     {
-      "id": "college-clemson",
-      "name": "Clemson University",
-      "playerCount": 168,
-      "reachedMlbCount": 43,
+      "id": "college-oklahoma",
+      "name": "University of Oklahoma",
+      "playerCount": 140,
+      "reachedMlbCount": 31,
       "reportedNames": [
-        "Clemson",
-        "Clemson University"
+        "Oklahoma",
+        "University of Oklahoma"
       ],
       "located": true
     },
     {
-      "id": "college-arizona",
-      "name": "University of Arizona",
-      "playerCount": 166,
-      "reachedMlbCount": 54,
+      "id": "college-stanford",
+      "name": "Stanford University",
+      "playerCount": 139,
+      "reachedMlbCount": 44,
       "reportedNames": [
-        "Arizona",
-        "University of Arizona"
+        "Stanford",
+        "Stanford University"
       ],
       "located": true
     },
     {
-      "id": "college-south-carolina",
-      "name": "University of South Carolina",
-      "playerCount": 164,
-      "reachedMlbCount": 42,
+      "id": "college-florida",
+      "name": "University of Florida",
+      "playerCount": 138,
+      "reachedMlbCount": 44,
       "reportedNames": [
-        "South Carolina",
-        "University of South Carolina"
+        "Florida",
+        "University of Florida"
       ],
       "located": true
     },
     {
-      "id": "college-georgia-tech",
-      "name": "Georgia Tech",
-      "playerCount": 161,
-      "reachedMlbCount": 46,
+      "id": "college-florida-state",
+      "name": "Florida State University",
+      "playerCount": 137,
+      "reachedMlbCount": 31,
       "reportedNames": [
-        "Georgia Institute of Technology",
-        "Georgia Tech"
+        "Florida State",
+        "Florida State University"
       ],
       "located": true
     },
     {
-      "id": "college-texas-tech",
-      "name": "Texas Tech University",
-      "playerCount": 161,
-      "reachedMlbCount": 37,
+      "id": "college-oklahoma-state",
+      "name": "Oklahoma State University",
+      "playerCount": 135,
+      "reachedMlbCount": 29,
       "reportedNames": [
-        "Texas Tech",
-        "Texas Tech University"
+        "Oklahoma State",
+        "Oklahoma State University"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-texas-a-and-m",
+      "name": "Texas A&M University",
+      "playerCount": 134,
+      "reachedMlbCount": 26,
+      "reportedNames": [
+        "Texas A&M",
+        "Texas A&M University"
       ],
       "located": true
     },
     {
       "id": "college-mississippi",
       "name": "University of Mississippi",
-      "playerCount": 159,
-      "reachedMlbCount": 36,
+      "playerCount": 131,
+      "reachedMlbCount": 28,
       "reportedNames": [
         "MIssissippi",
         "Mississippi",
@@ -296,10 +219,134 @@
       "located": true
     },
     {
+      "id": "college-north-carolina",
+      "name": "University of North Carolina at Chapel Hill",
+      "playerCount": 130,
+      "reachedMlbCount": 31,
+      "reportedNames": [
+        "North Carolina",
+        "UNC Chapel Hill",
+        "University of North Carolina at Chapel Hill"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-cal-state-fullerton",
+      "name": "Cal State Fullerton",
+      "playerCount": 127,
+      "reachedMlbCount": 34,
+      "reportedNames": [
+        "Cal State Fullerton",
+        "California State University Fullerton"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-texas-tech",
+      "name": "Texas Tech University",
+      "playerCount": 126,
+      "reachedMlbCount": 27,
+      "reportedNames": [
+        "Texas Tech",
+        "Texas Tech University"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-arkansas",
+      "name": "University of Arkansas",
+      "playerCount": 125,
+      "reachedMlbCount": 24,
+      "reportedNames": [
+        "Arkansas",
+        "University of Arkansas"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-oregon-state",
+      "name": "Oregon State University",
+      "playerCount": 124,
+      "reachedMlbCount": 29,
+      "reportedNames": [
+        "Oregon State",
+        "Oregon State University"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-georgia-tech",
+      "name": "Georgia Tech",
+      "playerCount": 123,
+      "reachedMlbCount": 32,
+      "reportedNames": [
+        "Georgia Institute of Technology",
+        "Georgia Tech"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-clemson",
+      "name": "Clemson University",
+      "playerCount": 122,
+      "reachedMlbCount": 30,
+      "reportedNames": [
+        "Clemson",
+        "Clemson University"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-arizona",
+      "name": "University of Arizona",
+      "playerCount": 121,
+      "reachedMlbCount": 41,
+      "reportedNames": [
+        "Arizona",
+        "University of Arizona"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-tennessee",
+      "name": "University of Tennessee",
+      "playerCount": 120,
+      "reachedMlbCount": 23,
+      "reportedNames": [
+        "Tennessee",
+        "University of Tennessee"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-mississippi-state",
+      "name": "Mississippi State University",
+      "playerCount": 116,
+      "reachedMlbCount": 30,
+      "reportedNames": [
+        "MIssissippi State",
+        "Mississippi State",
+        "Mississippi State University"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-north-carolina-state",
+      "name": "North Carolina State University",
+      "playerCount": 115,
+      "reachedMlbCount": 18,
+      "reportedNames": [
+        "NC State",
+        "North Carolina State",
+        "North Carolina State University"
+      ],
+      "located": false
+    },
+    {
       "id": "college-auburn",
       "name": "Auburn University",
-      "playerCount": 155,
-      "reachedMlbCount": 35,
+      "playerCount": 112,
+      "reachedMlbCount": 24,
       "reportedNames": [
         "Auburn",
         "Auburn University"
@@ -307,10 +354,124 @@
       "located": true
     },
     {
+      "id": "college-rice",
+      "name": "Rice University",
+      "playerCount": 112,
+      "reachedMlbCount": 26,
+      "reportedNames": [
+        "Rice",
+        "Rice University"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-texas-christian",
+      "name": "Texas Christian University",
+      "playerCount": 112,
+      "reachedMlbCount": 21,
+      "reportedNames": [
+        "TCU",
+        "Texas Christian",
+        "Texas Christian University"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-georgia",
+      "name": "University of Georgia",
+      "playerCount": 112,
+      "reachedMlbCount": 15,
+      "reportedNames": [
+        "Georgia",
+        "University of Georgia"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-virginia",
+      "name": "University of Virginia",
+      "playerCount": 110,
+      "reachedMlbCount": 34,
+      "reportedNames": [
+        "University of Virginia",
+        "Virginia"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-louisville",
+      "name": "University of Louisville",
+      "playerCount": 109,
+      "reachedMlbCount": 27,
+      "reportedNames": [
+        "Louisville",
+        "University of Louisville"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-uc-santa-barbara",
+      "name": "UC Santa Barbara",
+      "playerCount": 106,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "UC Santa Barbara",
+        "University of California - Santa Barbara"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-southern-california",
+      "name": "University of Southern California",
+      "playerCount": 106,
+      "reachedMlbCount": 25,
+      "reportedNames": [
+        "Southern California",
+        "USC",
+        "University of Southern California"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-california",
+      "name": "University of California, Berkeley",
+      "playerCount": 105,
+      "reachedMlbCount": 30,
+      "reportedNames": [
+        "California",
+        "UC Berkeley",
+        "University of California - Berkeley",
+        "University of California-Berkeley"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-south-carolina",
+      "name": "University of South Carolina",
+      "playerCount": 105,
+      "reachedMlbCount": 27,
+      "reportedNames": [
+        "South Carolina",
+        "University of South Carolina"
+      ],
+      "located": true
+    },
+    {
+      "id": "college-kentucky",
+      "name": "University of Kentucky",
+      "playerCount": 104,
+      "reachedMlbCount": 26,
+      "reportedNames": [
+        "Kentucky",
+        "University of Kentucky"
+      ],
+      "located": false
+    },
+    {
       "id": "college-long-beach-state",
       "name": "Long Beach State",
-      "playerCount": 155,
-      "reachedMlbCount": 48,
+      "playerCount": 100,
+      "reachedMlbCount": 36,
       "reportedNames": [
         "Cal State - Long Beach",
         "Cal State Long Beach",
@@ -321,102 +482,10 @@
       "located": true
     },
     {
-      "id": "college-mississippi-state",
-      "name": "Mississippi State University",
-      "playerCount": 155,
-      "reachedMlbCount": 39,
-      "reportedNames": [
-        "MIssissippi State",
-        "Mississippi State",
-        "Mississippi State University"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-tennessee",
-      "name": "University of Tennessee",
-      "playerCount": 155,
-      "reachedMlbCount": 38,
-      "reportedNames": [
-        "Tennessee",
-        "University of Tennessee"
-      ],
-      "located": true
-    },
-    {
-      "id": "college-oregon-state",
-      "name": "Oregon State University",
-      "playerCount": 153,
-      "reachedMlbCount": 33,
-      "reportedNames": [
-        "Oregon State",
-        "Oregon State University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-north-carolina-state",
-      "name": "North Carolina State University",
-      "playerCount": 146,
-      "reachedMlbCount": 21,
-      "reportedNames": [
-        "NC State",
-        "North Carolina State",
-        "North Carolina State University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-california",
-      "name": "University of California, Berkeley",
-      "playerCount": 146,
-      "reachedMlbCount": 40,
-      "reportedNames": [
-        "California",
-        "UC Berkeley",
-        "University of California - Berkeley",
-        "University of California-Berkeley"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-alabama",
-      "name": "University of Alabama",
-      "playerCount": 145,
-      "reachedMlbCount": 27,
-      "reportedNames": [
-        "Alabama",
-        "University of Alabama"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-georgia",
-      "name": "University of Georgia",
-      "playerCount": 145,
-      "reachedMlbCount": 18,
-      "reportedNames": [
-        "Georgia",
-        "University of Georgia"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-kentucky",
-      "name": "University of Kentucky",
-      "playerCount": 144,
-      "reachedMlbCount": 33,
-      "reportedNames": [
-        "Kentucky",
-        "University of Kentucky"
-      ],
-      "located": false
-    },
-    {
       "id": "college-san-diego-state",
       "name": "San Diego State University",
-      "playerCount": 140,
-      "reachedMlbCount": 32,
+      "playerCount": 98,
+      "reachedMlbCount": 18,
       "reportedNames": [
         "San Diego State",
         "San Diego State University"
@@ -424,66 +493,10 @@
       "located": false
     },
     {
-      "id": "college-central-florida",
-      "name": "University of Central Florida",
-      "playerCount": 138,
-      "reachedMlbCount": 18,
-      "reportedNames": [
-        "Central Florida",
-        "University of Central Florida"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-uc-santa-barbara",
-      "name": "UC Santa Barbara",
-      "playerCount": 136,
-      "reachedMlbCount": 17,
-      "reportedNames": [
-        "UC Santa Barbara",
-        "University of California - Santa Barbara"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-rice",
-      "name": "Rice University",
-      "playerCount": 135,
-      "reachedMlbCount": 35,
-      "reportedNames": [
-        "Rice",
-        "Rice University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-virginia",
-      "name": "University of Virginia",
-      "playerCount": 133,
-      "reachedMlbCount": 38,
-      "reportedNames": [
-        "University of Virginia",
-        "Virginia"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-texas-christian",
-      "name": "Texas Christian University",
-      "playerCount": 129,
-      "reachedMlbCount": 24,
-      "reportedNames": [
-        "TCU",
-        "Texas Christian",
-        "Texas Christian University"
-      ],
-      "located": false
-    },
-    {
       "id": "college-fresno-state",
       "name": "Fresno State",
-      "playerCount": 128,
-      "reachedMlbCount": 30,
+      "playerCount": 95,
+      "reachedMlbCount": 16,
       "reportedNames": [
         "California State University Fresno",
         "Fresno State"
@@ -491,21 +504,32 @@
       "located": false
     },
     {
-      "id": "college-louisville",
-      "name": "University of Louisville",
-      "playerCount": 128,
-      "reachedMlbCount": 29,
+      "id": "college-central-florida",
+      "name": "University of Central Florida",
+      "playerCount": 94,
+      "reachedMlbCount": 12,
       "reportedNames": [
-        "Louisville",
-        "University of Louisville"
+        "Central Florida",
+        "University of Central Florida"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-san-diego",
+      "name": "University of San Diego",
+      "playerCount": 94,
+      "reachedMlbCount": 19,
+      "reportedNames": [
+        "San Diego",
+        "University of San Diego"
       ],
       "located": false
     },
     {
       "id": "college-dallas-baptist",
       "name": "Dallas Baptist University",
-      "playerCount": 120,
-      "reachedMlbCount": 21,
+      "playerCount": 91,
+      "reachedMlbCount": 15,
       "reportedNames": [
         "Dallas Baptist",
         "Dallas Baptist University"
@@ -513,10 +537,21 @@
       "located": false
     },
     {
+      "id": "college-washington",
+      "name": "University of Washington",
+      "playerCount": 89,
+      "reachedMlbCount": 10,
+      "reportedNames": [
+        "University of Washington",
+        "Washington"
+      ],
+      "located": false
+    },
+    {
       "id": "college-houston",
       "name": "University of Houston",
-      "playerCount": 120,
-      "reachedMlbCount": 28,
+      "playerCount": 86,
+      "reachedMlbCount": 22,
       "reportedNames": [
         "Houston",
         "University of Houston"
@@ -526,8 +561,8 @@
     {
       "id": "college-wichita-state",
       "name": "Wichita State University",
-      "playerCount": 119,
-      "reachedMlbCount": 27,
+      "playerCount": 86,
+      "reachedMlbCount": 16,
       "reportedNames": [
         "Wichita State",
         "Wichita State University"
@@ -535,21 +570,21 @@
       "located": false
     },
     {
-      "id": "college-washington",
-      "name": "University of Washington",
-      "playerCount": 118,
-      "reachedMlbCount": 17,
+      "id": "college-baylor",
+      "name": "Baylor University",
+      "playerCount": 85,
+      "reachedMlbCount": 14,
       "reportedNames": [
-        "University of Washington",
-        "Washington"
+        "Baylor",
+        "Baylor University"
       ],
       "located": false
     },
     {
       "id": "college-wake-forest",
       "name": "Wake Forest University",
-      "playerCount": 117,
-      "reachedMlbCount": 25,
+      "playerCount": 85,
+      "reachedMlbCount": 18,
       "reportedNames": [
         "Wake Forest",
         "Wake Forest University"
@@ -557,87 +592,20 @@
       "located": false
     },
     {
-      "id": "college-nebraska",
-      "name": "University of Nebraska–Lincoln",
-      "playerCount": 115,
-      "reachedMlbCount": 30,
+      "id": "college-alabama",
+      "name": "University of Alabama",
+      "playerCount": 83,
+      "reachedMlbCount": 18,
       "reportedNames": [
-        "Nebraska",
-        "Nebraska Lincoln",
-        "University of Nebraska at Lincoln"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-san-diego",
-      "name": "University of San Diego",
-      "playerCount": 113,
-      "reachedMlbCount": 23,
-      "reportedNames": [
-        "San DIego",
-        "San Diego",
-        "University of San Diego"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-missouri",
-      "name": "University of Missouri",
-      "playerCount": 109,
-      "reachedMlbCount": 21,
-      "reportedNames": [
-        "Missouri"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-michigan",
-      "name": "University of Michigan",
-      "playerCount": 107,
-      "reachedMlbCount": 26,
-      "reportedNames": [
-        "Michigan",
-        "University of Michigan"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-west-virginia",
-      "name": "West Virginia University",
-      "playerCount": 107,
-      "reachedMlbCount": 16,
-      "reportedNames": [
-        "West Virginia",
-        "West Virginia University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-coastal-carolina",
-      "name": "Coastal Carolina University",
-      "playerCount": 104,
-      "reachedMlbCount": 14,
-      "reportedNames": [
-        "Coastal Carolina",
-        "Coastal Carolina University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-tampa",
-      "name": "University of Tampa",
-      "playerCount": 104,
-      "reachedMlbCount": 7,
-      "reportedNames": [
-        "Tampa",
-        "University of Tampa"
+        "Alabama",
+        "University of Alabama"
       ],
       "located": false
     },
     {
       "id": "college-east-carolina",
       "name": "East Carolina University",
-      "playerCount": 102,
+      "playerCount": 81,
       "reachedMlbCount": 15,
       "reportedNames": [
         "East Carolina",
@@ -646,77 +614,21 @@
       "located": false
     },
     {
-      "id": "college-florida-atlantic",
-      "name": "Florida Atlantic University",
-      "playerCount": 102,
-      "reachedMlbCount": 15,
-      "reportedNames": [
-        "Florida Atlantic",
-        "Florida Atlantic University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-florida-international",
-      "name": "Florida International University",
-      "playerCount": 101,
-      "reachedMlbCount": 15,
-      "reportedNames": [
-        "Florida International",
-        "Florida International University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-baylor",
-      "name": "Baylor University",
-      "playerCount": 100,
-      "reachedMlbCount": 17,
-      "reportedNames": [
-        "Baylor",
-        "Baylor University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-lewis-clark-state",
-      "name": "Lewis–Clark State College",
-      "playerCount": 100,
-      "reachedMlbCount": 16,
-      "reportedNames": [
-        "Lewis Clark State College",
-        "Lewis-Clark State",
-        "Lewis-Clark State College"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-oral-roberts",
-      "name": "Oral Roberts University",
-      "playerCount": 99,
+      "id": "college-coastal-carolina",
+      "name": "Coastal Carolina University",
+      "playerCount": 80,
       "reachedMlbCount": 11,
       "reportedNames": [
-        "Oral Roberts",
-        "Oral Roberts University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-pepperdine",
-      "name": "Pepperdine University",
-      "playerCount": 99,
-      "reachedMlbCount": 23,
-      "reportedNames": [
-        "Pepperdine",
-        "Pepperdine University"
+        "Coastal Carolina",
+        "Coastal Carolina University"
       ],
       "located": false
     },
     {
       "id": "college-uc-irvine",
       "name": "UC Irvine",
-      "playerCount": 99,
-      "reachedMlbCount": 15,
+      "playerCount": 79,
+      "reachedMlbCount": 12,
       "reportedNames": [
         "UC Irvine",
         "University of California - Irvine"
@@ -724,10 +636,22 @@
       "located": false
     },
     {
+      "id": "college-nebraska",
+      "name": "University of Nebraska–Lincoln",
+      "playerCount": 78,
+      "reachedMlbCount": 23,
+      "reportedNames": [
+        "Nebraska",
+        "Nebraska Lincoln",
+        "University of Nebraska at Lincoln"
+      ],
+      "located": false
+    },
+    {
       "id": "college-indiana",
       "name": "Indiana University",
-      "playerCount": 96,
-      "reachedMlbCount": 25,
+      "playerCount": 74,
+      "reachedMlbCount": 20,
       "reportedNames": [
         "Indiana",
         "Indiana University-Bloomington"
@@ -735,55 +659,65 @@
       "located": false
     },
     {
-      "id": "college-south-florida",
-      "name": "University of South Florida",
-      "playerCount": 96,
-      "reachedMlbCount": 18,
+      "id": "college-florida-atlantic",
+      "name": "Florida Atlantic University",
+      "playerCount": 72,
+      "reachedMlbCount": 14,
       "reportedNames": [
-        "South Florida",
-        "University of South Florida"
+        "Florida Atlantic",
+        "Florida Atlantic University"
       ],
       "located": false
     },
     {
-      "id": "college-connecticut",
-      "name": "University of Connecticut",
-      "playerCount": 95,
+      "id": "college-notre-dame",
+      "name": "University of Notre Dame",
+      "playerCount": 72,
       "reachedMlbCount": 19,
       "reportedNames": [
-        "Connecticut",
-        "University of Connecticut"
+        "Notre Dame",
+        "University of Notre Dame"
       ],
       "located": false
     },
     {
-      "id": "college-illinois",
-      "name": "University of Illinois Urbana-Champaign",
-      "playerCount": 95,
-      "reachedMlbCount": 18,
+      "id": "college-oral-roberts",
+      "name": "Oral Roberts University",
+      "playerCount": 71,
+      "reachedMlbCount": 9,
       "reportedNames": [
-        "Illinois",
-        "University of Illinois",
-        "University of Illinois at Urbana-Champaign"
+        "Oral Roberts",
+        "Oral Roberts University"
       ],
       "located": false
     },
     {
-      "id": "college-south-alabama",
-      "name": "University of South Alabama",
-      "playerCount": 95,
-      "reachedMlbCount": 19,
+      "id": "college-tulane",
+      "name": "Tulane University",
+      "playerCount": 71,
+      "reachedMlbCount": 17,
       "reportedNames": [
-        "South Alabama",
-        "University of South Alabama"
+        "Tulane",
+        "Tulane University"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-tampa",
+      "name": "University of Tampa",
+      "playerCount": 71,
+      "reachedMlbCount": 4,
+      "reportedNames": [
+        "Tampa",
+        "University of Tampa"
       ],
       "located": false
     },
     {
       "id": "college-duke",
       "name": "Duke University",
-      "playerCount": 94,
-      "reachedMlbCount": 16,
+      "playerCount": 70,
+      "reachedMlbCount": 9,
       "reportedNames": [
         "Duke",
         "Duke University"
@@ -791,10 +725,53 @@
       "located": false
     },
     {
+      "id": "college-connecticut",
+      "name": "University of Connecticut",
+      "playerCount": 70,
+      "reachedMlbCount": 15,
+      "reportedNames": [
+        "Connecticut",
+        "University of Connecticut"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-oregon",
+      "name": "University of Oregon",
+      "playerCount": 70,
+      "reachedMlbCount": 16,
+      "reportedNames": [
+        "Oregon"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-west-virginia",
+      "name": "West Virginia University",
+      "playerCount": 70,
+      "reachedMlbCount": 14,
+      "reportedNames": [
+        "West Virginia",
+        "West Virginia University"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-pepperdine",
+      "name": "Pepperdine University",
+      "playerCount": 69,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "Pepperdine",
+        "Pepperdine University"
+      ],
+      "located": false
+    },
+    {
       "id": "college-kansas",
       "name": "University of Kansas",
-      "playerCount": 93,
-      "reachedMlbCount": 11,
+      "playerCount": 69,
+      "reachedMlbCount": 9,
       "reportedNames": [
         "Kansas",
         "University of Kansas"
@@ -802,10 +779,75 @@
       "located": false
     },
     {
+      "id": "college-south-florida",
+      "name": "University of South Florida",
+      "playerCount": 69,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "South Florida",
+        "University of South Florida"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-cal-poly-san-luis-obispo",
+      "name": "Cal Poly San Luis Obispo",
+      "playerCount": 68,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "Cal Poly - San Luis Obispo",
+        "Cal Poly San Luis Obispo",
+        "California Polytechnic State University - San Luis Obispo"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-michigan",
+      "name": "University of Michigan",
+      "playerCount": 68,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "Michigan",
+        "University of Michigan"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-minnesota",
+      "name": "University of Minnesota",
+      "playerCount": 68,
+      "reachedMlbCount": 11,
+      "reportedNames": [
+        "Minnesota",
+        "University of Minnesota"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-boston-college",
+      "name": "Boston College",
+      "playerCount": 65,
+      "reachedMlbCount": 12,
+      "reportedNames": [
+        "Boston College"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-kent-state",
+      "name": "Kent State",
+      "playerCount": 65,
+      "reachedMlbCount": 10,
+      "reportedNames": [
+        "Kent State"
+      ],
+      "located": false
+    },
+    {
       "id": "college-southern-mississippi",
       "name": "University of Southern Mississippi",
-      "playerCount": 93,
-      "reachedMlbCount": 15,
+      "playerCount": 65,
+      "reachedMlbCount": 9,
       "reportedNames": [
         "Southern MIssissippi",
         "Southern Miss",
@@ -815,78 +857,53 @@
       "located": false
     },
     {
-      "id": "college-tulane",
-      "name": "Tulane University",
-      "playerCount": 92,
-      "reachedMlbCount": 20,
+      "id": "college-unc-wilmington",
+      "name": "UNC Wilmington",
+      "playerCount": 64,
+      "reachedMlbCount": 10,
       "reportedNames": [
-        "Tulane",
-        "Tulane University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-notre-dame",
-      "name": "University of Notre Dame",
-      "playerCount": 92,
-      "reachedMlbCount": 23,
-      "reportedNames": [
-        "Notre Dame",
-        "University of Notre Dame"
+        "UNC Wilmington"
       ],
       "located": false
     },
     {
       "id": "college-washington-state",
       "name": "Washington State University",
-      "playerCount": 92,
-      "reachedMlbCount": 15,
+      "playerCount": 64,
+      "reachedMlbCount": 5,
       "reportedNames": [
-        "Washington State",
-        "Washington State University"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-minnesota",
-      "name": "University of Minnesota",
-      "playerCount": 89,
-      "reachedMlbCount": 17,
-      "reportedNames": [
-        "Minnesota",
-        "University of Minnesota"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-oregon",
-      "name": "University of Oregon",
-      "playerCount": 89,
-      "reachedMlbCount": 16,
-      "reportedNames": [
-        "Oregon"
-      ],
-      "located": false
-    },
-    {
-      "id": "college-cal-poly-san-luis-obispo",
-      "name": "Cal Poly San Luis Obispo",
-      "playerCount": 84,
-      "reachedMlbCount": 13,
-      "reportedNames": [
-        "Cal Poly - San Luis Obispo",
-        "Cal Poly San Luis Obispo",
-        "California Polytechnic State University - San Luis Obispo"
+        "Washington State"
       ],
       "located": false
     },
     {
       "id": "college-virginia-tech",
       "name": "Virginia Tech",
-      "playerCount": 84,
-      "reachedMlbCount": 17,
+      "playerCount": 63,
+      "reachedMlbCount": 12,
       "reportedNames": [
         "Virginia Tech"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-kansas-state",
+      "name": "Kansas State",
+      "playerCount": 62,
+      "reachedMlbCount": 8,
+      "reportedNames": [
+        "Kansas State"
+      ],
+      "located": false
+    },
+    {
+      "id": "college-florida-international",
+      "name": "Florida International University",
+      "playerCount": 61,
+      "reachedMlbCount": 10,
+      "reportedNames": [
+        "Florida International",
+        "Florida International University"
       ],
       "located": false
     }

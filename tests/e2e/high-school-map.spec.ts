@@ -25,10 +25,10 @@ async function ready(page: Page) {
 test("default view reports the audited post-2000 school universe", async ({ page }) => {
   await ready(page);
   const coverage = page.getByRole("region", { name: "High school research coverage" });
-  await expect(coverage).toContainText("MLB/MiLB participants54,980");
-  await expect(coverage).toContainText("Reached MLB7,380");
-  await expect(coverage).toContainText("With U.S. high school16,800");
-  await expect(coverage).toContainText("Leader programs mapped25");
+  await expect(coverage).toContainText("MLB/MiLB participants49,771");
+  await expect(coverage).toContainText("Reached MLB5,372");
+  await expect(coverage).toContainText("With U.S. high school14,862");
+  await expect(coverage).toContainText("Leader programs mapped15");
   await expect(page.getByRole("heading", { name: "IMG Academy leads this view" })).toBeVisible();
   await expect(page.getByRole("region", { name: "Selected high school detail" })).toContainText("James Wood");
 });

@@ -25,6 +25,7 @@ type CollegeData = {
     definition: string;
     sources: string[];
     caveats: string[];
+    publicationReady: boolean;
     counts: {
       affiliatedPlayers: number;
       mlbParticipants: number;
@@ -34,6 +35,12 @@ type CollegeData = {
       playersAddedBySabrLahman: number;
       playersWithVerifiedCollege: number;
       playersWithoutVerifiedCollege: number;
+      playersWithDocumentedNoCollege: number;
+      playersWithUnresolvedEducation: number;
+      resolvedSigningSchoolPlayers: number;
+      requiredResolvedPlayers: number;
+      resolutionCoverageRate: number;
+      minimumPublicationCoverage: number;
       verifiedCollegePlayerCredits: number;
       collegeIdentities: number;
       locatedColleges: number;
@@ -204,6 +211,48 @@ function LoadingState({ error }: { error?: string | null }) {
   );
 }
 
+function CollegePublicationHold({ data }: { data: CollegeData }) {
+  const percent = new Intl.NumberFormat("en-US", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return (
+    <main className="site-shell hs-theme college-theme college-review" data-college-map-ready="true">
+      <header className="site-header hs-header college-header">
+        <div className="header-copy">
+          <div className="eyebrow-line"><span>MLB + AFFILIATED MiLB · CAREERS STARTING 2000–2026</span><span className="brand-chip">SOURCE REVIEW</span></div>
+          <h1>College map withheld pending source coverage</h1>
+          <p>The ranking is not being published as complete until the last school attended before each player&apos;s professional signing is documented for at least 90% of the eligible cohort.</p>
+        </div>
+        <div className="header-actions">
+          <a className="hs-nav-link" href="/mlb-high-school-map">High school map</a>
+          <a className="hs-nav-link" href="/mlb-talent-map">2026 roster map</a>
+        </div>
+      </header>
+
+      <section className="coverage-strip hs-coverage college-coverage" aria-label="College research coverage">
+        <div><span>Eligible career starters</span><strong>{integer.format(data.meta.counts.affiliatedPlayers)}</strong></div>
+        <div><span>Signing-school status resolved</span><strong>{integer.format(data.meta.counts.resolvedSigningSchoolPlayers)}</strong></div>
+        <div><span>Current coverage</span><strong>{percent.format(data.meta.counts.resolutionCoverageRate)}</strong></div>
+        <div><span>Publication requirement</span><strong>{percent.format(data.meta.counts.minimumPublicationCoverage)}</strong></div>
+      </section>
+
+      <section className="methodology-band hs-methodology college-methodology" aria-labelledby="college-review-title">
+        <div><p className="panel-kicker">Accuracy gate</p><h2 id="college-review-title">No guessed colleges. No false “no college” labels.</h2></div>
+        <p>Each player may receive credit for one school only: the last school attended before signing a professional contract. Earlier transfer schools and unsigned draft selections receive no credit. A blank education field, international origin, foreign birth, or young signing age is not evidence that a player skipped college.</p>
+        <dl>
+          <div><dt>Verified final college</dt><dd>{integer.format(data.meta.counts.playersWithVerifiedCollege)}</dd></div>
+          <div><dt>Documented non-college signing</dt><dd>{integer.format(data.meta.counts.playersWithDocumentedNoCollege)}</dd></div>
+          <div><dt>Unresolved</dt><dd>{integer.format(data.meta.counts.playersWithUnresolvedEducation)}</dd></div>
+          <div><dt>Required to publish</dt><dd>{integer.format(data.meta.counts.requiredResolvedPlayers)}</dd></div>
+        </dl>
+      </section>
+
+      <footer className="site-footer hs-footer college-footer">
+        <div><strong>Status</strong><p>The interactive college rankings and player lists remain disabled until the documented coverage threshold is met.</p></div>
+        <div className="footer-note"><span>Research snapshot: {data.meta.snapshotDate}</span><span>Independent research · not affiliated with or endorsed by MLB</span></div>
+      </footer>
+    </main>
+  );
+}
+
 export function MlbCollegeMap() {
   const { bundle, error } = useCollegeBundle();
   const [filters, setFilters] = useState<CollegeFilters>(DEFAULT_COLLEGE_FILTERS);
@@ -240,6 +289,7 @@ export function MlbCollegeMap() {
 
   if (!bundle) return <LoadingState error={error} />;
   const { data, states } = bundle;
+  if (!data.meta.publicationReady) return <CollegePublicationHold data={data} />;
   const currentLeader = ranked[0];
   const fullThreshold = Math.min(...data.colleges.map((college) => college.playerCount));
   const mapDescription = `${integer.format(ranked.length)} colleges with ${integer.format(uniquePlayers)} distinct players match the current selection. Dot area represents the number of players credited to each college.`;
@@ -315,7 +365,7 @@ export function MlbCollegeMap() {
             <label className="filter-field" htmlFor="college-position"><span>Primary position group</span><select id="college-position" value={filters.positionGroup} onChange={(event) => update("positionGroup", event.target.value)}><option value="all">All position groups</option>{positionValues.map((position) => <option value={position} key={position}>{position}</option>)}</select></label>
             <label className="filter-field" htmlFor="college-search"><span>College or city</span><input id="college-search" type="search" placeholder="Search the audited leaders" value={filters.query} onChange={(event) => update("query", event.target.value)} /></label>
           </div>
-          <div className="filter-note hs-filter-note college-filter-note"><strong>Counting rule</strong><p>{data.meta.definition}</p><p>Transfers credit every verified college once; college totals are not additive.</p><p>{integer.format(data.meta.counts.playersWithoutVerifiedCollege)} participants remain unresolved—not labeled as non-college players.</p></div>
+          <div className="filter-note hs-filter-note college-filter-note"><strong>Counting rule</strong><p>{data.meta.definition}</p><p>Each player can credit only the last verified school attended before signing.</p><p>{integer.format(data.meta.counts.playersWithUnresolvedEducation)} participants remain unresolved—not labeled as non-college players.</p></div>
         </aside>
 
         <aside className="ranking-panel hs-ranking-panel college-ranking-panel">

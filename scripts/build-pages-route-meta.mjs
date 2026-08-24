@@ -14,7 +14,7 @@ const routes = [
   {
     directory: "mlb-high-school-map/",
     title: "High Schools Producing MLB & MiLB Talent Since 2000 | MLB Talent Map 2026",
-    description: "Map and rank U.S. high schools across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026.",
+    description: "Map and rank U.S. high schools for 49,771 players whose official MLB or affiliated MiLB careers began in 2000 or later.",
     url: "https://mlb-talent-map-2026.pages.dev/mlb-high-school-map",
     image: "https://mlb-talent-map-2026.pages.dev/og-high-schools.png",
     imageAlt: "Map of leading U.S. high schools by MLB and affiliated MiLB participants since 2000",
@@ -23,7 +23,7 @@ const routes = [
   {
     directory: "mlb-college-map/",
     title: "Colleges Producing MLB & MiLB Talent Since 2000 | MLB Talent Map 2026",
-    description: "Map and rank the leading colleges across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026.",
+    description: "Publication-status audit for the MLB college talent map using players whose professional careers began in 2000 or later.",
     url: "https://mlb-talent-map-2026.pages.dev/mlb-college-map",
     image: "https://mlb-talent-map-2026.pages.dev/og-colleges.png",
     imageAlt: "Map of leading U.S. colleges by MLB and affiliated MiLB participants since 2000",

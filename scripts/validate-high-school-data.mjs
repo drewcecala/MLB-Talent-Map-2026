@@ -33,18 +33,20 @@ const expectedParticipantFields = [
   "appearedInMlb", "hasAnyHighSchool", "hasUsHighSchool",
 ];
 const expectedCounts = {
-  affiliatedPlayers: 54_980,
-  mlbParticipants: 7_380,
-  minorOnlyPlayers: 47_600,
-  hydratedPlayers: 54_980,
-  playersWithAnyHighSchool: 18_642,
-  playersWithUsHighSchool: 16_800,
-  playersMissingHighSchool: 36_338,
-  schoolPlayerCredits: 16_800,
-  usHighSchoolIdentities: 7_048,
-  locatedHighSchools: 25,
-  locatedPlayers: 621,
-  outsideScopeCredits: 1_842,
+  sourcePeriodParticipants: 54_980,
+  excludedPre2000Players: 5_209,
+  affiliatedPlayers: 49_771,
+  mlbParticipants: 5_372,
+  minorOnlyPlayers: 44_399,
+  hydratedPlayers: 49_771,
+  playersWithAnyHighSchool: 16_317,
+  playersWithUsHighSchool: 14_862,
+  playersMissingHighSchool: 33_454,
+  schoolPlayerCredits: 14_862,
+  usHighSchoolIdentities: 6_441,
+  locatedHighSchools: 15,
+  locatedPlayers: 392,
+  outsideScopeCredits: 1_455,
 };
 
 assert.equal(data.meta.snapshotDate, "2026-08-24");
@@ -58,11 +60,16 @@ assert.equal(data.meta.counts.mlbParticipants + data.meta.counts.minorOnlyPlayer
 
 assert.equal(universe.meta.snapshotDate, "2026-08-24");
 assert.deepEqual(universe.meta.seasonRange, { start: 2000, end: 2026 });
+assert.equal(universe.meta.careerStartCutoff, 2000);
+assert.deepEqual(universe.meta.careerLookbackRange, { start: 1876, end: 1999 });
+assert.equal(universe.meta.sourcePeriodParticipants, 54_980);
+assert.equal(universe.meta.excludedPreCutoffPlayers, 5_209);
 assert.deepEqual(universe.meta.sportIds, expectedSportIds);
 assert.deepEqual(universe.meta.participantFields, expectedParticipantFields);
 assert.equal(universe.meta.participantCount, expectedCounts.affiliatedPlayers);
 assert.equal(universe.participants.length, expectedCounts.affiliatedPlayers);
 assert.equal(universe.meta.seasonSportCounts.length, 27 * expectedSportIds.length);
+assert.equal(universe.meta.careerLookbackSeasonSportCounts.length, 124 * expectedSportIds.length);
 unique(universe.meta.seasonSportCounts.map((row) => `${row.season}|${row.sportId}`), "season/sport source row");
 assert.deepEqual(
   universe.meta.seasonSportCounts.filter((row) => row.season === 2020).map((row) => [row.sportId, row.players]),
@@ -74,6 +81,9 @@ const universeParticipants = universe.participants.map((row) => Object.fromEntri
   expectedParticipantFields.map((field, index) => [field, row[index]]),
 ));
 unique(universeParticipants.map((player) => player.id), "universe player id");
+assert.equal(universeParticipants.some((player) => player.id === 111188), false, "Barry Bonds must be excluded");
+assert.ok(universe.excludedPreCutoffPlayerIds.includes(111188), "Barry Bonds must be documented in the excluded carryovers");
+assert.equal(universe.excludedPreCutoffPlayerIds.length, 5_209);
 const universeById = new Map();
 for (const player of universeParticipants) {
   assert.ok(Number.isInteger(player.id) && player.id > 0, `invalid player id: ${player.id}`);
@@ -101,9 +111,9 @@ unique(data.schools.map((school) => school.id), "school id");
 assert.deepEqual(data.schools.slice(0, 5).map((school) => [school.id, school.playerCount]), [
   ["fl-img-academy-bradenton", 47],
   ["fl-american-heritage-plantation", 33],
-  ["ca-rancho-bernardo-san-diego", 31],
-  ["fl-jesuit-tampa", 30],
-  ["fl-sarasota", 30],
+  ["ca-rancho-bernardo-san-diego", 29],
+  ["az-chaparral-scottsdale", 28],
+  ["fl-marjory-stoneman-douglas", 26],
 ]);
 
 const levelBySportId = new Map([
@@ -140,7 +150,7 @@ assert.equal(playerCredits, data.meta.counts.schoolPlayerCredits);
 
 const stateByAbbr = new Map(states.features.map((feature) => [feature.properties.state_abbr, feature]));
 const mapped = data.schools.filter((school) => school.latitude !== null || school.longitude !== null);
-assert.equal(mapped.length, 25);
+assert.equal(mapped.length, 15);
 assert.ok(data.schools.every((school) => (school.playerCount >= 20) === (school.latitude !== null && school.longitude !== null)), "the audited 20+ threshold must exactly match the mapped set");
 for (const school of mapped) {
   assert.ok(Number.isFinite(school.latitude) && Number.isFinite(school.longitude), `invalid coordinate: ${school.id}`);
@@ -149,7 +159,7 @@ for (const school of mapped) {
   assert.ok(school.locationSource && school.locationSourceUrl?.startsWith("https://"), `missing location evidence: ${school.id}`);
 }
 
-assert.equal(leaders.schools.length, 25);
+assert.equal(leaders.schools.length, 15);
 assert.deepEqual(leaders.meta.counts, expectedCounts);
 assert.equal(leaders.meta.schoolUniverseSha256, data.meta.sha256, "client bundle must reference the full school-universe checksum");
 assert.deepEqual(leaders.schools, mapped, "client bundle must contain the exact audited leader set");
@@ -159,17 +169,16 @@ assert.equal(locations.minPlayers, 20);
 assert.equal(locations.schools.length, 25);
 unique(locations.schools.map((school) => school.id), "location id");
 assert.ok(locations.schools.every((school) => school.precision === "campus"));
-assert.deepEqual([...locations.schools.map((school) => school.id)].sort(), [...mapped.map((school) => school.id)].sort());
+assert.ok(mapped.every((school) => locations.schools.some((location) => location.id === school.id)), "every active leader must have retained location evidence");
 assert.ok(resolutions.rules.length > 0);
 assert.ok(resolutions.rules.every((rule) => rule.canonical?.id && rule.canonical?.state));
 
 for (const source of data.meta.sources) assert.match(source, /^https:\/\//);
 for (const [label, passed] of Object.entries(audit.checks)) assert.equal(passed, true, `audit check failed: ${label}`);
-assert.equal(audit.counts.affiliatedPlayers, expectedCounts.affiliatedPlayers);
-assert.equal(audit.counts.locationAuditedPrograms, 25);
-assert.equal(audit.counts.schoolIdentities, expectedCounts.usHighSchoolIdentities);
+assert.deepEqual(audit.counts, expectedCounts);
+assert.equal(audit.leaderThreshold, 20);
 
 const dataDigest = digestWithoutMetaSha(data);
 assert.equal(data.meta.sha256, dataDigest, "embedded high-school data checksum must match content");
 
-process.stdout.write(`High-school data validation passed: 54,980 official participants, 7,048 U.S. school identities, 25 campus-audited leaders, sha256 ${dataDigest}\n`);
+process.stdout.write(`High-school data validation passed: 49,771 career starters, 6,441 U.S. school identities, 15 campus-audited leaders, sha256 ${dataDigest}\n`);

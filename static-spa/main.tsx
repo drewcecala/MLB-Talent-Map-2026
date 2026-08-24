@@ -13,9 +13,9 @@ const title = collegeRoute
     ? "High Schools Producing MLB & MiLB Talent Since 2000 | MLB Talent Map 2026"
     : "Interactive roster map | The Geography of MLB Talent";
 const description = collegeRoute
-  ? "Map and rank the leading colleges across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026."
+  ? "Publication-status audit for the MLB college talent map using players whose professional careers began in 2000 or later."
   : highSchoolRoute
-    ? "Map and rank U.S. high schools across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026."
+    ? "Map and rank U.S. high schools for 49,771 players whose official MLB or affiliated MiLB careers began in 2000 or later."
     : "Explore U.S. birthplace geography and international origins for every player on an MLB organization roster as of August 24, 2026.";
 const socialImage = collegeRoute
   ? "https://mlb-talent-map-2026.pages.dev/og-colleges.png"

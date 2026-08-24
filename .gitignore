@@ -49,6 +49,7 @@ next-env.d.ts
 /data/raw/mlb-rosters-*.json
 /data/raw/mlb-high-school-people-*.json
 /data/raw/mlb-draft-*.json
+/data/raw/mlb-signing-evidence-*.json
 /data/raw/lahman-*.csv
 /data/raw/chadwick-register/
 /data/processed/

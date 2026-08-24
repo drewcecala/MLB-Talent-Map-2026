@@ -6,6 +6,7 @@ const START_YEAR = 2000;
 const END_YEAR = Number(SNAPSHOT_DATE.slice(0, 4));
 const MLB_API = "https://statsapi.mlb.com/api/v1";
 const DRAFT_START_YEAR = 1965;
+const MINIMUM_PUBLICATION_COVERAGE = 0.9;
 const SABR_SHARE_URL = "https://sabr.app.box.com/s/y1prhc795jk8zvmelfd3jq7tl389y6cd";
 const SABR_FILES = {
   collegePlaying: {
@@ -27,6 +28,7 @@ const UNIVERSE_FILE = new URL("../data/mlb-affiliated-universe-audit.json", impo
 const RESOLUTION_FILE = new URL("../data/college-resolutions.json", import.meta.url);
 const LOCATION_FILE = new URL("../data/college-locations.json", import.meta.url);
 const DRAFT_FILE = new URL(`mlb-draft-${DRAFT_START_YEAR}-${END_YEAR}-${SNAPSHOT_DATE}.json`, RAW_DIR);
+const SIGNING_FILE = new URL(`mlb-signing-evidence-${SNAPSHOT_DATE}.json`, RAW_DIR);
 const AUDIT_FILE = new URL("../data/mlb-college-map-audit.json", import.meta.url);
 const LEADER_FILE = new URL("../public/data/mlb-college-leaders.json", import.meta.url);
 const QUALITY_REPORT_FILE = new URL("../reports/college-data-quality.json", import.meta.url);
@@ -168,6 +170,52 @@ async function loadDrafts() {
   return output;
 }
 
+function firstProfessionalSigning(person) {
+  const transaction = (person.transactions ?? [])
+    .filter((row) => row.typeCode === "SGN")
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)))[0];
+  if (!transaction) return null;
+  return {
+    playerId: person.id,
+    date: transaction.date,
+    sourceUrl: `${MLB_API}/people/${person.id}?hydrate=transactions`,
+  };
+}
+
+async function loadSigningEvidence(playerIds) {
+  const requestedPlayerIds = [...playerIds].sort((a, b) => a - b);
+  try {
+    const cached = JSON.parse(await readFile(SIGNING_FILE, "utf8"));
+    if (cached.snapshotDate === SNAPSHOT_DATE
+      && cached.requestedPlayerIds?.length === requestedPlayerIds.length
+      && cached.requestedPlayerIds.every((id, index) => id === requestedPlayerIds[index])) {
+      return cached;
+    }
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+
+  const chunks = [];
+  for (let index = 0; index < requestedPlayerIds.length; index += 75) {
+    chunks.push(requestedPlayerIds.slice(index, index + 75));
+  }
+  const payloads = await mapLimit(chunks, 4, async (ids, index) => {
+    const query = new URLSearchParams({ personIds: ids.join(","), hydrate: "transactions" });
+    const payload = await fetchJson(`${MLB_API}/people?${query}`);
+    if ((index + 1) % 50 === 0) {
+      process.stderr.write(`Fetched ${Math.min((index + 1) * 75, requestedPlayerIds.length)}/${requestedPlayerIds.length} transaction profiles\n`);
+    }
+    return payload.people ?? [];
+  });
+  const output = {
+    snapshotDate: SNAPSHOT_DATE,
+    requestedPlayerIds,
+    evidence: payloads.flat().map(firstProfessionalSigning).filter(Boolean).sort((a, b) => a.playerId - b.playerId),
+  };
+  await writeFile(SIGNING_FILE, `${JSON.stringify(output)}\n`);
+  return output;
+}
+
 function resolutionFor(name, rules) {
   const key = normalize(name);
   const rule = rules.find((candidate) => candidate.aliases.some((alias) => normalize(alias) === key));
@@ -238,12 +286,13 @@ for (const rule of resolutions.rules) {
   for (const alias of rule.aliases) knownCollegeNames.add(normalize(alias));
 }
 
-const creditsByPlayer = new Map();
+const candidateCreditsByPlayer = new Map();
+const draftRecordsByPlayer = new Map();
 const sourceCreditCounts = { mlbEducation: 0, mlbDraft: 0, sabrLahman: 0 };
 function addCredit(playerId, rawName, source, evidenceUrl, sourceDetail = {}) {
   if (!participantById.has(playerId) || !String(rawName ?? "").trim()) return false;
   const canonical = resolutionFor(rawName, resolutions.rules);
-  const playerCredits = creditsByPlayer.get(playerId) ?? new Map();
+  const playerCredits = candidateCreditsByPlayer.get(playerId) ?? new Map();
   const existing = playerCredits.get(canonical.id) ?? {
     canonical,
     reportedNames: new Set(),
@@ -253,11 +302,12 @@ function addCredit(playerId, rawName, source, evidenceUrl, sourceDetail = {}) {
   const sourceAlreadyPresent = existing.sources.has(source);
   existing.reportedNames.add(String(rawName).trim());
   existing.sources.add(source);
-  if (!existing.evidence.some((row) => row.source === source && row.url === evidenceUrl)) {
+  if (!existing.evidence.some((row) => row.source === source && row.url === evidenceUrl
+    && row.draftYear === sourceDetail.draftYear && row.reportedYear === sourceDetail.reportedYear)) {
     existing.evidence.push({ source, url: evidenceUrl, ...sourceDetail });
   }
   playerCredits.set(canonical.id, existing);
-  creditsByPlayer.set(playerId, playerCredits);
+  candidateCreditsByPlayer.set(playerId, playerCredits);
   if (!sourceAlreadyPresent) sourceCreditCounts[source] += 1;
   return true;
 }
@@ -272,7 +322,6 @@ for (const person of peopleById.values()) {
   }
 }
 
-const draftAddedPlayerIds = new Set();
 const rejectedDraftSchools = [];
 for (const draft of drafts.years) {
   for (const pick of draft.rounds.flatMap((round) => round.picks ?? [])) {
@@ -282,11 +331,21 @@ for (const draft of drafts.years) {
     const schoolClass = pick.school.schoolClass ?? "";
     const explicitCollege = isExplicitCollegeClass(schoolClass);
     const knownCollege = knownCollegeNames.has(normalize(name));
-    if (!explicitCollege && (isExplicitNonCollegeDraftSchool(name, schoolClass) || !knownCollege)) {
-      rejectedDraftSchools.push({ playerId, year: draft.year, name, schoolClass: schoolClass || null });
+    const classification = explicitCollege || knownCollege ? "college"
+      : isExplicitNonCollegeDraftSchool(name, schoolClass) ? "nonCollege" : "unresolved";
+    const draftRecords = draftRecordsByPlayer.get(playerId) ?? [];
+    draftRecords.push({
+      year: draft.year,
+      name,
+      schoolClass: schoolClass || null,
+      classification,
+      sourceUrl: `${MLB_API}/draft/${draft.year}`,
+    });
+    draftRecordsByPlayer.set(playerId, draftRecords);
+    if (classification !== "college") {
+      rejectedDraftSchools.push({ playerId, year: draft.year, name, schoolClass: schoolClass || null, classification });
       continue;
     }
-    const hadCollege = creditsByPlayer.has(playerId);
     addCredit(playerId, name, "mlbDraft", `${MLB_API}/draft/${draft.year}`, {
       draftYear: draft.year,
       schoolClass: schoolClass || null,
@@ -295,11 +354,9 @@ for (const draft of drafts.years) {
       reportedCountry: pick.school.country ?? null,
       classificationBasis: explicitCollege ? "mlb_school_class" : "verified_college_identity",
     });
-    if (!hadCollege) draftAddedPlayerIds.add(playerId);
   }
 }
 
-const lahmanAddedPlayerIds = new Set();
 const lahmanUnmatchedIds = new Set();
 for (const row of collegePlaying) {
   const playerId = mlbamByBbref.get(row.playerID);
@@ -309,19 +366,100 @@ for (const row of collegePlaying) {
   }
   const school = schoolById.get(row.schoolID);
   if (!school?.name_full) continue;
-  const hadCollege = creditsByPlayer.has(playerId);
   addCredit(playerId, school.name_full, "sabrLahman", SABR_SHARE_URL, {
     schoolId: row.schoolID,
-    firstReportedYear: Number(row.yearID) || null,
+    reportedYear: Number(row.yearID) || null,
     reportedCity: school.city || null,
     reportedState: school.state || null,
     reportedCountry: school.country || null,
   });
-  if (!hadCollege) lahmanAddedPlayerIds.add(playerId);
+}
+
+const signingPayload = await loadSigningEvidence(participantById.keys());
+const signingByPlayer = new Map(signingPayload.evidence.map((row) => [row.playerId, row]));
+const selectedCreditsByPlayer = new Map();
+const documentedNoCollegePlayerIds = new Set();
+const unresolvedPlayerIds = new Set();
+const selectionBasisCounts = {
+  signedDraftCollege: 0,
+  signedDraftNonCollege: 0,
+  datedLahmanCollege: 0,
+  mlbEducationUncorroborated: 0,
+  unresolved: 0,
+};
+
+function selectCredit(playerId, canonicalId, basis, supportingEvidence = null) {
+  const credit = candidateCreditsByPlayer.get(playerId)?.get(canonicalId);
+  if (!credit) return false;
+  selectedCreditsByPlayer.set(playerId, {
+    ...credit,
+    selectionBasis: basis,
+    signingEvidence: supportingEvidence,
+  });
+  selectionBasisCounts[basis] += 1;
+  return true;
+}
+
+for (const participant of participants) {
+  const person = peopleById.get(participant.id);
+  const signing = signingByPlayer.get(participant.id) ?? null;
+  const signingYear = Number(signing?.date?.slice(0, 4)) || null;
+  const recordedSigningDraftYear = Number(person?.draftYear) || null;
+  const draftRecords = (draftRecordsByPlayer.get(participant.id) ?? [])
+    .filter((row) => row.year <= participant.firstSeason)
+    .sort((a, b) => b.year - a.year);
+  const signingDraft = draftRecords.find((row) => row.year === signingYear)
+    ?? draftRecords.find((row) => row.year === recordedSigningDraftYear)
+    ?? null;
+  const candidateCredits = candidateCreditsByPlayer.get(participant.id);
+
+  if (signingDraft?.classification === "college") {
+    const canonical = resolutionFor(signingDraft.name, resolutions.rules);
+    if (selectCredit(participant.id, canonical.id, "signedDraftCollege", signing)) continue;
+  }
+  if (signingDraft?.classification === "nonCollege") {
+    const conflictsWithCollege = Boolean(candidateCredits?.size);
+    if (!conflictsWithCollege) {
+      documentedNoCollegePlayerIds.add(participant.id);
+      selectionBasisCounts.signedDraftNonCollege += 1;
+      continue;
+    }
+    unresolvedPlayerIds.add(participant.id);
+    selectionBasisCounts.unresolved += 1;
+    continue;
+  }
+
+  const lahmanCandidates = [...(candidateCredits?.values() ?? [])].map((credit) => {
+    const years = credit.evidence
+      .filter((row) => row.source === "sabrLahman" && row.reportedYear <= participant.firstSeason)
+      .map((row) => row.reportedYear);
+    return { credit, latestYear: years.length ? Math.max(...years) : null };
+  }).filter((row) => row.latestYear !== null)
+    .sort((a, b) => b.latestYear - a.latestYear);
+  if (lahmanCandidates.length) {
+    const latestYear = lahmanCandidates[0].latestYear;
+    const latest = lahmanCandidates.filter((row) => row.latestYear === latestYear);
+    const educationCredits = [...(candidateCredits?.values() ?? [])]
+      .filter((credit) => credit.sources.has("mlbEducation"));
+    const conflictsWithEducation = educationCredits.some((credit) => credit.canonical.id !== latest[0].credit.canonical.id);
+    if (latest.length === 1 && !conflictsWithEducation
+      && selectCredit(participant.id, latest[0].credit.canonical.id, "datedLahmanCollege", signing)) continue;
+  }
+
+  const educationCredits = [...(candidateCredits?.values() ?? [])]
+    .filter((credit) => credit.sources.has("mlbEducation"));
+  if (educationCredits.length === 1) selectionBasisCounts.mlbEducationUncorroborated += 1;
+
+  unresolvedPlayerIds.add(participant.id);
+  selectionBasisCounts.unresolved += 1;
+}
+
+if (selectedCreditsByPlayer.size + documentedNoCollegePlayerIds.size + unresolvedPlayerIds.size !== participants.length) {
+  throw new Error("Every eligible player must have exactly one college-resolution status");
 }
 
 const collegeRows = new Map();
-for (const [playerId, playerCredits] of creditsByPlayer) {
+for (const [playerId, credit] of selectedCreditsByPlayer) {
   const person = peopleById.get(playerId);
   const participation = participantById.get(playerId);
   const player = {
@@ -336,9 +474,8 @@ for (const [playerId, playerCredits] of creditsByPlayer) {
     position: person.primaryPosition?.abbreviation ?? "—",
     positionGroup: positionGroup(person),
   };
-  for (const credit of playerCredits.values()) {
-    const location = locations.colleges.find((row) => row.id === credit.canonical.id);
-    const row = collegeRows.get(credit.canonical.id) ?? {
+  const location = locations.colleges.find((row) => row.id === credit.canonical.id);
+  const row = collegeRows.get(credit.canonical.id) ?? {
       id: credit.canonical.id,
       name: credit.canonical.name,
       city: location?.city ?? credit.canonical.city ?? null,
@@ -351,15 +488,16 @@ for (const [playerId, playerCredits] of creditsByPlayer) {
       locationSourceUrl: location?.sourceUrl ?? null,
       reportedNames: new Set(),
       players: [],
-    };
-    for (const reportedName of credit.reportedNames) row.reportedNames.add(reportedName);
-    row.players.push({
-      ...player,
-      collegeSources: [...credit.sources].sort(),
-      collegeEvidence: credit.evidence,
-    });
-    collegeRows.set(row.id, row);
-  }
+  };
+  for (const reportedName of credit.reportedNames) row.reportedNames.add(reportedName);
+  row.players.push({
+    ...player,
+    collegeSources: [...credit.sources].sort(),
+    collegeEvidence: credit.evidence,
+    collegeSelectionBasis: credit.selectionBasis,
+    professionalSigning: credit.signingEvidence,
+  });
+  collegeRows.set(row.id, row);
 }
 
 const colleges = [...collegeRows.values()].map((college) => ({
@@ -372,7 +510,7 @@ const colleges = [...collegeRows.values()].map((college) => ({
   latestSeason: Math.max(...college.players.map((player) => player.lastSeason)),
 })).sort((a, b) => b.playerCount - a.playerCount || a.name.localeCompare(b.name));
 
-const verifiedCollegePlayerIds = new Set(creditsByPlayer.keys());
+const verifiedCollegePlayerIds = new Set(selectedCreditsByPlayer.keys());
 const mappedColleges = colleges.filter((college) => college.latitude !== null && college.longitude !== null);
 const mappedPlayerIds = new Set(mappedColleges.flatMap((college) => college.players.map((player) => player.id)));
 const mlbParticipants = participants.filter((participant) => participant.appearedInMlb).length;
@@ -383,16 +521,30 @@ const sourceFiles = {
   sabrCollegePlaying: { sha256: sha256(sabrTexts.collegePlaying), records: collegePlaying.length },
   sabrSchools: { sha256: sha256(sabrTexts.schools), records: schools.length },
   chadwickRegister: { sha256: sha256(chadwickHashes.join("")), records: chadwickRows.length },
+  mlbSigningTransactions: { sha256: sha256(`${JSON.stringify(signingPayload)}\n`), records: signingPayload.evidence.length },
 };
+const resolvedSigningSchoolPlayers = verifiedCollegePlayerIds.size + documentedNoCollegePlayerIds.size;
+const resolutionCoverageRate = resolvedSigningSchoolPlayers / participants.length;
+const publicationReady = resolutionCoverageRate >= MINIMUM_PUBLICATION_COVERAGE;
+const selectedDraftPlayerIds = new Set([...selectedCreditsByPlayer]
+  .filter(([, credit]) => credit.selectionBasis === "signedDraftCollege").map(([id]) => id));
+const selectedLahmanPlayerIds = new Set([...selectedCreditsByPlayer]
+  .filter(([, credit]) => credit.selectionBasis === "datedLahmanCollege").map(([id]) => id));
 const counts = {
   affiliatedPlayers: participants.length,
   mlbParticipants,
   minorOnlyPlayers: participants.length - mlbParticipants,
   playersWithMlbEducationCollege: baselinePlayerIds.size,
-  playersAddedByMlbDraft: draftAddedPlayerIds.size,
-  playersAddedBySabrLahman: lahmanAddedPlayerIds.size,
+  playersAddedByMlbDraft: [...selectedDraftPlayerIds].filter((id) => !baselinePlayerIds.has(id)).length,
+  playersAddedBySabrLahman: [...selectedLahmanPlayerIds].filter((id) => !baselinePlayerIds.has(id) && !selectedDraftPlayerIds.has(id)).length,
   playersWithVerifiedCollege: verifiedCollegePlayerIds.size,
   playersWithoutVerifiedCollege: participants.length - verifiedCollegePlayerIds.size,
+  playersWithDocumentedNoCollege: documentedNoCollegePlayerIds.size,
+  playersWithUnresolvedEducation: unresolvedPlayerIds.size,
+  resolvedSigningSchoolPlayers,
+  requiredResolvedPlayers: Math.ceil(participants.length * MINIMUM_PUBLICATION_COVERAGE),
+  resolutionCoverageRate,
+  minimumPublicationCoverage: MINIMUM_PUBLICATION_COVERAGE,
   verifiedCollegePlayerCredits: colleges.reduce((sum, college) => sum + college.playerCount, 0),
   collegeIdentities: colleges.length,
   locatedColleges: mappedColleges.length,
@@ -405,19 +557,24 @@ const output = {
     snapshotDate: SNAPSHOT_DATE,
     generatedAt: new Date().toISOString(),
     seasonRange: { start: START_YEAR, end: END_YEAR },
-    definition: "Distinct players listed by MLB's official season-player endpoints at MLB or affiliated Triple-A through Rookie levels from 2000 through the snapshot season. A player is credited once to every college supported by MLB education, an MLB Draft record classified as college, or the SABR Lahman CollegePlaying table joined to MLB person IDs through the Chadwick Register.",
+    careerStartCutoff: START_YEAR,
+    publicationReady,
+    definition: "Players whose first appearance in MLB's official MLB or affiliated Triple-A through Rookie season-player endpoints was 2000 or later. Each player can be credited to no more than one college: the last school supported immediately before the professional signing. A signed MLB Draft school takes precedence; otherwise, a single latest dated SABR Lahman college season may qualify when it does not conflict with MLB education. An undated MLB education record alone is not credited.",
     sources: [
       `${MLB_API}/people?personIds=592450&hydrate=education`,
       `${MLB_API}/draft/${END_YEAR}`,
+      `${MLB_API}/people/592450?hydrate=transactions`,
       SABR_SHARE_URL,
       "https://github.com/chadwickbureau/register",
     ],
     sourceFiles,
     caveats: [
       "No college record is treated as unresolved evidence, not proof that a player did not attend college.",
-      "MLB education is the primary source. Official MLB Draft records fill gaps only when MLB labels the school as a four-year or junior college, or the reported school exactly matches a verified college identity; explicit high-school and preparatory-school records are excluded.",
-      "The SABR Lahman CollegePlaying table supplements MLB participants only, using exact MLBAM-to-Baseball-Reference identifier links from the Chadwick Register; it cannot fill records for minor-league-only players absent from Lahman.",
-      "A transfer is credited once to every verified college. Totals across colleges therefore are not additive.",
+      "Only the school immediately preceding the professional signing is credited. Earlier transfer schools and unsigned draft selections receive no credit.",
+      "MLB education names one reported college but usually supplies no attendance dates. It is retained as candidate evidence and is not by itself treated as proof of the final pre-signing school.",
+      "An explicit high-school or secondary-school record is classified as no college only when MLB's signing transaction or MLB person draft year links it to the signing draft. International origin, foreign birth, young signing age, and blank education are never used as negative evidence.",
+      "The SABR Lahman CollegePlaying table supplements MLB participants only through exact MLBAM-to-Baseball-Reference identifier links from the Chadwick Register; it cannot fill records for minor-league-only players absent from Lahman.",
+      `Public college rankings require at least ${(MINIMUM_PUBLICATION_COVERAGE * 100).toFixed(0)}% of eligible players to have either a verified final college or documented non-college signing status. This snapshot is ${publicationReady ? "eligible" : "withheld"}.`,
       "Counts measure participation in the 2000–2026 MLB/affiliated-MiLB universe, not draft selections, college roster size, games, seasons, or career peak level.",
       "Affiliated minor-league seasons were canceled in 2020; the 2020 minor-league endpoints contain no participants.",
     ],
@@ -437,7 +594,7 @@ const leaderColleges = mappedColleges.map((college) => ({
 }));
 const leaderOutput = {
   meta: { ...output.meta, collegeUniverseSha256: output.meta.sha256 },
-  colleges: leaderColleges,
+  colleges: publicationReady ? leaderColleges : [],
 };
 delete leaderOutput.meta.sha256;
 const leaderChecksumValue = structuredClone(leaderOutput);
@@ -448,6 +605,14 @@ const qualityOutput = {
   counts,
   sourceFiles,
   sourceCreditCounts,
+  selectionBasisCounts,
+  publicationGate: {
+    ready: publicationReady,
+    minimumCoverage: MINIMUM_PUBLICATION_COVERAGE,
+    actualCoverage: resolutionCoverageRate,
+    requiredResolvedPlayers: counts.requiredResolvedPlayers,
+    resolvedPlayers: resolvedSigningSchoolPlayers,
+  },
   draftRejectedRecords: rejectedDraftSchools.length,
   lahmanUnmatchedPlayerIds: lahmanUnmatchedIds.size,
   topColleges: colleges.slice(0, 75).map((college) => ({

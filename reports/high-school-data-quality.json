@@ -1,45 +1,38 @@
 {
   "snapshotDate": "2026-08-24",
-  "scope": "Unique players returned by official MLB season-player endpoints at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, or Rookie level for seasons 2000 through 2026, credited once to every U.S. high school in the MLB Stats API education record.",
+  "scope": "Distinct players whose first appearance in MLB's official MLB or affiliated Minor League season-player endpoints is 2000 or later. Every player listed by those endpoints before 2000 is excluded. Each eligible player is credited once to every U.S. high school in the MLB education record.",
   "leaderThreshold": 20,
   "counts": {
-    "affiliatedPlayers": 54980,
-    "mlbParticipants": 7380,
-    "minorOnlyParticipants": 47600,
-    "playersWithUsHighSchool": 16800,
-    "schoolIdentities": 7048,
-    "locationAuditedPrograms": 25,
-    "locationAuditedPlayers": 621,
-    "missingHighSchoolRecords": 36338,
-    "outsideUsHighSchoolCredits": 1842
+    "sourcePeriodParticipants": 54980,
+    "excludedPre2000Players": 5209,
+    "affiliatedPlayers": 49771,
+    "mlbParticipants": 5372,
+    "minorOnlyPlayers": 44399,
+    "hydratedPlayers": 49771,
+    "playersWithAnyHighSchool": 16317,
+    "playersWithUsHighSchool": 14862,
+    "playersMissingHighSchool": 33454,
+    "schoolPlayerCredits": 14862,
+    "usHighSchoolIdentities": 6441,
+    "locatedHighSchools": 15,
+    "locatedPlayers": 392,
+    "outsideScopeCredits": 1455
   },
-  "locationEvidence": {
-    "openStreetMapNominatim": 21,
-    "officialAddressWithCensusGeocoder": 3,
-    "officialDistrictAddressWithPublishedCoordinate": 1
-  },
+  "publicationRule": "Only programs meeting the current minimum-player threshold are included in the public leader bundle; retained coordinates for programs below the threshold are not published.",
   "checks": {
-    "officialSeasonUniverseReconciled": true,
+    "pre2000CareerCarryoversExcluded": true,
+    "barryBondsExcluded": true,
     "allParticipantIdsUnique": true,
-    "exactParticipationSeasonsRetained": true,
-    "universeAndMapChecksumsLinked": true,
-    "analyticalChecksumsStableAcrossRebuildTimestamps": true,
     "personIdsDeduplicatedWithinSchool": true,
-    "participantSeasonsInsideDeclaredWindow": true,
-    "schoolRowsCountSorted": true,
     "twentyPlusThresholdFullyLocated": true,
-    "campusCoordinatesInsideReportedState": true,
-    "ambiguousNameOnlyRecordsNotBroadlyMerged": true,
-    "documentedAliasesOnly": true,
-    "allLocationRecordsHaveSourceEvidence": true,
-    "embeddedDatasetChecksumMatches": true,
-    "leaderClientBundleMatchesFullSchoolUniverse": true
+    "publicLeaderBundleMatchesCurrentThreshold": true
   },
   "limitations": [
-    "MLB education records are incomplete for some players.",
-    "Reported school names and cities can use abbreviations, historical names, or neighboring locality labels.",
-    "Players with multiple listed high schools credit each school, so school totals are not additive.",
-    "Affiliated minor-league seasons were canceled in 2020; the official minor-league endpoints contain zero participants for that year while MLB remains included.",
-    "The public map location-audits every program with 20 or more qualifying players; lower-count school identities remain in the source dataset but are not shown as campus points."
+    "Career start is operationally defined as the first season returned by MLB's official MLB or affiliated Minor League season-player endpoints. The audit checks every season from 1876 through 1999 and excludes any player found before the 2000 cutoff.",
+    "MLB education records are not complete for every MLB or affiliated MiLB player.",
+    "A player who attended multiple listed high schools is credited to each school; totals across schools are not additive.",
+    "School names and cities are reported by MLB and may contain historical names, abbreviations, or missing city fields. Ambiguous name-only records remain unresolved; only documented leader aliases and campus identities are consolidated.",
+    "Only U.S. high schools in the 50 states and District of Columbia are included.",
+    "Affiliated minor-league seasons were canceled in 2020, so the 2020 minor-league endpoints contain no participants; MLB participants remain included for that season."
   ]
 }

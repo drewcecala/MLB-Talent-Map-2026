@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { MlbCollegeMap } from "./MlbCollegeMap";
 
 export const metadata: Metadata = {
-  title: "Colleges producing MLB and MiLB talent since 2000",
+  title: "MLB college talent map — source review",
   description:
-    "Map and rank the leading colleges across 54,980 official MLB and affiliated MiLB season participants from 2000 through August 24, 2026.",
+    "Publication-status audit for the MLB college talent map using players whose professional careers began in 2000 or later.",
   alternates: { canonical: "/mlb-college-map" },
 };
 

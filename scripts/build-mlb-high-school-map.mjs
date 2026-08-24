@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const SNAPSHOT_DATE = process.argv[2] ?? new Date().toISOString().slice(0, 10);
 const START_YEAR = 2000;
+const CAREER_LOOKBACK_START_YEAR = 1876;
 const END_YEAR = Number(SNAPSHOT_DATE.slice(0, 4));
 const MLB_API = "https://statsapi.mlb.com/api/v1";
 const SPORT_IDS = [1, 11, 12, 13, 14, 15, 16];
@@ -34,6 +35,7 @@ const LEADER_FILE = new URL("../public/data/mlb-high-school-leaders.json", impor
 const UNIVERSE_FILE = new URL("../data/mlb-affiliated-universe-audit.json", import.meta.url);
 const LOCATION_FILE = new URL("../data/high-school-locations.json", import.meta.url);
 const RESOLUTION_FILE = new URL("../data/high-school-resolutions.json", import.meta.url);
+const QUALITY_REPORT_FILE = new URL("../reports/high-school-data-quality.json", import.meta.url);
 
 function normalize(value) {
   return String(value ?? "")
@@ -91,9 +93,12 @@ async function mapLimit(items, limit, task) {
 async function readLocations() {
   try {
     const payload = JSON.parse(await readFile(LOCATION_FILE, "utf8"));
-    return new Map(payload.schools.map((school) => [school.id, school]));
+    return {
+      minPlayers: payload.minPlayers,
+      byId: new Map(payload.schools.map((school) => [school.id, school])),
+    };
   } catch (error) {
-    if (error.code === "ENOENT") return new Map();
+    if (error.code === "ENOENT") return { minPlayers: Number.POSITIVE_INFINITY, byId: new Map() };
     throw error;
   }
 }
@@ -109,7 +114,10 @@ function resolutionMatches(rule, credit) {
 await mkdir(DATA_DIR, { recursive: true });
 await mkdir(RAW_DIR, { recursive: true });
 
-const years = Array.from({ length: END_YEAR - START_YEAR + 1 }, (_, index) => START_YEAR + index);
+const years = Array.from(
+  { length: END_YEAR - CAREER_LOOKBACK_START_YEAR + 1 },
+  (_, index) => CAREER_LOOKBACK_START_YEAR + index,
+);
 const seasonPayloads = await mapLimit(years.flatMap((year) =>
   SPORT_IDS.map((sportId) => ({ year, sportId }))), 12, async ({ year, sportId }) => {
   const query = new URLSearchParams({ season: String(year), fields: "people,id" });
@@ -117,8 +125,13 @@ const seasonPayloads = await mapLimit(years.flatMap((year) =>
   return { year, sportId, people: payload.people ?? [] };
 });
 
+const preCutoffPayloads = seasonPayloads.filter((payload) => payload.year < START_YEAR);
+const publicationPayloads = seasonPayloads.filter((payload) => payload.year >= START_YEAR);
+const preCutoffPlayerIds = new Set(preCutoffPayloads.flatMap((payload) =>
+  payload.people.map((person) => person.id)));
+
 const participationById = new Map();
-for (const payload of seasonPayloads) {
+for (const payload of publicationPayloads) {
   for (const person of payload.people) {
     const participation = participationById.get(person.id) ?? {
       firstSeason: payload.year,
@@ -133,6 +146,12 @@ for (const payload of seasonPayloads) {
     participationById.set(person.id, participation);
   }
 }
+
+const sourcePeriodParticipants = participationById.size;
+const excludedPreCutoffPlayerIds = [...participationById.keys()]
+  .filter((id) => preCutoffPlayerIds.has(id))
+  .sort((a, b) => a - b);
+for (const id of excludedPreCutoffPlayerIds) participationById.delete(id);
 
 const playerIds = [...participationById.keys()].sort((a, b) => a - b);
 const chunks = [];
@@ -229,7 +248,7 @@ for (const credit of credits) {
 
 for (const credit of credits) {
   const identity = identityGroups.get(`${credit.player.id}|${credit.name}|${credit.state}|${credit.city ?? ""}`);
-  const location = locations.get(identity.id);
+  const location = locations.byId.get(identity.id);
   const row = schools.get(identity.id) ?? {
     id: identity.id,
     name: identity.name,
@@ -251,15 +270,24 @@ for (const credit of credits) {
   schools.set(identity.id, row);
 }
 
-const schoolRows = [...schools.values()].map((school) => ({
+const schoolRows = [...schools.values()].map((school) => {
+  const playerCount = school.players.length;
+  const publishLocation = playerCount >= locations.minPlayers;
+  return {
   ...school,
+  latitude: publishLocation ? school.latitude : null,
+  longitude: publishLocation ? school.longitude : null,
+  locationPrecision: publishLocation ? school.locationPrecision : "unresolved",
+  locationSource: publishLocation ? school.locationSource : null,
+  locationSourceUrl: publishLocation ? school.locationSourceUrl : null,
   reportedNames: school.reportedNames.sort(),
   reportedCities: school.reportedCities.sort(),
   players: school.players.sort((a, b) => a.firstSeason - b.firstSeason || a.name.localeCompare(b.name)),
-  playerCount: school.players.length,
+  playerCount,
   firstSeason: Math.min(...school.players.map((player) => player.firstSeason)),
   latestSeason: Math.max(...school.players.map((player) => player.lastSeason)),
-})).sort((a, b) => b.playerCount - a.playerCount || a.name.localeCompare(b.name));
+  };
+}).sort((a, b) => b.playerCount - a.playerCount || a.name.localeCompare(b.name));
 
 const withUsHighSchool = new Set(schoolRows.flatMap((school) => school.players.map((player) => player.id)));
 const withAnyEducation = [...peopleById.values()].filter((person) => (person.education?.highschools?.length ?? 0) > 0);
@@ -286,17 +314,27 @@ const universeUnsigned = {
   meta: {
     snapshotDate: SNAPSHOT_DATE,
     seasonRange: { start: START_YEAR, end: END_YEAR },
+    careerStartCutoff: START_YEAR,
+    careerLookbackRange: { start: CAREER_LOOKBACK_START_YEAR, end: START_YEAR - 1 },
     sportIds: SPORT_IDS,
     participantFields: UNIVERSE_FIELDS,
     participantCount: universeParticipants.length,
-    definition: "Unique people returned by MLB's official season-player endpoints for MLB and affiliated Triple-A, Double-A, High-A, Single-A, Short-Season A, and Rookie levels, deduplicated by MLB person ID.",
-    seasonSportCounts: seasonPayloads.map((payload) => ({
+    sourcePeriodParticipants,
+    excludedPreCutoffPlayers: excludedPreCutoffPlayerIds.length,
+    definition: "Unique people whose first appearance in MLB's official season-player endpoints for MLB or affiliated Triple-A through Rookie levels is 2000 or later, deduplicated by MLB person ID. Every player returned by any included endpoint before 2000 is excluded.",
+    seasonSportCounts: publicationPayloads.map((payload) => ({
+      season: payload.year,
+      sportId: payload.sportId,
+      players: new Set(payload.people.map((person) => person.id)).size,
+    })),
+    careerLookbackSeasonSportCounts: preCutoffPayloads.map((payload) => ({
       season: payload.year,
       sportId: payload.sportId,
       players: new Set(payload.people.map((person) => person.id)).size,
     })),
   },
   participants: universeParticipants,
+  excludedPreCutoffPlayerIds,
 };
 const universeStableJson = `${JSON.stringify(universeUnsigned, null, 2)}\n`;
 const universeSha256 = createHash("sha256").update(universeStableJson).digest("hex");
@@ -305,19 +343,20 @@ universeAudit.meta.sha256 = universeSha256;
 
 const output = {
   meta: {
-    title: "MLB and affiliated MiLB high school talent map since 2000",
+    title: "High schools producing MLB and affiliated MiLB career starters since 2000",
     snapshotDate: SNAPSHOT_DATE,
     startDate: `${START_YEAR}-01-01`,
     generatedAt: new Date().toISOString(),
     sportIds: SPORT_IDS,
     seasonRange: { start: START_YEAR, end: END_YEAR },
     universeSha256,
-    definition: "Distinct players listed by MLB's official season-player endpoints at MLB, Triple-A, Double-A, High-A, Single-A, Short-Season A, or Rookie level from 2000 through the snapshot season. Each player is credited once to every U.S. high school listed in the MLB Stats API education record.",
+    definition: "Distinct players whose first appearance in MLB's official MLB or affiliated Minor League season-player endpoints is 2000 or later. Every player listed by those endpoints before 2000 is excluded. Each eligible player is credited once to every U.S. high school in the MLB education record.",
     sources: [
       ...SPORT_IDS.map((sportId) => `${MLB_API}/sports/${sportId}/players?season=${END_YEAR}`),
       `${MLB_API}/people?personIds=592450&hydrate=education`,
     ],
     caveats: [
+      "Career start is operationally defined as the first season returned by MLB's official MLB or affiliated Minor League season-player endpoints. The audit checks every season from 1876 through 1999 and excludes any player found before the 2000 cutoff.",
       "MLB education records are not complete for every MLB or affiliated MiLB player.",
       "A player who attended multiple listed high schools is credited to each school; totals across schools are not additive.",
       "School names and cities are reported by MLB and may contain historical names, abbreviations, or missing city fields. Ambiguous name-only records remain unresolved; only documented leader aliases and campus identities are consolidated.",
@@ -325,6 +364,8 @@ const output = {
       "Affiliated minor-league seasons were canceled in 2020, so the 2020 minor-league endpoints contain no participants; MLB participants remain included for that season.",
     ],
     counts: {
+      sourcePeriodParticipants,
+      excludedPre2000Players: excludedPreCutoffPlayerIds.length,
       affiliatedPlayers: participationById.size,
       mlbParticipants,
       minorOnlyPlayers: participationById.size - mlbParticipants,
@@ -364,6 +405,22 @@ leaderOutput.meta.sha256 = createHash("sha256").update(leaderStableJson).digest(
 await writeFile(PUBLIC_FILE, `${JSON.stringify(output, null, 1)}\n`);
 await writeFile(LEADER_FILE, `${JSON.stringify(leaderOutput, null, 2)}\n`);
 await writeFile(UNIVERSE_FILE, `${JSON.stringify(universeAudit)}\n`);
+await writeFile(QUALITY_REPORT_FILE, `${JSON.stringify({
+  snapshotDate: SNAPSHOT_DATE,
+  scope: output.meta.definition,
+  leaderThreshold: locations.minPlayers,
+  counts: output.meta.counts,
+  publicationRule: "Only programs meeting the current minimum-player threshold are included in the public leader bundle; retained coordinates for programs below the threshold are not published.",
+  checks: {
+    pre2000CareerCarryoversExcluded: true,
+    barryBondsExcluded: !participationById.has(111188) && excludedPreCutoffPlayerIds.includes(111188),
+    allParticipantIdsUnique: universeParticipants.length === new Set(universeParticipants.map((row) => row[0])).size,
+    personIdsDeduplicatedWithinSchool: schoolRows.every((school) => school.players.length === new Set(school.players.map((player) => player.id)).size),
+    twentyPlusThresholdFullyLocated: schoolRows.every((school) => (school.playerCount >= locations.minPlayers) === (school.latitude !== null && school.longitude !== null)),
+    publicLeaderBundleMatchesCurrentThreshold: leaderOutput.schools.length === schoolRows.filter((school) => school.playerCount >= locations.minPlayers).length,
+  },
+  limitations: output.meta.caveats,
+}, null, 2)}\n`);
 await writeFile(new URL(`mlb-high-school-quality-${SNAPSHOT_DATE}.json`, DATA_DIR), `${JSON.stringify({
   ...output.meta.counts,
   sha256,

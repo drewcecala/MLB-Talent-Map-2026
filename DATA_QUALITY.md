@@ -90,36 +90,36 @@ The 2000–2026 MLB/affiliated-MiLB pipeline is validated independently from the
 
 | Check | Result |
 |---|---:|
-| Unique official MLB/MiLB participants | 54,980 |
-| Appeared in MLB during the period | 7,380 |
-| Appeared only in included affiliated minor-league levels | 47,600 |
-| Players with any reported high school | 18,642 |
-| Players with a U.S. high school | 16,800 |
-| U.S. school identities retained | 7,048 |
-| Programs meeting the 20-player map threshold | 25 |
-| Distinct players credited to mapped leaders | 621 |
-| Players without an MLB high-school record | 36,338 |
-| High-school credits outside the 50 states/DC scope | 1,842 |
+| Players visible in 2000–2026 endpoints | 54,980 |
+| Pre-2000 career carryovers excluded | 5,209 |
+| Eligible career starters | 49,771 |
+| Eligible players who reached MLB | 5,372 |
+| Eligible minor-only players | 44,399 |
+| Players with any reported high school | 16,317 |
+| Players with a U.S. high school | 14,862 |
+| U.S. school identities retained | 6,441 |
+| Programs meeting the 20-player map threshold | 15 |
+| Distinct players credited to mapped leaders | 392 |
+| Players without an MLB high-school record | 33,454 |
+| High-school credits outside the 50 states/DC scope | 1,455 |
 
-Automated release checks verify all 54,980 unique person IDs against the public universe audit, exact participation-season arrays, source sport IDs, universe-to-map checksum linkage, player-level joins, school count ordering, exact 20-player map-threshold coverage, source evidence for all campus points, state containment for every coordinate, and documented identity resolutions. The 2020 source reconciliation explicitly expects 1,289 MLB participants and zero participants from each canceled minor-league season endpoint. Machine-readable evidence is in `reports/high-school-data-quality.json` and `data/mlb-affiliated-universe-audit.json`.
+Automated release checks verify the 49,771 unique eligible person IDs, the 5,209 exclusions, exact participation-season arrays, source sport IDs, universe-to-map checksum linkage, player-level joins, school count ordering, exact 20-player map-threshold coverage, source evidence for all campus points, state containment for every coordinate, and documented identity resolutions. Barry Bonds is an explicit regression case: his person ID must be present in the pre-2000 exclusion set and absent from both school products. The 2020 source reconciliation expects 1,289 MLB participants and zero participants from each canceled minor-league season endpoint. Machine-readable evidence is in `reports/high-school-data-quality.json` and `data/mlb-affiliated-universe-audit.json`.
 
 ## College pipeline validation
 
 | Check | Result |
 |---|---:|
-| Unique official MLB/MiLB participants | 54,980 |
-| Players with an MLB education college | 23,895 |
-| Previously blank players recovered from MLB Draft evidence | 804 |
-| Additional previously blank players recovered from SABR/Lahman | 21 |
-| Players with verified college evidence | 24,720 |
-| Players without verified college evidence | 30,260 |
-| Distinct player-college credits | 28,832 |
-| College identities retained | 2,452 |
-| Programs at the 155-player map cutoff | 26 |
-| Distinct players credited to mapped leaders | 4,626 |
+| Eligible career starters | 49,771 |
+| Players with an MLB education college | 21,513 |
+| Players with one verified final college | 17,210 |
+| Players with documented non-college entry | 3,640 |
+| Resolved signing-school status | 20,850 (41.9%) |
+| Unresolved signing-school status | 28,921 |
+| Required resolved status for publication | 44,794 (90%) |
+| Public college rankings | Withheld |
 
-Automated release checks reconcile the source hierarchy at player level, recompute all supplement counts from record source labels, reject duplicate player credits within an institution, verify exact alias ownership, enforce sorted counts and the complete four-program boundary tie, link the full and browser checksums, validate source-file SHA-256 values, and require every displayed campus point to fall inside its reported 2020 state polygon. Browser checks cover source-backed player detail, filters and URL state, console health, accessibility, mobile ordering, footer reachability, and horizontal overflow.
+Automated release checks reconcile the source hierarchy at player level, enforce one college maximum per player, reject pre-2000 career starts and Barry Bonds specifically, verify exact alias ownership, validate source-file SHA-256 values, and keep the public college bundle empty below the 90% gate. Browser checks confirm that the publication hold reports the exact evidence counts and remains accessible without horizontal overflow.
 
 Machine-readable evidence is in `reports/college-data-quality.json`, `data/mlb-college-map-audit.json`, and `data/mlb-affiliated-universe-audit.json`.
 
-The largest residual limitation is source completeness. The 30,260 unresolved records include players who signed from high school or internationally as well as players whose college history may be absent from every selected source. The pipeline makes no attempt to distinguish those cases without positive evidence.
+The blocking limitation is source completeness and redistribution permission. The 28,921 unresolved records include high-school, international, and college entrants that cannot be distinguished reliably from blank or undated fields alone. Rankings will remain withheld until licensed acquisition data resolves at least 90% of the cohort and is cleared for the intended public use.
