@@ -1,0 +1,423 @@
+{
+  "snapshotDate": "2026-08-24",
+  "intendedGrain": "one unique MLB person id currently present on one MLB organization full roster",
+  "rowCount": 8440,
+  "organizationCount": 30,
+  "affiliateTeamCount": 201,
+  "duplicatePersonIdsAcrossOrganizations": 20,
+  "duplicateConflicts": [
+    {
+      "id": "683090",
+      "organizations": [
+        108,
+        118
+      ]
+    },
+    {
+      "id": "644433",
+      "organizations": [
+        110,
+        119
+      ]
+    },
+    {
+      "id": "693312",
+      "organizations": [
+        113,
+        120
+      ]
+    },
+    {
+      "id": "605280",
+      "organizations": [
+        112,
+        121
+      ]
+    },
+    {
+      "id": "642701",
+      "organizations": [
+        109,
+        134
+      ]
+    },
+    {
+      "id": "692024",
+      "organizations": [
+        121,
+        137
+      ]
+    },
+    {
+      "id": "672021",
+      "organizations": [
+        118,
+        137
+      ]
+    },
+    {
+      "id": "694376",
+      "organizations": [
+        117,
+        137
+      ]
+    },
+    {
+      "id": "680823",
+      "organizations": [
+        133,
+        141
+      ]
+    },
+    {
+      "id": "592791",
+      "organizations": [
+        112,
+        141
+      ]
+    },
+    {
+      "id": "665152",
+      "organizations": [
+        110,
+        142
+      ]
+    },
+    {
+      "id": "656546",
+      "organizations": [
+        141,
+        142
+      ]
+    },
+    {
+      "id": "621199",
+      "organizations": [
+        141,
+        142
+      ]
+    },
+    {
+      "id": "805373",
+      "organizations": [
+        108,
+        144
+      ]
+    },
+    {
+      "id": "623211",
+      "organizations": [
+        121,
+        145
+      ]
+    },
+    {
+      "id": "683569",
+      "organizations": [
+        143,
+        145
+      ]
+    },
+    {
+      "id": "622554",
+      "organizations": [
+        136,
+        145
+      ]
+    },
+    {
+      "id": "680767",
+      "organizations": [
+        115,
+        146
+      ]
+    },
+    {
+      "id": "666808",
+      "organizations": [
+        134,
+        147
+      ]
+    },
+    {
+      "id": "622608",
+      "organizations": [
+        115,
+        158
+      ]
+    }
+  ],
+  "unresolvedDuplicateAssignments": 0,
+  "unknownCurrentTeam": 16,
+  "unknownCurrentTeamPct": 0.19,
+  "usBirthPlayers": 4280,
+  "mappedUsPlayers": 3912,
+  "usMappingPct": 91.4,
+  "unresolvedUsPlayers": 368,
+  "internationalOrTerritoryPlayers": 4159,
+  "levelSummary": [
+    {
+      "level": "Rookie",
+      "count": 3039
+    },
+    {
+      "level": "Single-A",
+      "count": 1164
+    },
+    {
+      "level": "High-A",
+      "count": 1093
+    },
+    {
+      "level": "Double-A",
+      "count": 1047
+    },
+    {
+      "level": "Triple-A",
+      "count": 1046
+    },
+    {
+      "level": "MLB",
+      "count": 1035
+    },
+    {
+      "level": "Unassigned / unknown",
+      "count": 16
+    }
+  ],
+  "countrySummary": [
+    {
+      "country": "USA",
+      "count": 4280
+    },
+    {
+      "country": "Dominican Republic",
+      "count": 1757
+    },
+    {
+      "country": "Venezuela",
+      "count": 1426
+    },
+    {
+      "country": "Mexico",
+      "count": 199
+    },
+    {
+      "country": "Cuba",
+      "count": 162
+    },
+    {
+      "country": "Canada",
+      "count": 104
+    },
+    {
+      "country": "Panama",
+      "count": 92
+    },
+    {
+      "country": "Puerto Rico",
+      "count": 86
+    },
+    {
+      "country": "Colombia",
+      "count": 81
+    },
+    {
+      "country": "Nicaragua",
+      "count": 31
+    },
+    {
+      "country": "Japan",
+      "count": 30
+    },
+    {
+      "country": "Taiwan",
+      "count": 25
+    },
+    {
+      "country": "Curacao",
+      "count": 23
+    },
+    {
+      "country": "Australia",
+      "count": 22
+    },
+    {
+      "country": "Aruba",
+      "count": 16
+    },
+    {
+      "country": "Bahamas",
+      "count": 15
+    },
+    {
+      "country": "South Korea",
+      "count": 15
+    },
+    {
+      "country": "Brazil",
+      "count": 10
+    },
+    {
+      "country": "Netherlands",
+      "count": 10
+    },
+    {
+      "country": "Germany",
+      "count": 7
+    },
+    {
+      "country": "Italy",
+      "count": 7
+    },
+    {
+      "country": "Haiti",
+      "count": 5
+    },
+    {
+      "country": "Spain",
+      "count": 5
+    },
+    {
+      "country": "France",
+      "count": 3
+    },
+    {
+      "country": "New Zealand",
+      "count": 3
+    },
+    {
+      "country": "Uganda",
+      "count": 3
+    },
+    {
+      "country": "United Kingdom",
+      "count": 3
+    },
+    {
+      "country": "China",
+      "count": 2
+    },
+    {
+      "country": "Costa Rica",
+      "count": 2
+    },
+    {
+      "country": "Switzerland",
+      "count": 2
+    },
+    {
+      "country": "Antigua and Barbuda",
+      "count": 1
+    },
+    {
+      "country": "Honduras",
+      "count": 1
+    },
+    {
+      "country": "Jamaica",
+      "count": 1
+    },
+    {
+      "country": "Peru",
+      "count": 1
+    },
+    {
+      "country": "Portugal",
+      "count": 1
+    },
+    {
+      "country": "Russia",
+      "count": 1
+    },
+    {
+      "country": "San Marino",
+      "count": 1
+    },
+    {
+      "country": "Sint Maarten",
+      "count": 1
+    },
+    {
+      "country": "Slovakia",
+      "count": 1
+    },
+    {
+      "country": "South Africa",
+      "count": 1
+    },
+    {
+      "country": "Sudan",
+      "count": 1
+    },
+    {
+      "country": "Thailand",
+      "count": 1
+    },
+    {
+      "country": "U.S. Virgin Islands",
+      "count": 1
+    },
+    {
+      "country": "Unknown",
+      "count": 1
+    }
+  ],
+  "geographySummary": [
+    {
+      "basis": "outside_us_map",
+      "count": 4159
+    },
+    {
+      "basis": "federal_place_county",
+      "count": 3912
+    },
+    {
+      "basis": "ambiguous_place",
+      "count": 325
+    },
+    {
+      "basis": "unresolved",
+      "count": 44
+    }
+  ],
+  "matchMethodSummary": [
+    {
+      "method": "gnis_official_unique",
+      "count": 3896
+    },
+    {
+      "method": "gnis_variant_unique",
+      "count": 16
+    }
+  ],
+  "federalPopulatedPlaceCount": 191758,
+  "checks": {
+    "expectedMlbOrganizations": {
+      "expected": 30,
+      "actual": 30,
+      "pass": true
+    },
+    "allPlayersUniqueAfterDeduplication": {
+      "pass": true
+    },
+    "allOrganizationsRepresented": {
+      "pass": true
+    },
+    "duplicateAssignmentsResolvedToCurrentOrganization": {
+      "pass": true
+    },
+    "allCountyFipsValid": {
+      "pass": true
+    },
+    "noReleasedOrTradedStatuses": {
+      "pass": true
+    }
+  },
+  "caveats": [
+    "MLB person records expose birth city/state/country, not exact birth county.",
+    "Federal place matching is deliberately conservative: ambiguous names remain unmapped.",
+    "The fullRoster endpoint includes active players and rostered inactive/reserve/injured players; it excludes released and traded historical-season rows.",
+    "Current team assignment is read from each MLB person record at snapshot time; players without an in-scope active team remain labeled unassigned/unknown."
+  ]
+}

@@ -1,0 +1,7 @@
+*.zip binary
+*.dbf binary
+*.shp binary
+*.shx binary
+data/raw/** linguist-vendored
+public/data/*.json linguist-generated=true
+public/data/*.geojson linguist-generated=true

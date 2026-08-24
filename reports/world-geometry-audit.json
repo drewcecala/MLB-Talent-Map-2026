@@ -1,0 +1,19 @@
+{
+  "source": {
+    "source": "Natural Earth Admin 0 – Countries",
+    "sourceUrl": "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/",
+    "version": "5.1.1",
+    "scale": "1:50m",
+    "boundaryView": "de facto"
+  },
+  "geometryFeatures": 242,
+  "rosterCountries": 43,
+  "mappedRosterCountries": 43,
+  "unmatchedRosterCountries": [],
+  "unknownBirthCountryRecords": 1,
+  "checks": {
+    "naturalEarthVersionPresent": true,
+    "everyKnownRosterCountryHasGeometry": true,
+    "everyRosterCountryHasIsoAssignment": true
+  }
+}
