@@ -48,5 +48,8 @@ next-env.d.ts
 # local research snapshots containing player-level source fields
 /data/raw/mlb-rosters-*.json
 /data/raw/mlb-high-school-people-*.json
+/data/raw/mlb-draft-*.json
+/data/raw/lahman-*.csv
+/data/raw/chadwick-register/
 /data/processed/
 /data/raw/natural-earth-50m/*.README.html

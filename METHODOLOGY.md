@@ -100,3 +100,20 @@ Campus locations use OpenStreetMap Nominatim where an exact school feature is av
 The historical school dataset contains player names, exact participation seasons, highest included level, positions, and MLB debut dates where available. The repository also publishes the full 54,980-player universe and a linked SHA-256 checksum so the scope can be audited independently from the mapped school subset. Totals across schools are not additive because a player listed at multiple schools credits each school.
 
 MLB education data is incomplete: 18,642 participants have at least one high-school record, 16,800 have a U.S. high school in scope, and 36,338 have no reported high school. The official affiliated minor-league season was canceled in 2020; those six minor-league endpoints correctly return zero participants for 2020, while the MLB endpoint remains included.
+
+## College pipeline methodology
+
+The college map uses the same 54,980-person official MLB/affiliated-MiLB participation universe and asks which verified colleges are credited with the most of those players.
+
+1. Read every nonempty college reported by MLB's hydrated education record. This primary source identifies 23,895 players.
+2. Query the official MLB Draft endpoint for every draft year from 1965 through 2026 and intersect draft picks with the 54,980 MLB person IDs. Accept a draft school when MLB explicitly classifies it as a four-year or junior college. Older draft records lack consistent school-class fields, so they are accepted only when the reported school exactly matches an audited college alias, an MLB education college identity, or a SABR Lahman school identity. Explicit high-school, secondary-school, and preparatory-school records are excluded.
+3. Join the SABR Lahman 2025 `CollegePlaying` table to MLB person IDs through exact `key_bbref` → `key_mlbam` links in the Chadwick Register. This source can supplement MLB participants but not minor-only players who are absent from Lahman's major-league player universe.
+4. Consolidate audited institutional aliases such as `LSU`/`Louisiana State`, `USC`/`Southern California`, and `Miami`/`Miami (FL)`. Do not merge ambiguous institutions without a documented rule.
+5. Deduplicate by MLB person ID within each canonical college. A transfer credits every verified college once, so totals across colleges are not additive.
+6. Rank by distinct qualifying player IDs. Map every program at the 155-player cutoff; four programs tie at 155, producing a 26-program leader set rather than an arbitrary 25.
+
+The source hierarchy recovers 804 player records that were blank in MLB education from MLB Draft evidence and 21 more from SABR/Lahman. The final evidence state is 24,720 players with at least one verified college and 30,260 without verified college evidence. The latter are labeled **unresolved**, not “did not attend college,” because source absence is not proof of non-attendance.
+
+The reconciled data contains 28,832 player-college credits across 2,452 institution identities. The 26 mapped leaders cover 4,626 distinct players. Campus points are OpenStreetMap university-feature centroids recorded with direct feature links, and every displayed coordinate is automatically tested against the 2020 polygon for its reported state.
+
+The repository's full audit preserves record-level evidence URLs and source labels. The smaller public browser bundle retains the source labels needed to audit displayed player rows while omitting repeated evidence objects for performance. Both files have reproducible SHA-256 checksums and link back to the same player-universe checksum.

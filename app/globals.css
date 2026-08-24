@@ -2267,3 +2267,150 @@ body:has(.hs-theme) {
     padding-left: 10px;
   }
 }
+
+/* College-map palette follows the shared school-map structure. */
+
+.hs-theme.college-theme {
+  --ink: #201c35;
+  --muted: #6b667d;
+  --line: #d9d4e5;
+  --panel: #fffefe;
+  --paper: #f2f0f7;
+  --navy: #201947;
+  --blue: #4c2d9f;
+  --blue-soft: #e9e2fb;
+  --orange: #b77b00;
+  --focus: #5634c4;
+}
+
+html:has(.college-theme),
+body:has(.college-theme) {
+  background: #f2f0f7;
+}
+
+.college-theme .college-header {
+  background:
+    radial-gradient(circle at 86% 5%, rgba(231, 187, 77, 0.28), transparent 32%),
+    linear-gradient(122deg, #181337 0%, #2f2467 58%, #51409a 100%);
+}
+
+.college-theme .college-header .brand-chip {
+  color: #ffe29b;
+  border-color: rgba(255, 226, 155, 0.52);
+}
+
+.college-theme .college-header .share-button {
+  color: #211939;
+  background: #e6b73e;
+}
+
+.college-theme .college-header .share-button:hover {
+  background: #f0ca65;
+}
+
+.college-theme .college-coverage {
+  background: #15112f;
+}
+
+.college-theme .college-coverage span {
+  color: #cfc6ed;
+}
+
+.college-theme .college-map-background {
+  fill: #f5f3fa;
+}
+
+.college-theme .college-state {
+  fill: #e5e0ee;
+  stroke: #8a829e;
+}
+
+.college-theme .college-dot {
+  fill: #d89d1d;
+  stroke: #fffefe;
+}
+
+.college-theme .college-dot:hover,
+.college-theme .college-dot:focus,
+.college-theme .college-dot.active {
+  fill: #6b49d8;
+  stroke: #201947;
+}
+
+.college-theme .college-label-layer .hs-label-count {
+  fill: #5f3ac8;
+}
+
+.college-theme .college-size-legend {
+  background: #f3f0f9;
+}
+
+.college-theme .college-size-legend i {
+  background: #d89d1d;
+}
+
+.college-theme .college-detail {
+  background: #faf8ff;
+  border-color: #d9cff3;
+}
+
+.college-theme .college-detail-total strong {
+  color: #5b35c1;
+}
+
+.college-theme .college-player-list {
+  max-height: 440px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #9e8bc9 #f1edf8;
+}
+
+.college-theme .college-player-row {
+  border-color: #e5def3;
+}
+
+.college-theme .college-filter-note {
+  background: #eee8fb;
+  border-left-color: #6847d5;
+}
+
+.college-theme .college-rank-context {
+  background: #fbf0cf;
+  border-left-color: #8e6200;
+}
+
+.college-theme .college-table-button {
+  color: #4c2d9f;
+}
+
+.college-theme .college-methodology {
+  background: #211a48;
+}
+
+.college-theme .college-methodology .panel-kicker {
+  color: #f1c85e;
+}
+
+.college-theme .college-methodology dt {
+  color: #c8bdf0;
+}
+
+.college-theme .college-loading {
+  background:
+    radial-gradient(circle at 70% 25%, rgba(222, 174, 47, 0.25), transparent 35%),
+    #211a48;
+}
+
+.college-theme .hs-school-inspector,
+.college-theme .hs-school-inspector select {
+  min-width: 0;
+}
+
+.college-theme .hs-school-inspector select {
+  width: 100%;
+}
+
+.college-theme .college-footer a {
+  color: #4c2d9f;
+  text-decoration: underline;
+}
