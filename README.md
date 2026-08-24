@@ -61,6 +61,11 @@ npm run check
 `check` validates all three data products, builds both deployment targets, runs
 unit tests, and exercises every rendered route in desktop and mobile Chromium.
 
+`npm run deploy:pages` runs the complete quality suite before publishing the
+static Pages build. A separate production smoke workflow compares all three
+live JSON artifacts byte-for-byte with the release commit and keeps the college
+leaderboard withheld until its evidence gate passes.
+
 ### Rebuilding the data products
 
 `npm run data:build` regenerates the data from source. It refreshes the official
