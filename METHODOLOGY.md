@@ -82,3 +82,19 @@ Sequential color bins use quintile thresholds among positive county values in th
 ## Publication boundary
 
 The public map payload includes MLB person IDs, organization/level/status/position attributes, birth country, county FIPS when accepted, and match method. It excludes player names and raw birth-city/state text. The private processed audit file retains those fields for record-level verification.
+
+## High-school pipeline methodology
+
+The high-school map answers a different question: which U.S. high schools are credited with the most players who made an MLB debut from **2000-01-01 through 2026-08-24**?
+
+1. Request MLB's season-player universe for every season from 2000 through 2026 and deduplicate by MLB person ID.
+2. Hydrate those person records with MLB education data.
+3. Keep only players whose `mlbDebutDate` falls inside the declared window.
+4. Credit each player once to every listed high school in the 50 states or District of Columbia.
+5. Keep distinct school identities by normalized name, state, and reported city. Consolidate only documented aliases or neighboring locality labels for the same campus; do not broadly merge ambiguous name-only records.
+6. Rank by distinct MLB person IDs credited to each school.
+7. Location-audit every program with at least five qualifying players. The published leader map contains all 76 programs meeting that threshold.
+
+Campus locations use OpenStreetMap Nominatim where an exact school feature is available. Remaining leaders use an official school or municipal address with the U.S. Census Geocoder, or an official municipal coordinate. Every published point is automatically checked against the 2020 state polygon for its reported state.
+
+The historical school dataset contains player names, positions, and MLB debut dates so readers can inspect the exact public records behind each aggregate. Totals across schools are not additive because a player listed at multiple schools credits each school. MLB education data is not complete for every player; 1,753 of the 6,225 reviewed debut records have no high-school entry.

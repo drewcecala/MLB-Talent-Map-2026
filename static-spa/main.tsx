@@ -1,14 +1,32 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "../app/globals.css";
+import { MlbHighSchoolMap } from "../app/mlb-high-school-map/MlbHighSchoolMap";
 import { MlbTalentMap } from "../app/mlb-talent-map/MlbTalentMap";
 
-document.title = "Interactive roster map | The Geography of MLB Talent";
+const highSchoolRoute = window.location.pathname.startsWith("/mlb-high-school-map");
+const title = highSchoolRoute
+  ? "High Schools Producing MLB Talent Since 2000 | MLB Talent Map 2026"
+  : "Interactive roster map | The Geography of MLB Talent";
+const description = highSchoolRoute
+  ? "Map and rank U.S. high schools by distinct players who made an MLB debut from 2000 through August 24, 2026, with player-level source records."
+  : "Explore U.S. birthplace geography and international origins for every player on an MLB organization roster as of August 24, 2026.";
+const socialImage = highSchoolRoute
+  ? "https://mlb-talent-map-2026.pages.dev/og-high-schools.png"
+  : "https://mlb-talent-map-2026.pages.dev/og.png";
+document.title = title;
+document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
+document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+document.querySelector('meta[property="og:url"]')?.setAttribute("content", window.location.href);
+document.querySelector('meta[property="og:image"]')?.setAttribute("content", socialImage);
+document.querySelector('meta[name="twitter:image"]')?.setAttribute("content", socialImage);
+document.querySelector('link[rel="canonical"]')?.setAttribute("href", window.location.href.split("?")[0]);
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Missing application root");
 createRoot(root).render(
   <React.StrictMode>
-    <MlbTalentMap />
+    {highSchoolRoute ? <MlbHighSchoolMap /> : <MlbTalentMap />}
   </React.StrictMode>,
 );

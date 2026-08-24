@@ -1,0 +1,1999 @@
+{
+  "generatedAt": "2026-08-24T08:26:01.000Z",
+  "minPlayers": 5,
+  "attribution": "Campus locations from OpenStreetMap contributors (ODbL), official school or municipal sources, and the U.S. Census Geocoder.",
+  "schools": [
+    {
+      "id": "az-canyon-de-oro-oro-valley",
+      "name": "Canyon de Oro",
+      "reportedCity": "Oro Valley",
+      "city": "Oro Valley",
+      "state": "AZ",
+      "latitude": 32.3751091,
+      "longitude": -110.9724179,
+      "precision": "campus",
+      "source": "Town of Oro Valley",
+      "sourceUrl": "https://www.orovalleyaz.gov/Government/Departments/Parks-and-Recreation/Parks-and-Amenities/Canyon-Del-Oro-High-School",
+      "geocodeQuery": "Canyon de Oro High School, Oro Valley, AZ, USA",
+      "displayName": "Canyon del Oro High School, 25 W Calle Concordia, Oro Valley, AZ 85704",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "az-chaparral-scottsdale",
+      "name": "Chaparral",
+      "reportedCity": "Scottsdale",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "latitude": 33.5767338,
+      "longitude": -111.9325672,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/199720721",
+      "geocodeQuery": "Chaparral High School, Scottsdale, AZ, USA",
+      "displayName": "Chaparral High School, 6935, East Gold Dust Avenue, Scottsdale, Maricopa County, Arizona, 85253, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Chaparral High School, 6935, East Gold Dust Avenue, Scottsdale, Maricopa County, Arizona, 85253, United States",
+          "latitude": 33.5767338,
+          "longitude": -111.9325672,
+          "osmType": "way",
+          "osmId": 199720721,
+          "state": "AZ",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "az-chaparral"
+    },
+    {
+      "id": "az-horizon-scottsdale",
+      "name": "Horizon",
+      "reportedCity": "Scottsdale",
+      "city": "Scottsdale",
+      "state": "AZ",
+      "latitude": 33.625935328911,
+      "longitude": -111.960253455775,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://horizon.pvschools.net/our-school/about-our-school",
+      "geocodeQuery": "Horizon High School, Scottsdale, AZ, USA",
+      "displayName": "Horizon High School, 5601 E Greenway Rd, Scottsdale, AZ 85254",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "az-mountain-ridge-glendale",
+      "name": "Mountain Ridge",
+      "reportedCity": "Glendale",
+      "city": "Glendale",
+      "state": "AZ",
+      "latitude": 33.6915939,
+      "longitude": -112.2055891,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/1117067086",
+      "geocodeQuery": "Mountain Ridge High School, Glendale, AZ, USA",
+      "displayName": "Mountain Ridge High School, West Patrick Lane, Glendale, Maricopa County, Arizona, 85310, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Mountain Ridge High School, West Patrick Lane, Glendale, Maricopa County, Arizona, 85310, United States",
+          "latitude": 33.6915939,
+          "longitude": -112.2055891,
+          "osmType": "way",
+          "osmId": 1117067086,
+          "state": "AZ",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "az-mountain-ridge"
+    },
+    {
+      "id": "ca-bellarmine-prep-san-jose",
+      "name": "Bellarmine Prep",
+      "reportedCity": "San Jose",
+      "city": "San Jose",
+      "state": "CA",
+      "latitude": 37.3428035,
+      "longitude": -121.9181034,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/24169566",
+      "geocodeQuery": "Bellarmine Prep, San Jose, CA, USA",
+      "displayName": "Bellarmine College Preparatory, 960, West Hedding Street, College Park, Rose Garden, San Jose, Santa Clara County, California, 95126, United States",
+      "matchScore": 29,
+      "alternatives": [
+        {
+          "displayName": "Bellarmine College Preparatory, 960, West Hedding Street, College Park, Rose Garden, San Jose, Santa Clara County, California, 95126, United States",
+          "latitude": 37.3428035,
+          "longitude": -121.9181034,
+          "osmType": "way",
+          "osmId": 24169566,
+          "state": "CA",
+          "score": 29
+        }
+      ],
+      "geocodeReuse": "ca-bellarmine-prep"
+    },
+    {
+      "id": "ca-bishop-amat-la-puente",
+      "name": "Bishop Amat",
+      "reportedCity": "La Puente",
+      "city": "La Puente",
+      "state": "CA",
+      "latitude": 34.0544512,
+      "longitude": -117.964002,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/40663021",
+      "geocodeQuery": "Bishop Amat High School, La Puente, CA, USA",
+      "displayName": "Bishop Amat Memorial High School, 14301, Fairgrove Avenue, West Puente Valley, La Puente, Los Angeles County, California, 91746, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Bishop Amat Memorial High School, 14301, Fairgrove Avenue, West Puente Valley, La Puente, Los Angeles County, California, 91746, United States",
+          "latitude": 34.0544512,
+          "longitude": -117.964002,
+          "osmType": "way",
+          "osmId": 40663021,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-bishop-amat"
+    },
+    {
+      "id": "ca-canyon-anaheim",
+      "name": "Canyon",
+      "reportedCity": "Anaheim",
+      "city": "Anaheim",
+      "state": "CA",
+      "latitude": 33.8477598,
+      "longitude": -117.7885192,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/195235064",
+      "geocodeQuery": "Canyon High School, Anaheim, CA, USA",
+      "displayName": "Canyon High School, 220, Imperial Highway, Anaheim Hills, Anaheim, Orange County, California, 92807, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Canyon High School, 220, Imperial Highway, Anaheim Hills, Anaheim, Orange County, California, 92807, United States",
+          "latitude": 33.8477598,
+          "longitude": -117.7885192,
+          "osmType": "way",
+          "osmId": 195235064,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-canyon"
+    },
+    {
+      "id": "ca-capistrano-valley-mission-viejo",
+      "name": "Capistrano Valley",
+      "reportedCity": "Mission Viejo",
+      "city": "Mission Viejo",
+      "state": "CA",
+      "latitude": 33.5422403,
+      "longitude": -117.669712,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/290058848",
+      "geocodeQuery": "Capistrano Valley High School, Mission Viejo, CA, USA",
+      "displayName": "Capistrano Valley High School, Marguerite Parkway, Mission Viejo, Orange County, California, 92692, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Capistrano Valley High School, Marguerite Parkway, Mission Viejo, Orange County, California, 92692, United States",
+          "latitude": 33.5422403,
+          "longitude": -117.669712,
+          "osmType": "way",
+          "osmId": 290058848,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-capistrano-valley"
+    },
+    {
+      "id": "ca-crespi-carmelite-encino",
+      "name": "Crespi Carmelite",
+      "reportedCity": "Encino",
+      "city": "Encino",
+      "state": "CA",
+      "latitude": 34.1621947,
+      "longitude": -118.5221629,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/381163541",
+      "geocodeQuery": "Crespi Carmelite High School, Encino, CA, USA",
+      "displayName": "Crespi Carmelite High School, Alonzo Avenue, Encino Neighborhood Council District, Los Angeles, Los Angeles County, California, 91316, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Crespi Carmelite High School, Alonzo Avenue, Encino Neighborhood Council District, Los Angeles, Los Angeles County, California, 91316, United States",
+          "latitude": 34.1621947,
+          "longitude": -118.5221629,
+          "osmType": "way",
+          "osmId": 381163541,
+          "state": "CA",
+          "score": 28
+        }
+      ],
+      "geocodeReuse": "ca-crespi-carmelite"
+    },
+    {
+      "id": "ca-cypress",
+      "name": "Cypress",
+      "reportedCity": null,
+      "city": "Cypress",
+      "state": "CA",
+      "latitude": 33.8213869,
+      "longitude": -118.030504,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/188427768",
+      "geocodeQuery": "Cypress High School, CA, USA",
+      "displayName": "Cypress High School, Montecito Drive, Cypress, Orange County, California, 90630, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Cypress High School, Montecito Drive, Cypress, Orange County, California, 90630, United States",
+          "latitude": 33.8213869,
+          "longitude": -118.030504,
+          "osmType": "way",
+          "osmId": 188427768,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-dana-hills-dana-point",
+      "name": "Dana Hills",
+      "reportedCity": "Dana Point",
+      "city": "Dana Point",
+      "state": "CA",
+      "latitude": 33.4778002,
+      "longitude": -117.7003908,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/358829665",
+      "geocodeQuery": "Dana Hills High School, Dana Point, CA, USA",
+      "displayName": "Dana Hills High School, 33333, Golden Lantern Street, South Cove, Dana Point, Orange County, California, 92629, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Dana Hills High School, 33333, Golden Lantern Street, South Cove, Dana Point, Orange County, California, 92629, United States",
+          "latitude": 33.4778002,
+          "longitude": -117.7003908,
+          "osmType": "node",
+          "osmId": 358829665,
+          "state": "CA",
+          "score": 34
+        },
+        {
+          "displayName": "Dana Hills High School, Stonehill Drive, South Cove, Dana Point, Orange County, California, 92629, United States",
+          "latitude": 33.4768402,
+          "longitude": -117.6985371,
+          "osmType": "node",
+          "osmId": 679489485,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-dana-hills"
+    },
+    {
+      "id": "ca-eastlake-chula-vista",
+      "name": "Eastlake",
+      "reportedCity": "Chula Vista",
+      "city": "Chula Vista",
+      "state": "CA",
+      "latitude": 32.642316109001,
+      "longitude": -116.966595374195,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://elh.sweetwaterschools.org/",
+      "geocodeQuery": "Eastlake High School, Chula Vista, CA, USA",
+      "displayName": "Eastlake High School, 1120 Eastlake Pkwy, Chula Vista, CA 91915",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ca-edison-huntington-beach",
+      "name": "Edison",
+      "reportedCity": "Huntington Beach",
+      "city": "Huntington Beach",
+      "state": "CA",
+      "latitude": 33.6536021,
+      "longitude": -117.9689238,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/43757364",
+      "geocodeQuery": "Edison High School, Huntington Beach, CA, USA",
+      "displayName": "Edison High School, Magnolia Street, Huntington Beach, Orange County, California, 92646, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Edison High School, Magnolia Street, Huntington Beach, Orange County, California, 92646, United States",
+          "latitude": 33.6536021,
+          "longitude": -117.9689238,
+          "osmType": "way",
+          "osmId": 43757364,
+          "state": "CA",
+          "score": 34
+        },
+        {
+          "displayName": "Edison High School, 8491, Lomond Drive, Huntington Beach, Orange County, California, 92646, United States",
+          "latitude": 33.6528673,
+          "longitude": -117.9698348,
+          "osmType": "way",
+          "osmId": 195670701,
+          "state": "CA",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "ca-el-toro-lake-forest",
+      "name": "El Toro",
+      "reportedCity": "Lake Forest",
+      "city": "Lake Forest",
+      "state": "CA",
+      "latitude": 33.6369734,
+      "longitude": -117.6877516,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/344547107",
+      "geocodeQuery": "El Toro High School, Lake Forest, CA, USA",
+      "displayName": "El Toro High School, 25255, Toledo Way, The Woods, Lake Forest, Orange County, California, 92630, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "El Toro High School, 25255, Toledo Way, The Woods, Lake Forest, Orange County, California, 92630, United States",
+          "latitude": 33.6369734,
+          "longitude": -117.6877516,
+          "osmType": "way",
+          "osmId": 344547107,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-el-toro"
+    },
+    {
+      "id": "ca-elk-grove",
+      "name": "Elk Grove",
+      "reportedCity": null,
+      "city": "Elk Grove",
+      "state": "CA",
+      "latitude": 38.3990301,
+      "longitude": -121.3734746,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/173536553",
+      "geocodeQuery": "Elk Grove High School, CA, USA",
+      "displayName": "Elk Grove High School, Vista Grande Way, Elk Grove, Sacramento County, California, 94624, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Elk Grove High School, Vista Grande Way, Elk Grove, Sacramento County, California, 94624, United States",
+          "latitude": 38.3990301,
+          "longitude": -121.3734746,
+          "osmType": "way",
+          "osmId": 173536553,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-fountain-valley",
+      "name": "Fountain Valley",
+      "reportedCity": null,
+      "city": "Fountain Valley",
+      "state": "CA",
+      "latitude": 33.7057887,
+      "longitude": -117.9605593,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/457393714",
+      "geocodeQuery": "Fountain Valley High School, CA, USA",
+      "displayName": "Fountain Valley High School, 17816, Bushard Street, Talbert, Fountain Valley, Orange County, California, 92708, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Fountain Valley High School, 17816, Bushard Street, Talbert, Fountain Valley, Orange County, California, 92708, United States",
+          "latitude": 33.7057887,
+          "longitude": -117.9605593,
+          "osmType": "way",
+          "osmId": 457393714,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-grossmont-el-cajon",
+      "name": "Grossmont",
+      "reportedCity": "El Cajon",
+      "city": "El Cajon",
+      "state": "CA",
+      "latitude": 32.7823842,
+      "longitude": -116.9880011,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/351312974",
+      "geocodeQuery": "Grossmont High School, El Cajon, CA, USA",
+      "displayName": "Grossmont High School, 1100 Murray Dr, La Mesa, CA 91944",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ca-harvard-westlake",
+      "name": "Harvard-Westlake",
+      "reportedCity": "Studio City",
+      "city": "Studio City",
+      "state": "CA",
+      "latitude": 34.137867155659,
+      "longitude": -118.412751816463,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.hw.com/about/Contact-Us/Send-Us-A-Message",
+      "geocodeQuery": "Harvard-Westlake High School, Studio City, CA, USA",
+      "displayName": "Harvard-Westlake School, 3700 Coldwater Canyon Ave, Studio City, CA 91604",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ca-huntington-beach",
+      "name": "Huntington Beach",
+      "reportedCity": null,
+      "city": "Huntington Beach",
+      "state": "CA",
+      "latitude": 33.6763922,
+      "longitude": -118.003886,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/195210889",
+      "geocodeQuery": "Huntington Beach High School, CA, USA",
+      "displayName": "Huntington Beach High School, 1905, Main Street, La Bolsa, Huntington Beach, Orange County, California, 92648, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Huntington Beach High School, 1905, Main Street, La Bolsa, Huntington Beach, Orange County, California, 92648, United States",
+          "latitude": 33.6763922,
+          "longitude": -118.003886,
+          "osmType": "way",
+          "osmId": 195210889,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-jesuit",
+      "name": "Jesuit",
+      "reportedCity": "Sacramento",
+      "city": "Sacramento",
+      "state": "CA",
+      "latitude": 38.5862944,
+      "longitude": -121.3510626,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/358768367",
+      "geocodeQuery": "Jesuit High School, Sacramento, CA, USA",
+      "displayName": "Jesuit High School, Jacob Lane, Sacramento County, California, 95864, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Jesuit High School, Jacob Lane, Sacramento County, California, 95864, United States",
+          "latitude": 38.5862944,
+          "longitude": -121.3510626,
+          "osmType": "node",
+          "osmId": 358768367,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-la-quinta-westminster",
+      "name": "La Quinta",
+      "reportedCity": "Westminster",
+      "city": "Westminster",
+      "state": "CA",
+      "latitude": 33.7359525,
+      "longitude": -117.9484019,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/186520408",
+      "geocodeQuery": "La Quinta High School, Westminster, CA, USA",
+      "displayName": "La Quinta High School, 10372, McFadden Avenue, Bolsa, Westminster, Orange County, California, 92683, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "La Quinta High School, 10372, McFadden Avenue, Bolsa, Westminster, Orange County, California, 92683, United States",
+          "latitude": 33.7359525,
+          "longitude": -117.9484019,
+          "osmType": "way",
+          "osmId": 186520408,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-la-quinta"
+    },
+    {
+      "id": "ca-lakewood",
+      "name": "Lakewood",
+      "reportedCity": null,
+      "city": "Lakewood",
+      "state": "CA",
+      "latitude": 33.8382805,
+      "longitude": -118.1212162,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/295338881",
+      "geocodeQuery": "Lakewood High School, CA, USA",
+      "displayName": "Lakewood High School, 4400, Briercrest Avenue, Lakewood, Los Angeles County, California, 90713, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Lakewood High School, 4400, Briercrest Avenue, Lakewood, Los Angeles County, California, 90713, United States",
+          "latitude": 33.8382805,
+          "longitude": -118.1212162,
+          "osmType": "way",
+          "osmId": 295338881,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-mater-dei-santa-ana",
+      "name": "Mater Dei",
+      "reportedCity": "Santa Ana",
+      "city": "Santa Ana",
+      "state": "CA",
+      "latitude": 33.7260273,
+      "longitude": -117.8837551,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/219151401",
+      "geocodeQuery": "Mater Dei High School, Santa Ana, CA, USA",
+      "displayName": "Mater Dei High School, 1202, West Edinger Avenue, Santa Ana Memorial Park, Santa Ana, Orange County, California, 92707, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Mater Dei High School, 1202, West Edinger Avenue, Santa Ana Memorial Park, Santa Ana, Orange County, California, 92707, United States",
+          "latitude": 33.7260273,
+          "longitude": -117.8837551,
+          "osmType": "way",
+          "osmId": 219151401,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-mater-dei"
+    },
+    {
+      "id": "ca-millikan",
+      "name": "Millikan",
+      "reportedCity": "Long Beach",
+      "city": "Long Beach",
+      "state": "CA",
+      "latitude": 33.8076566,
+      "longitude": -118.109856,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/296804384",
+      "geocodeQuery": "Millikan High School, Long Beach, CA, USA",
+      "displayName": "Millikan High School, 2800, Snowden Avenue, Los Altos, Long Beach, Los Angeles County, California, 90815, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Millikan High School, 2800, Snowden Avenue, Los Altos, Long Beach, Los Angeles County, California, 90815, United States",
+          "latitude": 33.8076566,
+          "longitude": -118.109856,
+          "osmType": "way",
+          "osmId": 296804384,
+          "state": "CA",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "ca-notre-dame-sherman-oaks",
+      "name": "Notre Dame",
+      "reportedCity": "Sherman Oaks",
+      "city": "Sherman Oaks",
+      "state": "CA",
+      "latitude": 34.1582834,
+      "longitude": -118.4290356,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/337510970",
+      "geocodeQuery": "Notre Dame High School, Sherman Oaks, CA, USA",
+      "displayName": "Notre Dame High School, 13645, Riverside Drive, Sherman Oaks Neighborhood Council District, Los Angeles, Los Angeles County, California, 91423, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Notre Dame High School, 13645, Riverside Drive, Sherman Oaks Neighborhood Council District, Los Angeles, Los Angeles County, California, 91423, United States",
+          "latitude": 34.1582834,
+          "longitude": -118.4290356,
+          "osmType": "way",
+          "osmId": 337510970,
+          "state": "CA",
+          "score": 28
+        }
+      ],
+      "geocodeReuse": "ca-notre-dame"
+    },
+    {
+      "id": "ca-orange-lutheran-orange",
+      "name": "Orange Lutheran",
+      "reportedCity": "Orange",
+      "city": "Orange",
+      "state": "CA",
+      "latitude": 33.8251861,
+      "longitude": -117.829627,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/211220853",
+      "geocodeQuery": "Orange Lutheran High School, Orange, CA, USA",
+      "displayName": "Orange Lutheran High School, 2222, North Santiago Boulevard, Orange, Orange County, California, 92867, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Orange Lutheran High School, 2222, North Santiago Boulevard, Orange, Orange County, California, 92867, United States",
+          "latitude": 33.8251861,
+          "longitude": -117.829627,
+          "osmType": "way",
+          "osmId": 211220853,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-orange-lutheran"
+    },
+    {
+      "id": "ca-poway",
+      "name": "Poway",
+      "reportedCity": null,
+      "city": "Poway",
+      "state": "CA",
+      "latitude": 32.9988565,
+      "longitude": -117.025898,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/107391680",
+      "geocodeQuery": "Poway High School, CA, USA",
+      "displayName": "Poway High School, 15500, Espola Road, Stone Canyon Ranch, Poway, San Diego County, California, 92064, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Poway High School, 15500, Espola Road, Stone Canyon Ranch, Poway, San Diego County, California, 92064, United States",
+          "latitude": 32.9988565,
+          "longitude": -117.025898,
+          "osmType": "way",
+          "osmId": 107391680,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-rancho-bernardo-san-diego",
+      "name": "Rancho Bernardo",
+      "reportedCity": "San Diego",
+      "city": "San Diego",
+      "state": "CA",
+      "latitude": 32.9938834,
+      "longitude": -117.0652107,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/62102165",
+      "geocodeQuery": "Rancho Bernardo High School, San Diego, CA, USA",
+      "displayName": "Rancho Bernardo High School, 13010, Paseo Lucido, Bernardo Heights, Carmel Mountain Ranch, San Diego, San Diego County, California, 92128, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Rancho Bernardo High School, 13010, Paseo Lucido, Bernardo Heights, Carmel Mountain Ranch, San Diego, San Diego County, California, 92128, United States",
+          "latitude": 32.9938834,
+          "longitude": -117.0652107,
+          "osmType": "way",
+          "osmId": 62102165,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-rancho-bernardo"
+    },
+    {
+      "id": "ca-riverside-polytechnic-riverside",
+      "name": "Riverside Polytechnic",
+      "reportedCity": "Riverside",
+      "city": "Riverside",
+      "state": "CA",
+      "latitude": 33.9518637,
+      "longitude": -117.3681103,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/80806413",
+      "geocodeQuery": "Riverside Polytechnic High School, Riverside, CA, USA",
+      "displayName": "Riverside Polytechnic High School, 5450, Victoria Avenue, Victoria, Riverside, Riverside County, California, 92506, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Riverside Polytechnic High School, 5450, Victoria Avenue, Victoria, Riverside, Riverside County, California, 92506, United States",
+          "latitude": 33.9518637,
+          "longitude": -117.3681103,
+          "osmType": "way",
+          "osmId": 80806413,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-riverside-polytechnic"
+    },
+    {
+      "id": "ca-saint-francis-mountain-view",
+      "name": "Saint Francis",
+      "reportedCity": "Mountain View",
+      "city": "Mountain View",
+      "state": "CA",
+      "latitude": 37.3688563,
+      "longitude": -122.0848218,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/305661228",
+      "geocodeQuery": "Saint Francis High School, Mountain View, CA, USA",
+      "displayName": "Saint Francis High School, 1885, Miramonte Avenue, Mountain View, Santa Clara County, California, 94040, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Saint Francis High School, 1885, Miramonte Avenue, Mountain View, Santa Clara County, California, 94040, United States",
+          "latitude": 37.3688563,
+          "longitude": -122.0848218,
+          "osmType": "way",
+          "osmId": 305661228,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-saint-francis"
+    },
+    {
+      "id": "ca-saint-mary-s-stockton",
+      "name": "Saint Mary's",
+      "reportedCity": "Stockton",
+      "city": "Stockton",
+      "state": "CA",
+      "latitude": 38.003233346946,
+      "longitude": -121.306916059844,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.saintmaryshighschool.org/apps/contact/",
+      "geocodeQuery": "Saint Mary's High School, Stockton, CA, USA",
+      "displayName": "Saint Mary's High School, 5648 N El Dorado St, Stockton, CA 95207",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ca-servite-anaheim",
+      "name": "Servite",
+      "reportedCity": "Anaheim",
+      "city": "Anaheim",
+      "state": "CA",
+      "latitude": 33.8454374,
+      "longitude": -117.9495194,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/273370539",
+      "geocodeQuery": "Servite High School, Anaheim, CA, USA",
+      "displayName": "Servite High School, West Dogwood Avenue, West Anaheim, Anaheim, Orange County, California, 92801, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Servite High School, West Dogwood Avenue, West Anaheim, Anaheim, Orange County, California, 92801, United States",
+          "latitude": 33.8454374,
+          "longitude": -117.9495194,
+          "osmType": "way",
+          "osmId": 273370539,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-servite"
+    },
+    {
+      "id": "ca-thousand-oaks",
+      "name": "Thousand Oaks",
+      "reportedCity": null,
+      "city": "Thousand Oaks",
+      "state": "CA",
+      "latitude": 34.2111341,
+      "longitude": -118.8705184,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/236347365",
+      "geocodeQuery": "Thousand Oaks High School, CA, USA",
+      "displayName": "Thousand Oaks High School, 2323, North Moorpark Road, Thousand Oaks, Ventura County, California, 91360, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Thousand Oaks High School, 2323, North Moorpark Road, Thousand Oaks, Ventura County, California, 91360, United States",
+          "latitude": 34.2111341,
+          "longitude": -118.8705184,
+          "osmType": "way",
+          "osmId": 236347365,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-torrey-pines-san-diego",
+      "name": "Torrey Pines",
+      "reportedCity": "San Diego",
+      "city": "San Diego",
+      "state": "CA",
+      "latitude": 32.9573985,
+      "longitude": -117.2248968,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/66983654",
+      "geocodeQuery": "Torrey Pines High School, San Diego, CA, USA",
+      "displayName": "Torrey Pines High School, Del Mar Heights Road, Torrey Glen, Del Mar Highlands, Carmel Valley, San Diego, San Diego County, California, 92130, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Torrey Pines High School, Del Mar Heights Road, Torrey Glen, Del Mar Highlands, Carmel Valley, San Diego, San Diego County, California, 92130, United States",
+          "latitude": 32.9573985,
+          "longitude": -117.2248968,
+          "osmType": "way",
+          "osmId": 66983654,
+          "state": "CA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ca-torrey-pines"
+    },
+    {
+      "id": "ca-upland",
+      "name": "Upland",
+      "reportedCity": null,
+      "city": "Upland",
+      "state": "CA",
+      "latitude": 34.1051068,
+      "longitude": -117.6584634,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/855257798",
+      "geocodeQuery": "Upland High School, CA, USA",
+      "displayName": "Upland High School, 565, West 11th Street, College Heights, Upland, San Bernardino County, California, 91786, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Upland High School, 565, West 11th Street, College Heights, Upland, San Bernardino County, California, 91786, United States",
+          "latitude": 34.1051068,
+          "longitude": -117.6584634,
+          "osmType": "way",
+          "osmId": 855257798,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-valencia",
+      "name": "Valencia",
+      "reportedCity": null,
+      "city": "Santa Clarita",
+      "state": "CA",
+      "latitude": 34.4418505,
+      "longitude": -118.5640357,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/329799910",
+      "geocodeQuery": "Valencia High School, CA, USA",
+      "displayName": "Valencia High School, El Molina Avenue, Copper Hill, Santa Clarita, Los Angeles County, California, 91354, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Valencia High School, El Molina Avenue, Copper Hill, Santa Clarita, Los Angeles County, California, 91354, United States",
+          "latitude": 34.4418505,
+          "longitude": -118.5640357,
+          "osmType": "way",
+          "osmId": 329799910,
+          "state": "CA",
+          "score": 28
+        },
+        {
+          "displayName": "Valencia High School, Alta Vista Street, Old Town Placentia, Placentia, Orange County, California, 92870, United States",
+          "latitude": 33.8769592,
+          "longitude": -117.867003,
+          "osmType": "node",
+          "osmId": 358793984,
+          "state": "CA",
+          "score": 28
+        },
+        {
+          "displayName": "Valencia High School, 500, North Bradford Avenue, Old Town Placentia, Placentia, Orange County, California, 92870, United States",
+          "latitude": 33.8777647,
+          "longitude": -117.8680259,
+          "osmType": "node",
+          "osmId": 8325635035,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "ca-william-s-hart",
+      "name": "William S. Hart",
+      "reportedCity": "Santa Clarita",
+      "city": "Santa Clarita",
+      "state": "CA",
+      "latitude": 34.3839288,
+      "longitude": -118.5389089,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/383211037",
+      "geocodeQuery": "William S. Hart High School, Santa Clarita, CA, USA",
+      "displayName": "William S Hart High School, 24825, Newhall Avenue, Newhall, Santa Clarita, Los Angeles County, California, 91321, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "William S Hart High School, 24825, Newhall Avenue, Newhall, Santa Clarita, Los Angeles County, California, 91321, United States",
+          "latitude": 34.3839288,
+          "longitude": -118.5389089,
+          "osmType": "way",
+          "osmId": 383211037,
+          "state": "CA",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "ca-yucaipa",
+      "name": "Yucaipa",
+      "reportedCity": null,
+      "city": "Yucaipa",
+      "state": "CA",
+      "latitude": 34.0368667,
+      "longitude": -117.0869969,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/45893265",
+      "geocodeQuery": "Yucaipa High School, CA, USA",
+      "displayName": "Yucaipa High School, Chapman Heights Road, Yucaipa, San Bernardino County, California, 92399, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Yucaipa High School, Chapman Heights Road, Yucaipa, San Bernardino County, California, 92399, United States",
+          "latitude": 34.0368667,
+          "longitude": -117.0869969,
+          "osmType": "way",
+          "osmId": 45893265,
+          "state": "CA",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "co-cherry-creek-greenwood-village",
+      "name": "Cherry Creek",
+      "reportedCity": "Greenwood Village",
+      "city": "Greenwood Village",
+      "state": "CO",
+      "latitude": 39.6303721,
+      "longitude": -104.8793351,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/2280385716",
+      "geocodeQuery": "Cherry Creek High School, Greenwood Village, CO, USA",
+      "displayName": "Cherry Creek High School, East Union Avenue, Greenwood Village, Arapahoe County, Colorado, 80111, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Cherry Creek High School, East Union Avenue, Greenwood Village, Arapahoe County, Colorado, 80111, United States",
+          "latitude": 39.6303721,
+          "longitude": -104.8793351,
+          "osmType": "node",
+          "osmId": 2280385716,
+          "state": "CO",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "co-cherry-creek"
+    },
+    {
+      "id": "fl-american-heritage-plantation",
+      "name": "American Heritage",
+      "reportedCity": "Plantation",
+      "city": "Plantation",
+      "state": "FL",
+      "latitude": 26.121105932596,
+      "longitude": -80.310616098724,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.plantation.org/residents/schools",
+      "geocodeQuery": "American Heritage High School, Plantation, FL, USA",
+      "displayName": "American Heritage School, 12200 W Broward Blvd, Plantation, FL 33325",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "fl-bishop-kenny-jacksonville",
+      "name": "Bishop Kenny",
+      "reportedCity": "Jacksonville",
+      "city": "Jacksonville",
+      "state": "FL",
+      "latitude": 30.3109244,
+      "longitude": -81.640802,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/relation/3216452",
+      "geocodeQuery": "Bishop Kenny High School, Jacksonville, FL, USA",
+      "displayName": "Bishop Kenny High School, Kingman Avenue, Philips, South Jacksonville, Jacksonville, Duval County, Florida, 32207, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Bishop Kenny High School, Kingman Avenue, Philips, South Jacksonville, Jacksonville, Duval County, Florida, 32207, United States",
+          "latitude": 30.3109244,
+          "longitude": -81.640802,
+          "osmType": "relation",
+          "osmId": 3216452,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-bishop-kenny"
+    },
+    {
+      "id": "fl-calvary-christian-academy",
+      "name": "Calvary Christian Academy",
+      "reportedCity": "Fort Lauderdale",
+      "city": "Fort Lauderdale",
+      "state": "FL",
+      "latitude": 26.2044329,
+      "longitude": -80.1760761,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/1109635820",
+      "geocodeQuery": "Calvary Christian Academy, Fort Lauderdale, FL, USA",
+      "displayName": "Calvary Christian Academy, 2401, West Cypress Creek Road, Fort Lauderdale, Broward County, Florida, 33309, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Calvary Christian Academy, 2401, West Cypress Creek Road, Fort Lauderdale, Broward County, Florida, 33309, United States",
+          "latitude": 26.2044329,
+          "longitude": -80.1760761,
+          "osmType": "way",
+          "osmId": 1109635820,
+          "state": "FL",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "fl-christopher-columbus-miami",
+      "name": "Christopher Columbus",
+      "reportedCity": "Miami",
+      "city": "Miami",
+      "state": "FL",
+      "latitude": 25.7412541,
+      "longitude": -80.3360468,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/358729811",
+      "geocodeQuery": "Christopher Columbus High School, Miami, FL, USA",
+      "displayName": "Christopher Columbus High School, Southwest 87th Avenue, Coral Way Village, Miami-Dade County, Florida, 33165, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Christopher Columbus High School, Southwest 87th Avenue, Coral Way Village, Miami-Dade County, Florida, 33165, United States",
+          "latitude": 25.7412541,
+          "longitude": -80.3360468,
+          "osmType": "node",
+          "osmId": 358729811,
+          "state": "FL",
+          "score": 28
+        }
+      ],
+      "geocodeReuse": "fl-christopher-columbus"
+    },
+    {
+      "id": "fl-gulliver-prep",
+      "name": "Gulliver Prep",
+      "reportedCity": "Miami",
+      "city": "Coral Gables",
+      "state": "FL",
+      "latitude": 25.65549,
+      "longitude": -80.2816811,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/203207161",
+      "geocodeQuery": "Gulliver Prep, Miami, FL, USA",
+      "displayName": "Gulliver Prep, Campamento Avenue, Gables by the Sea, Coral Gables, Miami-Dade County, Florida, 33156, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Gulliver Prep, Campamento Avenue, Gables by the Sea, Coral Gables, Miami-Dade County, Florida, 33156, United States",
+          "latitude": 25.65549,
+          "longitude": -80.2816811,
+          "osmType": "way",
+          "osmId": 203207161,
+          "state": "FL",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "fl-img-academy-bradenton",
+      "name": "IMG Academy",
+      "reportedCity": "Bradenton",
+      "city": "Bradenton",
+      "state": "FL",
+      "latitude": 27.4405511,
+      "longitude": -82.6087522,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/relation/11901333",
+      "geocodeQuery": "IMG Academy, Bradenton, FL, USA",
+      "displayName": "IMG Academy, 54th Drive West, Academy Park Villas, South Bradenton, Manatee County, Florida, 34210, United States",
+      "matchScore": 26,
+      "alternatives": [
+        {
+          "displayName": "IMG Academy, 54th Drive West, Academy Park Villas, South Bradenton, Manatee County, Florida, 34210, United States",
+          "latitude": 27.4405511,
+          "longitude": -82.6087522,
+          "osmType": "relation",
+          "osmId": 11901333,
+          "state": "FL",
+          "score": 26
+        }
+      ],
+      "geocodeReuse": "fl-img-academy"
+    },
+    {
+      "id": "fl-jesuit-tampa",
+      "name": "Jesuit",
+      "reportedCity": "Tampa",
+      "city": "Tampa",
+      "state": "FL",
+      "latitude": 27.9860149,
+      "longitude": -82.4993425,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/136005716",
+      "geocodeQuery": "Jesuit High School, Tampa, FL, USA",
+      "displayName": "Jesuit High School, 4701, North Himes Avenue, Tampa, Hillsborough County, Florida, 33614, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Jesuit High School, 4701, North Himes Avenue, Tampa, Hillsborough County, Florida, 33614, United States",
+          "latitude": 27.9860149,
+          "longitude": -82.4993425,
+          "osmType": "way",
+          "osmId": 136005716,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-jesuit"
+    },
+    {
+      "id": "fl-lake-brantley-altamonte-springs",
+      "name": "Lake Brantley",
+      "reportedCity": "Altamonte Springs",
+      "city": "Altamonte Springs",
+      "state": "FL",
+      "latitude": 28.6823458,
+      "longitude": -81.4226194,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/460262599",
+      "geocodeQuery": "Lake Brantley High School, Altamonte Springs, FL, USA",
+      "displayName": "Lake Brantley High School, 991, Sand Lake Road, Altamonte Springs, Seminole County, Florida, 32714, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Lake Brantley High School, 991, Sand Lake Road, Altamonte Springs, Seminole County, Florida, 32714, United States",
+          "latitude": 28.6823458,
+          "longitude": -81.4226194,
+          "osmType": "way",
+          "osmId": 460262599,
+          "state": "FL",
+          "score": 34
+        },
+        {
+          "displayName": "Lake Brantley High School, 991, Sand Lake Road, Altamonte Springs, Seminole County, Florida, 32714, United States",
+          "latitude": 28.6815693,
+          "longitude": -81.422044,
+          "osmType": "way",
+          "osmId": 814341154,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-lake-brantley"
+    },
+    {
+      "id": "fl-lakeland",
+      "name": "Lakeland",
+      "reportedCity": null,
+      "city": "Lakeland",
+      "state": "FL",
+      "latitude": 28.0346,
+      "longitude": -81.9387025,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/800882863",
+      "geocodeQuery": "Lakeland High School, FL, USA",
+      "displayName": "Lakeland Senior High School, Bartow Road, Lakeland, Polk County, Florida, 33081, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Lakeland Senior High School, Bartow Road, Lakeland, Polk County, Florida, 33081, United States",
+          "latitude": 28.0346,
+          "longitude": -81.9387025,
+          "osmType": "way",
+          "osmId": 800882863,
+          "state": "FL",
+          "score": 28
+        },
+        {
+          "displayName": "Lakeland Highlands Junior High School, Lake Miriam Drive, Lakeland, Polk County, Florida, 33813, United States",
+          "latitude": 27.9767118,
+          "longitude": -81.9515313,
+          "osmType": "way",
+          "osmId": 480563431,
+          "state": "FL",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "fl-lakewood-ranch-bradenton",
+      "name": "Lakewood Ranch",
+      "reportedCity": "Bradenton",
+      "city": "Bradenton",
+      "state": "FL",
+      "latitude": 27.4435206,
+      "longitude": -82.4361361,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/874222666",
+      "geocodeQuery": "Lakewood Ranch High School, Bradenton, FL, USA",
+      "displayName": "Lakewood Ranch High School, 5500, Lakewood Ranch Boulevard, Lakewood Ranch, Bradenton, Manatee County, Florida, 34211, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Lakewood Ranch High School, 5500, Lakewood Ranch Boulevard, Lakewood Ranch, Bradenton, Manatee County, Florida, 34211, United States",
+          "latitude": 27.4435206,
+          "longitude": -82.4361361,
+          "osmType": "way",
+          "osmId": 874222666,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-lakewood-ranch"
+    },
+    {
+      "id": "fl-marjory-stoneman-douglas",
+      "name": "Marjory Stoneman Douglas",
+      "reportedCity": "Parkland",
+      "city": "Parkland",
+      "state": "FL",
+      "latitude": 26.3044596,
+      "longitude": -80.2694856,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/563122395",
+      "geocodeQuery": "Marjory Stoneman Douglas High School, Parkland, FL, USA",
+      "displayName": "Marjory Stoneman Douglas High School, 5901, Pine Island Road, Parkland, Broward County, Florida, 33076, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Marjory Stoneman Douglas High School, 5901, Pine Island Road, Parkland, Broward County, Florida, 33076, United States",
+          "latitude": 26.3044596,
+          "longitude": -80.2694856,
+          "osmType": "way",
+          "osmId": 563122395,
+          "state": "FL",
+          "score": 34
+        },
+        {
+          "displayName": "Marjory Stoneman Douglas High School, Main Courtyard, Parkland, Broward County, Florida, 33076, United States",
+          "latitude": 26.3047089,
+          "longitude": -80.2692925,
+          "osmType": "way",
+          "osmId": 383264506,
+          "state": "FL",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "fl-monsignor-edward-pace",
+      "name": "Monsignor Edward Pace",
+      "reportedCity": "Miami Gardens",
+      "city": "Miami Gardens",
+      "state": "FL",
+      "latitude": 25.9175593,
+      "longitude": -80.2543712,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/141946928",
+      "geocodeQuery": "Monsignor Edward Pace High School, Miami Gardens, FL, USA",
+      "displayName": "Monsignor Edward Pace High School, 15600, Northwest 32nd Avenue, Miami Gardens, Miami-Dade County, Florida, 33054, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Monsignor Edward Pace High School, 15600, Northwest 32nd Avenue, Miami Gardens, Miami-Dade County, Florida, 33054, United States",
+          "latitude": 25.9175593,
+          "longitude": -80.2543712,
+          "osmType": "way",
+          "osmId": 141946928,
+          "state": "FL",
+          "score": 34
+        },
+        {
+          "displayName": "Monsignor Edward Pace High School, Northwest 4th Avenue, Miami Gardens, Miami-Dade County, Florida, 33169, United States",
+          "latitude": 25.929538,
+          "longitude": -80.2089367,
+          "osmType": "node",
+          "osmId": 358728043,
+          "state": "FL",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "fl-plant",
+      "name": "Plant",
+      "reportedCity": "Tampa",
+      "city": "Tampa",
+      "state": "FL",
+      "latitude": 27.9245634,
+      "longitude": -82.5038568,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/32454766",
+      "geocodeQuery": "Plant High School, Tampa, FL, USA",
+      "displayName": "Plant High School, 2415, South Himes Avenue, Palma Ceia, Tampa, Hillsborough County, Florida, 33629, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Plant High School, 2415, South Himes Avenue, Palma Ceia, Tampa, Hillsborough County, Florida, 33629, United States",
+          "latitude": 27.9245634,
+          "longitude": -82.5038568,
+          "osmType": "way",
+          "osmId": 32454766,
+          "state": "FL",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "fl-saint-thomas-aquinas-fort-lauderdale",
+      "name": "Saint Thomas Aquinas",
+      "reportedCity": "Fort Lauderdale",
+      "city": "Fort Lauderdale",
+      "state": "FL",
+      "latitude": 26.1078646,
+      "longitude": -80.1797687,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/358705565",
+      "geocodeQuery": "Saint Thomas Aquinas High School, Fort Lauderdale, FL, USA",
+      "displayName": "Saint Thomas Aquinas High School, Southwest 28th Avenue, Fort Lauderdale, Broward County, Florida, 33312, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Saint Thomas Aquinas High School, Southwest 28th Avenue, Fort Lauderdale, Broward County, Florida, 33312, United States",
+          "latitude": 26.1078646,
+          "longitude": -80.1797687,
+          "osmType": "node",
+          "osmId": 358705565,
+          "state": "FL",
+          "score": 34
+        },
+        {
+          "displayName": "Saint Thomas Aquinas High School, Southwest 29th Avenue, Fort Lauderdale, Broward County, Florida, 33312, United States",
+          "latitude": 26.1083947,
+          "longitude": -80.1811932,
+          "osmType": "way",
+          "osmId": 739108798,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-saint-thomas-aquinas"
+    },
+    {
+      "id": "fl-sarasota",
+      "name": "Sarasota",
+      "reportedCity": null,
+      "city": "Sarasota",
+      "state": "FL",
+      "latitude": 27.3247143,
+      "longitude": -82.5262722,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/relation/13503823",
+      "geocodeQuery": "Sarasota High School, FL, USA",
+      "displayName": "Sarasota High School, Championship Drive, Avondale, Sarasota, Sarasota County, Florida, 34326, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Sarasota High School, Championship Drive, Avondale, Sarasota, Sarasota County, Florida, 34326, United States",
+          "latitude": 27.3247143,
+          "longitude": -82.5262722,
+          "osmType": "relation",
+          "osmId": 13503823,
+          "state": "FL",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "fl-seminole-unresolved",
+      "name": "Seminole",
+      "reportedCity": null,
+      "city": "Sanford",
+      "state": "FL",
+      "latitude": 28.778723,
+      "longitude": -81.2836045,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/518053247",
+      "geocodeQuery": "Seminole High School, Sanford, FL, USA",
+      "displayName": "Seminole High School, Ridgewood Avenue, Dreamworld, Sanford, Seminole County, Florida, 32773, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Seminole High School, Ridgewood Avenue, Dreamworld, Sanford, Seminole County, Florida, 32773, United States",
+          "latitude": 28.778723,
+          "longitude": -81.2836045,
+          "osmType": "way",
+          "osmId": 518053247,
+          "state": "FL",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "fl-seminole"
+    },
+    {
+      "id": "fl-westminster-christian-miami",
+      "name": "Westminster Christian",
+      "reportedCity": "Miami",
+      "city": "Miami",
+      "state": "FL",
+      "latitude": 25.629980268137,
+      "longitude": -80.302040434951,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.wcsmiami.org/",
+      "geocodeQuery": "Westminster Christian High School, Miami, FL, USA",
+      "displayName": "Westminster Christian School, 6855 SW 152 St, Palmetto Bay, FL 33157",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ga-marist-school-atlanta",
+      "name": "Marist School",
+      "reportedCity": "Atlanta",
+      "city": "Atlanta",
+      "state": "GA",
+      "latitude": 33.9012244,
+      "longitude": -84.3351785,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/554189479",
+      "geocodeQuery": "Marist School, Atlanta, GA, USA",
+      "displayName": "Marist School, 3790, Ashford Dunwoody Road Northeast, Atlanta, DeKalb County, Georgia, 30319, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Marist School, 3790, Ashford Dunwoody Road Northeast, Atlanta, DeKalb County, Georgia, 30319, United States",
+          "latitude": 33.9012244,
+          "longitude": -84.3351785,
+          "osmType": "way",
+          "osmId": 554189479,
+          "state": "GA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "ga-marist-school"
+    },
+    {
+      "id": "ga-walton",
+      "name": "Walton",
+      "reportedCity": "Marietta",
+      "city": "Marietta",
+      "state": "GA",
+      "latitude": 33.9895577,
+      "longitude": -84.4400167,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/34846007",
+      "geocodeQuery": "Walton High School, Marietta, GA, USA",
+      "displayName": "Walton High School, 1590, Bill Murdock Road Northeast, Marietta, Cobb County, Georgia, 30062, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Walton High School, 1590, Bill Murdock Road Northeast, Marietta, Cobb County, Georgia, 30062, United States",
+          "latitude": 33.9895577,
+          "longitude": -84.4400167,
+          "osmType": "way",
+          "osmId": 34846007,
+          "state": "GA",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "il-lemont",
+      "name": "Lemont",
+      "reportedCity": null,
+      "city": "Lemont",
+      "state": "IL",
+      "latitude": 41.6733929,
+      "longitude": -87.9902438,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/223765070",
+      "geocodeQuery": "Lemont High School, IL, USA",
+      "displayName": "Lemont High School, 800, Porter Street, Lemont, Lemont Township, Cook County, Illinois, 60439, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Lemont High School, 800, Porter Street, Lemont, Lemont Township, Cook County, Illinois, 60439, United States",
+          "latitude": 41.6733929,
+          "longitude": -87.9902438,
+          "osmType": "way",
+          "osmId": 223765070,
+          "state": "IL",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "la-barbe",
+      "name": "Barbe",
+      "reportedCity": "Lake Charles",
+      "city": "Lake Charles",
+      "state": "LA",
+      "latitude": 30.177441,
+      "longitude": -93.2556664,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/1293526764",
+      "geocodeQuery": "Barbe High School, Lake Charles, LA, USA",
+      "displayName": "Barbe High School, 2200, West McNeese Street, Lake Charles, Calcasieu Parish, Louisiana, 70605, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Barbe High School, 2200, West McNeese Street, Lake Charles, Calcasieu Parish, Louisiana, 70605, United States",
+          "latitude": 30.177441,
+          "longitude": -93.2556664,
+          "osmType": "way",
+          "osmId": 1293526764,
+          "state": "LA",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "la-catholic-baton-rouge",
+      "name": "Catholic",
+      "reportedCity": "Baton Rouge",
+      "city": "Baton Rouge",
+      "state": "LA",
+      "latitude": 30.4409,
+      "longitude": -91.1555029,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/402080864",
+      "geocodeQuery": "Catholic High School, Baton Rouge, LA, USA",
+      "displayName": "Catholic High School, Claycut Road, Marwede Place, Garden District, Mid City, Baton Rouge, East Baton Rouge Parish, Louisiana, 70806, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Catholic High School, Claycut Road, Marwede Place, Garden District, Mid City, Baton Rouge, East Baton Rouge Parish, Louisiana, 70806, United States",
+          "latitude": 30.4409,
+          "longitude": -91.1555029,
+          "osmType": "way",
+          "osmId": 402080864,
+          "state": "LA",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "la-catholic"
+    },
+    {
+      "id": "nc-charlotte-christian-charlotte",
+      "name": "Charlotte Christian",
+      "reportedCity": "Charlotte",
+      "city": "Charlotte",
+      "state": "NC",
+      "latitude": 35.140803294679,
+      "longitude": -80.770601925957,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.charlottechristian.com/admissions/apply",
+      "geocodeQuery": "Charlotte Christian High School, Charlotte, NC, USA",
+      "displayName": "Charlotte Christian School, 7301 Sardis Rd, Charlotte, NC 28270",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "nj-bishop-eustace-prep-pennsauken",
+      "name": "Bishop Eustace Prep",
+      "reportedCity": "Pennsauken",
+      "city": "Pennsauken",
+      "state": "NJ",
+      "latitude": 39.9302427,
+      "longitude": -75.0645067,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/30176384",
+      "geocodeQuery": "Bishop Eustace Prep, Pennsauken, NJ, USA",
+      "displayName": "Bishop Eustace Preparatory School, 5552 Marlton Pike, Pennsauken, NJ 08109",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "nj-saint-joseph-regional-montvale",
+      "name": "Saint Joseph Regional",
+      "reportedCity": "Montvale",
+      "city": "Montvale",
+      "state": "NJ",
+      "latitude": 41.0499149,
+      "longitude": -74.0699876,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/1121629902",
+      "geocodeQuery": "Saint Joseph Regional High School, Montvale, NJ, USA",
+      "displayName": "Saint Joseph Regional High School, 40 Chestnut Ridge Rd, Montvale, NJ 07645",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "nv-bishop-gorman-las-vegas",
+      "name": "Bishop Gorman",
+      "reportedCity": "Las Vegas",
+      "city": "Las Vegas",
+      "state": "NV",
+      "latitude": 36.0819621,
+      "longitude": -115.3180774,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/354544750",
+      "geocodeQuery": "Bishop Gorman High School, Las Vegas, NV, USA",
+      "displayName": "Bishop Gorman Catholic High School, 5959, South Hualapai Way, The Cliffs, Summerlin, Las Vegas, Clark County, Nevada, 89148, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Bishop Gorman Catholic High School, 5959, South Hualapai Way, The Cliffs, Summerlin, Las Vegas, Clark County, Nevada, 89148, United States",
+          "latitude": 36.0819621,
+          "longitude": -115.3180774,
+          "osmType": "way",
+          "osmId": 354544750,
+          "state": "NV",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "nv-bishop-gorman"
+    },
+    {
+      "id": "oh-archbishop-moeller",
+      "name": "Archbishop Moeller",
+      "reportedCity": "Cincinnati",
+      "city": "Cincinnati",
+      "state": "OH",
+      "latitude": 39.219241191879,
+      "longitude": -84.357561682467,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.moeller.org/page/media--public-relations",
+      "geocodeQuery": "Archbishop Moeller High School, Cincinnati, OH, USA",
+      "displayName": "Archbishop Moeller High School, 9001 Montgomery Rd, Cincinnati, OH 45242",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "ok-stillwater",
+      "name": "Stillwater",
+      "reportedCity": null,
+      "city": "Stillwater",
+      "state": "OK",
+      "latitude": 36.1380942,
+      "longitude": -97.0638455,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/209509602",
+      "geocodeQuery": "Stillwater High School, OK, USA",
+      "displayName": "Stillwater High School, North Crescent Drive, Wildwood Addition, Stillwater, Payne County, Oklahoma, 74075, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Stillwater High School, North Crescent Drive, Wildwood Addition, Stillwater, Payne County, Oklahoma, 74075, United States",
+          "latitude": 36.1380942,
+          "longitude": -97.0638455,
+          "osmType": "way",
+          "osmId": 209509602,
+          "state": "OK",
+          "score": 28
+        },
+        {
+          "displayName": "Stillwater High School, Kameoka Trail, Stillwater, Payne County, Oklahoma, 74075, United States",
+          "latitude": 36.1391216,
+          "longitude": -97.0634095,
+          "osmType": "way",
+          "osmId": 1464171101,
+          "state": "OK",
+          "score": 28
+        },
+        {
+          "displayName": "Stillwater High School, North Boomer Road, Stillwater, Payne County, Oklahoma, 74075, United States",
+          "latitude": 36.1344061,
+          "longitude": -97.0627191,
+          "osmType": "node",
+          "osmId": 3380427655,
+          "state": "OK",
+          "score": 26
+        }
+      ]
+    },
+    {
+      "id": "tn-farragut-knoxville",
+      "name": "Farragut",
+      "reportedCity": "Knoxville",
+      "city": "Knoxville",
+      "state": "TN",
+      "latitude": 35.88652,
+      "longitude": -84.1600405,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/node/13140105055",
+      "geocodeQuery": "Farragut High School, Knoxville, TN, USA",
+      "displayName": "Farragut High School Auditorium, 11237, Kingston Pike, Knoxville, Knox County, East Tennessee, Tennessee, 37934, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Farragut High School Auditorium, 11237, Kingston Pike, Knoxville, Knox County, East Tennessee, Tennessee, 37934, United States",
+          "latitude": 35.88652,
+          "longitude": -84.1600405,
+          "osmType": "node",
+          "osmId": 13140105055,
+          "state": "TN",
+          "score": 34
+        }
+      ],
+      "geocodeReuse": "tn-farragut"
+    },
+    {
+      "id": "tn-tullahoma",
+      "name": "Tullahoma",
+      "reportedCity": null,
+      "city": "Tullahoma",
+      "state": "TN",
+      "latitude": 35.3706421,
+      "longitude": -86.2224246,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/599481319",
+      "geocodeQuery": "Tullahoma High School, TN, USA",
+      "displayName": "Tullahoma High School, Rock Creek Walking Trail, Pineview Heights, Tullahoma, Coffee County, Middle Tennessee, Tennessee, 37388, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Tullahoma High School, Rock Creek Walking Trail, Pineview Heights, Tullahoma, Coffee County, Middle Tennessee, Tennessee, 37388, United States",
+          "latitude": 35.3706421,
+          "longitude": -86.2224246,
+          "osmType": "way",
+          "osmId": 599481319,
+          "state": "TN",
+          "score": 28
+        },
+        {
+          "displayName": "Tullahoma High School, North Jackson Street, Flowertown, Tullahoma, Coffee County, Middle Tennessee, Tennessee, 37360, United States",
+          "latitude": 35.3716509,
+          "longitude": -86.2211102,
+          "osmType": "node",
+          "osmId": 11470980931,
+          "state": "TN",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "tx-bellaire-houston",
+      "name": "Bellaire",
+      "reportedCity": "Houston",
+      "city": "Houston",
+      "state": "TX",
+      "latitude": 29.691240687137,
+      "longitude": -95.467784419866,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://bellaire.houstonisd.org/our-school",
+      "geocodeQuery": "Bellaire High School, Houston, TX, USA",
+      "displayName": "Bellaire High School, 5100 Maple St, Bellaire, TX 77401",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "tx-colleyville-heritage",
+      "name": "Colleyville Heritage",
+      "reportedCity": "Colleyville",
+      "city": "Colleyville",
+      "state": "TX",
+      "latitude": 32.8878275,
+      "longitude": -97.1025959,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/relation/19264913",
+      "geocodeQuery": "Colleyville Heritage High School, Colleyville, TX, USA",
+      "displayName": "Colleyville Heritage High School, 5401, Heritage Avenue, Colleyville, Tarrant County, Texas, 76034, United States",
+      "matchScore": 34,
+      "alternatives": [
+        {
+          "displayName": "Colleyville Heritage High School, 5401, Heritage Avenue, Colleyville, Tarrant County, Texas, 76034, United States",
+          "latitude": 32.8878275,
+          "longitude": -97.1025959,
+          "osmType": "relation",
+          "osmId": 19264913,
+          "state": "TX",
+          "score": 34
+        },
+        {
+          "displayName": "Colleyville Heritage High School, 5401, Heritage Avenue, Colleyville, Tarrant County, Texas, 76034, United States",
+          "latitude": 32.8865778,
+          "longitude": -97.1035591,
+          "osmType": "relation",
+          "osmId": 9268784,
+          "state": "TX",
+          "score": 34
+        }
+      ]
+    },
+    {
+      "id": "tx-jesuit-college-prep",
+      "name": "Jesuit College Prep",
+      "reportedCity": "Dallas",
+      "city": "Dallas",
+      "state": "TX",
+      "latitude": 32.917286232834,
+      "longitude": -96.818543898727,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.jesuitdallas.org/about/contact-us",
+      "geocodeQuery": "Jesuit College Prep, Dallas, TX, USA",
+      "displayName": "Jesuit College Preparatory School of Dallas, 12345 Inwood Rd, Dallas, TX 75244",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "tx-kingwood",
+      "name": "Kingwood",
+      "reportedCity": null,
+      "city": "Houston",
+      "state": "TX",
+      "latitude": 30.0460134,
+      "longitude": -95.1936562,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/279671280",
+      "geocodeQuery": "Kingwood High School, TX, USA",
+      "displayName": "Kingwood High School, 2701, Kingwood Drive, Kingwood, Houston, Harris County, Texas, 77339, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Kingwood High School, 2701, Kingwood Drive, Kingwood, Houston, Harris County, Texas, 77339, United States",
+          "latitude": 30.0460134,
+          "longitude": -95.1936562,
+          "osmType": "way",
+          "osmId": 279671280,
+          "state": "TX",
+          "score": 28
+        },
+        {
+          "displayName": "Kingwood High School, 2701, Kingwood Drive, Kingwood, Houston, Harris County, Texas, 77339, United States",
+          "latitude": 30.0452489,
+          "longitude": -95.1954358,
+          "osmType": "way",
+          "osmId": 258135304,
+          "state": "TX",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "tx-klein-oak-spring",
+      "name": "Klein Oak",
+      "reportedCity": "Spring",
+      "city": "Spring",
+      "state": "TX",
+      "latitude": 30.094716611254,
+      "longitude": -95.517171666373,
+      "precision": "campus",
+      "source": "Official school address / U.S. Census Geocoder",
+      "sourceUrl": "https://www.kleinisd.net/o/kleinoak/",
+      "geocodeQuery": "Klein Oak High School, Spring, TX, USA",
+      "displayName": "Klein Oak High School, 22603 Northcrest Dr, Spring, TX 77389",
+      "matchScore": 40,
+      "alternatives": []
+    },
+    {
+      "id": "tx-round-rock",
+      "name": "Round Rock",
+      "reportedCity": null,
+      "city": "Round Rock",
+      "state": "TX",
+      "latitude": 30.5077261,
+      "longitude": -97.6974236,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/231041389",
+      "geocodeQuery": "Round Rock High School, TX, USA",
+      "displayName": "Round Rock High School, 300, North Lake Creek Drive, Round Rock, Williamson County, Texas, 78681, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "Round Rock High School, 300, North Lake Creek Drive, Round Rock, Williamson County, Texas, 78681, United States",
+          "latitude": 30.5077261,
+          "longitude": -97.6974236,
+          "osmType": "way",
+          "osmId": 231041389,
+          "state": "TX",
+          "score": 28
+        }
+      ]
+    },
+    {
+      "id": "tx-the-woodlands",
+      "name": "The Woodlands",
+      "reportedCity": null,
+      "city": "The Woodlands",
+      "state": "TX",
+      "latitude": 30.1941097,
+      "longitude": -95.5045776,
+      "precision": "campus",
+      "source": "OpenStreetMap Nominatim",
+      "sourceUrl": "https://www.openstreetmap.org/way/124444297",
+      "geocodeQuery": "The Woodlands High School, TX, USA",
+      "displayName": "The Woodlands High School, Research Forest Drive, Cochran's Crossing, The Woodlands, Montgomery County, Texas, 77381, United States",
+      "matchScore": 28,
+      "alternatives": [
+        {
+          "displayName": "The Woodlands High School, Research Forest Drive, Cochran's Crossing, The Woodlands, Montgomery County, Texas, 77381, United States",
+          "latitude": 30.1941097,
+          "longitude": -95.5045776,
+          "osmType": "way",
+          "osmId": 124444297,
+          "state": "TX",
+          "score": 28
+        },
+        {
+          "displayName": "The Woodlands High School, Bus Loop, Cochran's Crossing, The Woodlands, Montgomery County, Texas, 77381, United States",
+          "latitude": 30.1943473,
+          "longitude": -95.5048695,
+          "osmType": "relation",
+          "osmId": 4867287,
+          "state": "TX",
+          "score": 28
+        }
+      ]
+    }
+  ]
+}

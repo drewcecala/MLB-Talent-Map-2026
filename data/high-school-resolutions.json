@@ -1,0 +1,41 @@
+{
+  "method": "Manual identity resolutions are limited to school-name aliases, historical names, neighboring locality labels for the same campus, and otherwise unique name-only leader records. Ambiguous name-only records remain unresolved.",
+  "rules": [
+    { "playerIds": [669023], "state": "FL", "names": ["Pace"], "canonical": { "id": "fl-monsignor-edward-pace", "name": "Monsignor Edward Pace", "city": "Miami Gardens", "state": "FL" } },
+    { "state": "FL", "names": ["Monsignor Edward Pace"], "canonical": { "id": "fl-monsignor-edward-pace", "name": "Monsignor Edward Pace", "city": "Miami Gardens", "state": "FL" } },
+    { "state": "FL", "names": ["Pace"], "cities": [""], "canonical": { "id": "fl-pace-pace", "name": "Pace", "city": "Pace", "state": "FL" } },
+
+    { "state": "CA", "names": ["Hart", "William S. Hart"], "cities": ["Valencia", "Newhall", "Santa Clarita"], "canonical": { "id": "ca-william-s-hart", "name": "William S. Hart", "city": "Newhall", "state": "CA" } },
+    { "state": "FL", "names": ["Plant", "H.B. Plant", "Henry B. Plant"], "cities": ["Tampa"], "canonical": { "id": "fl-plant", "name": "Henry B. Plant", "city": "Tampa", "state": "FL" } },
+    { "state": "CA", "names": ["Harvard-Westlake", "Harvard-Westlake School"], "cities": ["Los Angeles", "North Hollywood", "Studio City"], "canonical": { "id": "ca-harvard-westlake", "name": "Harvard-Westlake", "city": "Studio City", "state": "CA" } },
+    { "state": "GA", "names": ["Walton", "George Walton Comprehensive"], "cities": ["Marietta"], "canonical": { "id": "ga-walton", "name": "Walton", "city": "Marietta", "state": "GA" } },
+    { "state": "OH", "names": ["Archbishop Moeller", "Moeller"], "cities": ["Cincinnati"], "canonical": { "id": "oh-archbishop-moeller", "name": "Archbishop Moeller", "city": "Cincinnati", "state": "OH" } },
+    { "state": "LA", "names": ["Barbe", "Alfred M. Barbe"], "cities": ["Lake Charles"], "canonical": { "id": "la-barbe", "name": "Barbe", "city": "Lake Charles", "state": "LA" } },
+    { "state": "FL", "names": ["Calvary Christian Academy", "Calvary Christian"], "cities": ["Fort Lauderdale"], "canonical": { "id": "fl-calvary-christian-academy", "name": "Calvary Christian Academy", "city": "Fort Lauderdale", "state": "FL" } },
+    { "state": "TX", "names": ["Colleyville Heritage", "Heritage"], "cities": ["Colleyville"], "canonical": { "id": "tx-colleyville-heritage", "name": "Colleyville Heritage", "city": "Colleyville", "state": "TX" } },
+    { "state": "TX", "names": ["Jesuit College Prep", "Jesuit", "Jesuit Prep"], "cities": ["Dallas"], "canonical": { "id": "tx-jesuit-college-prep", "name": "Jesuit College Prep", "city": "Dallas", "state": "TX" } },
+    { "state": "FL", "names": ["Marjory Stoneman Douglas", "Stoneman Douglas"], "cities": ["Parkland"], "canonical": { "id": "fl-marjory-stoneman-douglas", "name": "Marjory Stoneman Douglas", "city": "Parkland", "state": "FL" } },
+    { "state": "CA", "names": ["Millikan", "Robert A. Millikan"], "cities": ["Long Beach"], "canonical": { "id": "ca-millikan", "name": "Millikan", "city": "Long Beach", "state": "CA" } },
+    { "state": "CA", "names": ["Jesuit"], "cities": ["Sacramento", "Carmichael"], "canonical": { "id": "ca-jesuit", "name": "Jesuit", "city": "Sacramento", "state": "CA" } },
+    { "state": "FL", "names": ["Gulliver Prep"], "cities": ["Miami", "Pinecrest"], "canonical": { "id": "fl-gulliver-prep", "name": "Gulliver Prep", "city": "Pinecrest", "state": "FL" } },
+
+    { "state": "CA", "names": ["Elk Grove"], "cities": [""], "canonical": { "id": "ca-elk-grove", "name": "Elk Grove", "city": "Elk Grove", "state": "CA" } },
+    { "state": "CA", "names": ["Poway"], "cities": [""], "canonical": { "id": "ca-poway", "name": "Poway", "city": "Poway", "state": "CA" } },
+    { "state": "FL", "names": ["Sarasota"], "cities": [""], "canonical": { "id": "fl-sarasota", "name": "Sarasota", "city": "Sarasota", "state": "FL" } },
+    { "state": "CA", "names": ["Huntington Beach"], "cities": [""], "canonical": { "id": "ca-huntington-beach", "name": "Huntington Beach", "city": "Huntington Beach", "state": "CA" } },
+    { "state": "FL", "names": ["Lakeland"], "cities": [""], "canonical": { "id": "fl-lakeland", "name": "Lakeland", "city": "Lakeland", "state": "FL" } },
+    { "state": "CA", "names": ["Lakewood"], "cities": [""], "canonical": { "id": "ca-lakewood", "name": "Lakewood", "city": "Lakewood", "state": "CA" } },
+    { "state": "TX", "names": ["Round Rock"], "cities": [""], "canonical": { "id": "tx-round-rock", "name": "Round Rock", "city": "Round Rock", "state": "TX" } },
+    { "state": "TX", "names": ["The Woodlands"], "cities": [""], "canonical": { "id": "tx-the-woodlands", "name": "The Woodlands", "city": "The Woodlands", "state": "TX" } },
+    { "state": "CA", "names": ["Yucaipa"], "cities": [""], "canonical": { "id": "ca-yucaipa", "name": "Yucaipa", "city": "Yucaipa", "state": "CA" } },
+    { "state": "CA", "names": ["Cypress"], "cities": [""], "canonical": { "id": "ca-cypress", "name": "Cypress", "city": "Cypress", "state": "CA" } },
+    { "state": "CA", "names": ["Fountain Valley"], "cities": [""], "canonical": { "id": "ca-fountain-valley", "name": "Fountain Valley", "city": "Fountain Valley", "state": "CA" } },
+    { "state": "TX", "names": ["Kingwood"], "cities": [""], "canonical": { "id": "tx-kingwood", "name": "Kingwood", "city": "Kingwood", "state": "TX" } },
+    { "state": "IL", "names": ["Lemont"], "cities": [""], "canonical": { "id": "il-lemont", "name": "Lemont", "city": "Lemont", "state": "IL" } },
+    { "state": "OK", "names": ["Stillwater"], "cities": [""], "canonical": { "id": "ok-stillwater", "name": "Stillwater", "city": "Stillwater", "state": "OK" } },
+    { "state": "CA", "names": ["Thousand Oaks"], "cities": [""], "canonical": { "id": "ca-thousand-oaks", "name": "Thousand Oaks", "city": "Thousand Oaks", "state": "CA" } },
+    { "state": "TN", "names": ["Tullahoma"], "cities": [""], "canonical": { "id": "tn-tullahoma", "name": "Tullahoma", "city": "Tullahoma", "state": "TN" } },
+    { "state": "CA", "names": ["Upland"], "cities": [""], "canonical": { "id": "ca-upland", "name": "Upland", "city": "Upland", "state": "CA" } },
+    { "state": "CA", "names": ["Valencia"], "cities": [""], "canonical": { "id": "ca-valencia", "name": "Valencia", "city": "Valencia", "state": "CA" } }
+  ]
+}

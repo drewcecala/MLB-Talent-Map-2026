@@ -83,3 +83,19 @@ Accepted U.S. matches are 3,896 unique official GNIS place-name matches and 16 u
 The project validates uniqueness, organization coverage, allowed levels and geography values, county referential integrity, status exclusions, summary reconciliation, public-field privacy, data-source URLs, desktop/mobile rendering, URL state, international-only behavior, accessibility, and horizontal overflow.
 
 Machine-readable evidence is in `reports/data-quality.json` and `reports/world-geometry-audit.json`.
+
+## High-school pipeline validation
+
+The post-2000 pipeline is validated independently from the current-roster map:
+
+| Check | Result |
+|---|---:|
+| MLB debut records reviewed | 6,225 |
+| Players with a U.S. high school | 3,979 |
+| U.S. school identities retained | 2,656 |
+| Programs meeting the five-player map threshold | 76 |
+| Leader-program players | 463 |
+| Players without an MLB high-school record | 1,753 |
+| High-school records outside the 50 states/DC scope | 493 |
+
+Automated release checks verify the debut-date window, distinct MLB person IDs within each school, school count ordering, exact five-player map-threshold coverage, source evidence for all campus points, state containment for every coordinate, documented identity-resolution structure, and an embedded SHA-256 checksum. Machine-readable evidence is in `reports/high-school-data-quality.json`.

@@ -1,0 +1,36 @@
+{
+  "snapshotDate": "2026-08-24",
+  "scope": "Players with an MLB debut from 2000-01-01 through 2026-08-24, credited once to every U.S. high school in the MLB Stats API education record.",
+  "leaderThreshold": 5,
+  "counts": {
+    "mlbPlayersReviewed": 6225,
+    "playersWithUsHighSchool": 3979,
+    "schoolIdentities": 2656,
+    "locationAuditedPrograms": 76,
+    "locationAuditedPlayers": 463,
+    "missingHighSchoolRecords": 1753,
+    "outsideUsHighSchoolRecords": 493
+  },
+  "locationEvidence": {
+    "openStreetMapNominatim": 64,
+    "officialAddressWithCensusGeocoder": 11,
+    "officialMunicipalCoordinate": 1
+  },
+  "checks": {
+    "mlbPersonIdsDeduplicatedWithinSchool": true,
+    "debutDatesInsideDeclaredWindow": true,
+    "schoolRowsCountSorted": true,
+    "fivePlusThresholdFullyLocated": true,
+    "campusCoordinatesInsideReportedState": true,
+    "ambiguousNameOnlyRecordsNotBroadlyMerged": true,
+    "documentedAliasesOnly": true,
+    "allLocationRecordsHaveSourceEvidence": true,
+    "embeddedDatasetChecksumMatches": true
+  },
+  "limitations": [
+    "MLB education records are incomplete for some players.",
+    "Reported school names and cities can use abbreviations, historical names, or neighboring locality labels.",
+    "Players with multiple listed high schools credit each school, so school totals are not additive.",
+    "The public map location-audits programs with five or more qualifying players; lower-count school identities remain in the source dataset but are not shown as campus points."
+  ]
+}

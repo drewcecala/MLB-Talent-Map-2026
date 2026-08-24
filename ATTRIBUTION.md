@@ -10,6 +10,9 @@
 | County boundaries | [U.S. Census Bureau 2020 Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/2020/geo/carto-boundary-file.html) | 2020 | Simplified 50-state/DC county and state geometry | Census cartographic boundaries are simplified representations of MAF/TIGER geography |
 | County population | U.S. Census Bureau 2020 population reference joined by county FIPS | 2020 | Per-capita denominator | Per-capita rankings require at least 10 mapped players in the selected view |
 | Country boundaries | [Natural Earth Admin 0 – Countries](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) | Version 5.1.1, 1:50m | Worldwide birth-country choropleth and small-country label points | Public-domain dataset; default de facto boundary view; joined to MLB labels through documented ISO alpha-3 codes |
+| MLB season players and education | [MLB Stats API season players](https://statsapi.mlb.com/api/v1/sports/1/players?season=2026) and [person education example](https://statsapi.mlb.com/api/v1/people?personIds=592450&hydrate=education) | 2000–2026 seasons, queried 2026-08-24 | MLB person ID, debut date, primary position, and reported high schools | Each school count is distinct by MLB person ID; MLB education completeness varies by player |
+| High-school campus points | [OpenStreetMap Nominatim](https://nominatim.org/release-docs/latest/api/Search/) and official school/municipal sources | Audited 2026-08-24 | Campus locations for all 76 programs with five or more qualifying MLB debuts | Nominatim requests were cached and rate-limited; OpenStreetMap data is ODbL |
+| Address geocoding | [U.S. Census Geocoder](https://geocoding.geo.census.gov/geocoder/) | Queried 2026-08-24 | Coordinates for 11 official school addresses not resolved to an exact Nominatim school feature | Every resulting point is checked against the reported-state polygon |
 
 ## MLB content notice
 
