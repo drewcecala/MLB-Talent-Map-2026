@@ -99,7 +99,7 @@ for (const [index, school] of targets.entries()) {
   });
   const response = await fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
     headers: {
-      "User-Agent": "MLB-Talent-Map-2026/1.0 (https://github.com/drewcecala/MLB-Talent-Map-2026)",
+      "User-Agent": "MLB-Talent-Map-2026/1.0 (https://github.com/heHate-Me/MLB-Talent-Map-2026)",
       "Accept-Language": "en-US,en;q=0.9",
     },
   });
