@@ -308,8 +308,11 @@ export function MlbHighSchoolMap() {
             Every U.S. high school credited with at least 20 distinct players whose official MLB or affiliated MiLB career record begins in 2000 or later, through {data.meta.snapshotDate}. Dot size shows player count; each school opens to its underlying official player records.
           </p>
         </div>
-        <div className="header-actions">
-          <a className="hs-nav-link" href="/mlb-talent-map">2026 roster map</a>
+        <div className="header-actions header-actions-with-nav">
+          <nav className="header-route-nav" aria-label="Related research maps">
+            <a className="hs-nav-link" href="/mlb-talent-map/">Roster atlas</a>
+            <a className="hs-nav-link" href="/mlb-college-map/">College source audit</a>
+          </nav>
           <button className="share-button" type="button" onClick={handleShare}>{shareState}</button>
           <p>Filters and selected school stay in the URL.</p>
         </div>

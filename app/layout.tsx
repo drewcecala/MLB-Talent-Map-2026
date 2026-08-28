@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: "The Geography of MLB Talent",
     description:

@@ -131,6 +131,16 @@ a:focus-visible,
   line-height: 1.4;
 }
 
+.header-actions-with-nav,
+.header-route-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.header-actions-with-nav p {
+  margin: 0;
+}
+
 .share-button {
   width: 100%;
   min-height: 46px;

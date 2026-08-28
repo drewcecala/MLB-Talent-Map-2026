@@ -1,0 +1,18 @@
+{
+  "name": "The Geography of MLB Talent",
+  "short_name": "MLB Talent Map",
+  "description": "An evidence-audited atlas of MLB and affiliated Minor League Baseball talent.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3f0f3",
+  "theme_color": "#4d2058",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

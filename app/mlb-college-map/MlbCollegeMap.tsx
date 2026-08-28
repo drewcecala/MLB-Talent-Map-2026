@@ -221,10 +221,10 @@ function CollegePublicationHold({ data }: { data: CollegeData }) {
           <h1>College map withheld pending source coverage</h1>
           <p>The ranking is not being published as complete until the last school attended before each player&apos;s professional signing is documented for at least 90% of the eligible cohort.</p>
         </div>
-        <div className="header-actions">
-          <a className="hs-nav-link" href="/mlb-high-school-map">High school map</a>
-          <a className="hs-nav-link" href="/mlb-talent-map">2026 roster map</a>
-        </div>
+        <nav className="header-actions header-route-nav" aria-label="Related research maps">
+          <a className="hs-nav-link" href="/mlb-high-school-map/">High school map</a>
+          <a className="hs-nav-link" href="/mlb-talent-map/">Roster atlas</a>
+        </nav>
       </header>
 
       <section className="coverage-strip hs-coverage college-coverage" aria-label="College research coverage">
@@ -317,9 +317,11 @@ export function MlbCollegeMap() {
           <h1>Colleges Producing MLB &amp; MiLB Talent</h1>
           <p>The leading U.S. college programs across all {integer.format(data.meta.counts.affiliatedPlayers)} official MLB and affiliated MiLB season participants since 2000—supplemented wherever MLB education was blank.</p>
         </div>
-        <div className="header-actions">
-          <a className="hs-nav-link" href="/mlb-high-school-map">High school map</a>
-          <a className="hs-nav-link" href="/mlb-talent-map">2026 roster map</a>
+        <div className="header-actions header-actions-with-nav">
+          <nav className="header-route-nav" aria-label="Related research maps">
+            <a className="hs-nav-link" href="/mlb-high-school-map/">High school map</a>
+            <a className="hs-nav-link" href="/mlb-talent-map/">Roster atlas</a>
+          </nav>
           <button className="share-button" type="button" onClick={handleShare}>{shareState}</button>
           <p>Filters and selected college stay in the URL.</p>
         </div>

@@ -608,7 +608,11 @@ export function MlbTalentMap() {
             Every player on an MLB organization full roster as of {data.meta.snapshotDate}, including MLB, Triple-A, Double-A, High-A, Single-A, and Rookie levels. U.S. counties use conservative federal place matching; international players are mapped to MLB&apos;s reported birth countries.
           </p>
         </div>
-        <div className="header-actions">
+        <div className="header-actions header-actions-with-nav">
+          <nav className="header-route-nav" aria-label="Related research maps">
+            <a className="hs-nav-link" href="/mlb-high-school-map/">High school map</a>
+            <a className="hs-nav-link" href="/mlb-college-map/">College source audit</a>
+          </nav>
           <button className="share-button" type="button" onClick={handleShare}>{shareState}</button>
           <p>Filters stay in the URL when you share.</p>
         </div>

@@ -5,8 +5,10 @@ import { MlbCollegeMap } from "../app/mlb-college-map/MlbCollegeMap";
 import { MlbHighSchoolMap } from "../app/mlb-high-school-map/MlbHighSchoolMap";
 import { MlbTalentMap } from "../app/mlb-talent-map/MlbTalentMap";
 
-const highSchoolRoute = window.location.pathname.startsWith("/mlb-high-school-map");
-const collegeRoute = window.location.pathname.startsWith("/mlb-college-map");
+const publicUrl = "https://mlb-talent-map-2026.pages.dev";
+const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+const highSchoolRoute = pathname === "/mlb-high-school-map";
+const collegeRoute = pathname === "/mlb-college-map";
 const title = collegeRoute
   ? "Colleges Producing MLB & MiLB Talent Since 2000 | MLB Talent Map 2026"
   : highSchoolRoute
@@ -18,18 +20,23 @@ const description = collegeRoute
     ? "Map and rank U.S. high schools for 49,771 players whose official MLB or affiliated MiLB careers began in 2000 or later."
     : "Explore U.S. birthplace geography and international origins for every player on an MLB organization roster as of August 24, 2026.";
 const socialImage = collegeRoute
-  ? "https://mlb-talent-map-2026.pages.dev/og-colleges.png"
+  ? `${publicUrl}/og-colleges.png`
   : highSchoolRoute
-    ? "https://mlb-talent-map-2026.pages.dev/og-high-schools.png"
-    : "https://mlb-talent-map-2026.pages.dev/og.png";
+    ? `${publicUrl}/og-high-schools.png`
+    : `${publicUrl}/og.png`;
+const canonicalUrl = collegeRoute
+  ? `${publicUrl}/mlb-college-map/`
+  : highSchoolRoute
+    ? `${publicUrl}/mlb-high-school-map/`
+    : `${publicUrl}/`;
 document.title = title;
 document.querySelector('meta[name="description"]')?.setAttribute("content", description);
 document.querySelector('meta[property="og:title"]')?.setAttribute("content", title);
 document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
-document.querySelector('meta[property="og:url"]')?.setAttribute("content", window.location.href);
+document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
 document.querySelector('meta[property="og:image"]')?.setAttribute("content", socialImage);
 document.querySelector('meta[name="twitter:image"]')?.setAttribute("content", socialImage);
-document.querySelector('link[rel="canonical"]')?.setAttribute("href", window.location.href.split("?")[0]);
+document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Missing application root");

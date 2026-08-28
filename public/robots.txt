@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mlb-talent-map-2026.pages.dev/sitemap.xml

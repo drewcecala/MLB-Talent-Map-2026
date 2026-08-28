@@ -14,7 +14,7 @@
     "data:build": "node scripts/build-mlb-talent-map.mjs 2026-08-24 && node scripts/build-world-geometry.mjs && node scripts/build-mlb-high-school-map.mjs 2026-08-24 && node scripts/build-mlb-college-map.mjs 2026-08-24",
     "data:world": "node scripts/build-world-geometry.mjs",
     "validate:data": "node scripts/validate-public-data.mjs && node scripts/validate-high-school-data.mjs && node scripts/validate-college-data.mjs",
-    "verify:production": "node scripts/verify-production.mjs",
+    "verify:production": "npm run build:pages && node scripts/verify-production.mjs",
     "test:unit": "node --experimental-strip-types --test tests/*.test.mjs",
     "test:e2e": "playwright test",
     "test": "npm run validate:data && npm run build && npm run test:unit && npm run test:e2e",

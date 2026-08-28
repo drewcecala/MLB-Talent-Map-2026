@@ -9,9 +9,9 @@ An audited roster-and-birthplace geography project covering every unique player 
 
 **Interactive map:** [mlb-talent-map-2026.pages.dev](https://mlb-talent-map-2026.pages.dev)
 
-**High-school pipeline:** [mlb-talent-map-2026.pages.dev/mlb-high-school-map](https://mlb-talent-map-2026.pages.dev/mlb-high-school-map)
+**High-school pipeline:** [mlb-talent-map-2026.pages.dev/mlb-high-school-map](https://mlb-talent-map-2026.pages.dev/mlb-high-school-map/)
 
-**College pipeline:** [mlb-talent-map-2026.pages.dev/mlb-college-map](https://mlb-talent-map-2026.pages.dev/mlb-college-map)
+**College pipeline:** [mlb-talent-map-2026.pages.dev/mlb-college-map](https://mlb-talent-map-2026.pages.dev/mlb-college-map/)
 
 ## What the product does
 
@@ -28,9 +28,9 @@ An audited roster-and-birthplace geography project covering every unique player 
 
 ## Route
 
-- `/mlb-talent-map` — current MLB/MiLB roster birthplace map.
-- `/mlb-high-school-map` — historical MLB/affiliated-MiLB pipeline by U.S. high school.
-- `/mlb-college-map` — college evidence audit and publication status.
+- `/` — current MLB/MiLB roster birthplace map.
+- `/mlb-high-school-map/` — historical MLB/affiliated-MiLB pipeline by U.S. high school.
+- `/mlb-college-map/` — college evidence audit and publication status.
 
 ## High-school pipeline scope
 
@@ -62,9 +62,10 @@ npm run check
 unit tests, and exercises every rendered route in desktop and mobile Chromium.
 
 `npm run deploy:pages` runs the complete quality suite before publishing the
-static Pages build. A separate production smoke workflow compares all three
-live JSON artifacts byte-for-byte with the release commit and keeps the college
-leaderboard withheld until its evidence gate passes.
+static Pages build. A separate production smoke workflow compares the live HTML,
+assets, discovery files, and three JSON artifacts with the release commit, then
+checks canonical routing, real 404 responses, rendered navigation, filters, and
+the college publication gate in Chromium.
 
 ### Rebuilding the data products
 
