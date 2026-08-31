@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/readme-hero.png" alt="Global baseball talent geography visualized across a globe and county map" width="100%">
+</p>
+
 # The Geography of MLB Talent
 
 An audited roster-and-birthplace geography project covering every unique player on an MLB organization full roster as of **August 24, 2026**. The snapshot includes MLB, Triple-A, Double-A, High-A, Single-A, and Rookie levels.
